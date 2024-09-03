@@ -182,14 +182,16 @@ export default function Tech() {
 
     return (
         <div className={`${classes?.textColorClass} flex flex-col  justify-center items-center h-full pb-[6%]`}>
-            <h1 className={` desktop:text-4xl desktop:text-red-500 laptop:text-3xl laptop:text-blue-500 tablet:text-xl tablet:text-green-500    ${classes?.bgColorTitle} px-4 bg-opacity-30 py-4 flex justify-center items-center rounded-md`}>{texts?.technologies} <GrTechnology size={32} className={`ml-4 bg-white bg-opacity-90 p-1 rounded-full ${classes?.textColorTitleIcon}`} /></h1>
-            <h1 className="desktop:text-lg desktop:text-red-500 laptop:text-base laptop:text-blue-500 tablet:text-sm tablet:text-green-500 text-center mt-4 w-[50%]">{texts?.info}</h1>
+            <h1 className={` xl:text-red-500 lg:text-blue-500 md:text-yellow-500 sm:text-green-500   ${classes?.bgColorTitle} px-4 bg-opacity-30 py-4 flex justify-center items-center rounded-md`}>{texts?.technologies} <GrTechnology size={32} className={`ml-4 bg-white bg-opacity-90 p-1 rounded-full ${classes?.textColorTitleIcon}`} /></h1>
+            <h1 className="text-lg  text-center mt-4 w-[50%]">{texts?.info}</h1>
+
             <TbArrowWaveRightUp size={50} className={`${classes?.textColorArrow} opacity-20  mt-4 mb-6 rotate-90`} />
             <div className="flex justify-center select-none space-x-4 items-center">
                 <button onClick={() => setOption('languages')} className={`${option === 'languages' ? `${classes?.bgColorTitle}` : `${classes?.hoverColorButtons} ${classes?.hoverOpacityButtons}`} transition duration-200 rounded-md laptop:text-lg desktop:text-xl  px-2 py-1 cursor-pointer`}>{texts?.option_1}</button>
                 <button onClick={() => setOption('frontend')} className={`${option === 'frontend' ? `${classes?.bgColorTitle}` : `${classes?.hoverColorButtons} ${classes?.hoverOpacityButtons}`} transition duration-200 rounded-md laptop:text-lg desktop:text-xl px-2 py-1 cursor-pointer`}>{texts?.option_2}</button>
                 <button onClick={() => setOption('backend')} className={`${option === 'backend' ? `${classes?.bgColorTitle}` : `${classes?.hoverColorButtons} ${classes?.hoverOpacityButtons}`} transition duration-200  rounded-md laptop:text-lg desktop:text-xl px-2 py-1 cursor-pointer`}>{texts?.option_3}</button>
             </div>
+
             <div className={`${option === 'languages' && category !== 'secondary' && 'w-[840px]'} ${option === 'languages' && category === 'secondary' && 'w-[450px]'} ${option === 'frontend' && 'w-[450px]'} ${option === 'backend' && 'w-[840px]'} ${classes?.bgColorImages} ${classes?.bgOpacityImages} select-none transition-width ease-in-out duration-300  flex relative rounded-lg  shadow-2xl  px-6 py-6 mt-2 justify-center items-center`}>
                 <TbHandMove size={22} className="absolute opacity-70 top-1.5 right-1.5" />
                 {option === 'languages' && (

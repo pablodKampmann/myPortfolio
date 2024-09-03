@@ -164,7 +164,7 @@ export default function NavBar({ tone, language, colorMain, handleColorChange }:
     }, [showOptions]);
 
     return (
-        <div className={`w-full flex justify-between items-center ${classes?.bgMain} border-b-2 ${classes?.borderColor} transition select-none duration-200 ${classes?.bgMainOpacity} h-[10%] `} >
+        <div className={`w-full flex z-10 relative justify-between items-center ${classes?.bgMain} border-b-2 ${classes?.borderColor} transition select-none duration-200 ${classes?.bgMainOpacity} h-[10%] `} >
 
             <div className="ml-4 flex justify-center items-center">
                 {showCancelButton ? (

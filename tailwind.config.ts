@@ -9,14 +9,20 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        'tablet': '640px',
+        'sm': '640px',
         // => @media (min-width: 640px) { ... }
 
-        'laptop': '1024px',
+        'md': '768px',
+        // => @media (min-width: 768px) { ... }
+
+        'lg': '1024px',
         // => @media (min-width: 1024px) { ... }
 
-        'desktop': '1280px',
+        'xl': '1280px',
         // => @media (min-width: 1280px) { ... }
+
+        '2xl': '1536px',
+        // => @media (min-width: 1536px) { ... }
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

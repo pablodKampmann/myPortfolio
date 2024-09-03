@@ -135,15 +135,18 @@ export default function RootLayout({
         </div>
         <div className={`${!isLoading ? 'opacity-100' : 'opacity-0 '} overflow-hidden`}>
           <div className={`h-screen overflow-hidden relative ${classes?.bgMainColor} transition duration-200 ${classes?.bgMainOpacity}`}>
-            <div className={`absolute left-9 bottom-[14%] rounded-full ${classes?.bgLinesColor} h-36 w-1 `}></div>
-            <div className={`absolute left-9 bottom-[40%] rounded-full ${classes?.bgLinesColor} h-4 w-1 `}></div>
-            <div className={`absolute left-9 bottom-[48%] rounded-full ${classes?.bgLinesColor} h-16 w-1 `}></div>
-            <div className={`absolute right-9 bottom-[42%] rounded-full ${classes?.bgLinesColor} h-16 w-1 `}></div>
-            <button onClick={() => router.push('/')} className={`absolute -right-8 hover:underline transition duration-150 cursor-pointer bottom-[64%] font-semibold text-${colorMain}-500 transform rotate-90`}>@pablokampmann</button>
-            <div className={`absolute right-9 bottom-[80%] rounded-full ${classes?.bgLinesColor} h-8 w-1 `}></div>
-            <ToneMode tone={tone} colorMain={colorMain} handleToneChange={handleToneChange} />
-            <LanguageOptions tone={tone} language={language} colorMain={colorMain} handleLanguageChange={handleLanguageChange} />
-            <NavBar tone={tone} language={language} colorMain={colorMain} handleColorChange={handleColorMainChange} />
+            <div className={`absolute left-9 bottom-[14%] rounded-full ${classes?.bgLinesColor} h-36 w-1 z-10`}></div>
+            <div className={`absolute left-9 bottom-[40%] rounded-full ${classes?.bgLinesColor} h-4 w-1 z-10`}></div>
+            <div className={`absolute left-9 bottom-[48%] rounded-full ${classes?.bgLinesColor} h-16 w-1 z-10`}></div>
+            <div className={`absolute right-9 bottom-[42%] rounded-full ${classes?.bgLinesColor} h-16 w-1 z-10`}></div>
+            <button onClick={() => router.push('/')} className={`absolute -right-8 hover:underline transition duration-150 cursor-pointer bottom-[64%] font-semibold text-${colorMain}-500 transform rotate-90 z-10`}>
+              @pablokampmann
+            </button>
+            <div className={`absolute right-9 bottom-[80%] rounded-full ${classes?.bgLinesColor} h-8 w-1 z-10`}></div>
+            <ToneMode tone={tone} colorMain={colorMain} handleToneChange={handleToneChange}  />
+            <LanguageOptions tone={tone} language={language} colorMain={colorMain} handleLanguageChange={handleLanguageChange}  />
+            <NavBar tone={tone} language={language} colorMain={colorMain} handleColorChange={handleColorMainChange}  />
+
             {children}
           </div>
         </div>

@@ -73,7 +73,7 @@ export default function ToneMode({ tone, colorMain, handleToneChange }: ToneOpti
     }
 
     return (
-        <button onClick={handleClick} className={`absolute bottom-4 ${classes?.bgColorMain} ${classes?.bgColorMainHover} transition duration-150 cursor-pointer p-2 rounded-full left-4`}>
+        <button onClick={handleClick} className={`absolute z-10 bottom-4 ${classes?.bgColorMain} ${classes?.bgColorMainHover} transition duration-150 cursor-pointer p-2 rounded-full left-4`}>
             {tone === 'dark' ? (
                 <MdDarkMode size={30} className="text-black" />
             ) : (
