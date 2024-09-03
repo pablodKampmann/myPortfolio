@@ -12,10 +12,10 @@ const config: Config = {
         'tablet': '640px',
         // => @media (min-width: 640px) { ... }
 
-        'laptop': '960px',
+        'laptop': '1024px',
         // => @media (min-width: 1024px) { ... }
 
-        'desktop': '1600px',
+        'desktop': '1280px',
         // => @media (min-width: 1280px) { ... }
       },
       backgroundImage: {
@@ -28,7 +28,7 @@ const config: Config = {
         'move-whatsapp': 'move-whatsapp 0.15s ease-out',
         'move-email': 'move-email 0.15s ease-out',
         'move-gitHub': 'move-gitHub 0.15s ease-out',
-        'move-from-bottom': 'move-from-bottom 0.2s ease-out',
+        'move-from-bottom': 'move-from-bottom 0.3s ease-out',
       },
       keyframes: {
         'move-from-left': {
@@ -60,11 +60,8 @@ const config: Config = {
           '100%': { opacity: '1', transform: 'translateX(0) translateY(-0%)' },
         },
         'move-from-bottom': {
-          '0%': { opacity: '0', transform: ' translateY(100%)' },
-          '25%': { opacity: '0', transform: ' translateY(75%)' },
-          '50%': { opacity: '0.05', transform: ' translateY(50%)' },
-          '75%': { opacity: '0.8', transform: ' translateY(25%)' },
-          '100%': { opacity: '1', transform: ' translateY(0%)' },
+          '0%': { opacity: '0', transform: 'translateY(100%)' },
+          '100%': { opacity: '1', transform: 'translateY(0%)' },
         },
       }
     },

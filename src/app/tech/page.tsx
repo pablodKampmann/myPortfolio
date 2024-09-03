@@ -4,11 +4,13 @@ import Image from "next/image";
 import React, { useState, useEffect } from 'react';
 import { GrTechnology } from "react-icons/gr";
 import { TbArrowWaveRightUp } from "react-icons/tb";
+import { FaMousePointer } from "react-icons/fa";
+import { FaRegHandPointer } from "react-icons/fa6";
+import { TbHandMove } from "react-icons/tb";
 
 export default function Tech() {
     const [option, setOption] = useState('languages');
     const [category, setCategory] = useState('primary');
-    const imageBlur = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8XwMAAoABfYJLKisAAAAASUVORK5CYII='
 
     //LISTENER DEL LOCALSTORAGE
     useEffect(() => {
@@ -41,6 +43,8 @@ export default function Tech() {
         const storedLanguage = localStorage.getItem('language');
         if (storedLanguage) {
             setLanguage(storedLanguage);
+        } else {
+            setLanguage('spa')
         }
     }, []);
 
@@ -82,6 +86,8 @@ export default function Tech() {
         const storedTone = localStorage.getItem('tone');
         if (storedTone) {
             setTone(storedTone);
+        } else {
+            setTone('dark');
         }
     }, []);
 
@@ -169,20 +175,23 @@ export default function Tech() {
         const storedTone = localStorage.getItem('colorMain');
         if (storedTone) {
             setColorMain(storedTone);
+        } else {
+            setColorMain('emerald')
         }
     }, []);
 
     return (
         <div className={`${classes?.textColorClass} flex flex-col  justify-center items-center h-full pb-[6%]`}>
-            <h1 className={`text-4xl ${classes?.bgColorTitle} px-4 bg-opacity-30 py-4 flex justify-center items-center rounded-md`}>{texts?.technologies} <GrTechnology size={32} className={`ml-4 bg-white bg-opacity-90 p-1 rounded-full ${classes?.textColorTitleIcon}`} /></h1>
-            <h1 className="laptop:text-base desktop:text-lg text-center mt-4 w-[50%]">{texts?.info}</h1>
-            <TbArrowWaveRightUp size={50} className={`${classes?.textColorArrow} opacity-20 mt-6 mb-6 rotate-90`} />
+            <h1 className={` desktop:text-4xl desktop:text-red-500 laptop:text-3xl laptop:text-blue-500 tablet:text-xl tablet:text-green-500    ${classes?.bgColorTitle} px-4 bg-opacity-30 py-4 flex justify-center items-center rounded-md`}>{texts?.technologies} <GrTechnology size={32} className={`ml-4 bg-white bg-opacity-90 p-1 rounded-full ${classes?.textColorTitleIcon}`} /></h1>
+            <h1 className="desktop:text-lg desktop:text-red-500 laptop:text-base laptop:text-blue-500 tablet:text-sm tablet:text-green-500 text-center mt-4 w-[50%]">{texts?.info}</h1>
+            <TbArrowWaveRightUp size={50} className={`${classes?.textColorArrow} opacity-20  mt-4 mb-6 rotate-90`} />
             <div className="flex justify-center select-none space-x-4 items-center">
                 <button onClick={() => setOption('languages')} className={`${option === 'languages' ? `${classes?.bgColorTitle}` : `${classes?.hoverColorButtons} ${classes?.hoverOpacityButtons}`} transition duration-200 rounded-md laptop:text-lg desktop:text-xl  px-2 py-1 cursor-pointer`}>{texts?.option_1}</button>
                 <button onClick={() => setOption('frontend')} className={`${option === 'frontend' ? `${classes?.bgColorTitle}` : `${classes?.hoverColorButtons} ${classes?.hoverOpacityButtons}`} transition duration-200 rounded-md laptop:text-lg desktop:text-xl px-2 py-1 cursor-pointer`}>{texts?.option_2}</button>
                 <button onClick={() => setOption('backend')} className={`${option === 'backend' ? `${classes?.bgColorTitle}` : `${classes?.hoverColorButtons} ${classes?.hoverOpacityButtons}`} transition duration-200  rounded-md laptop:text-lg desktop:text-xl px-2 py-1 cursor-pointer`}>{texts?.option_3}</button>
             </div>
-            <div className={`${option === 'languages' && category !== 'secondary' && 'w-[840px]'} ${option === 'languages' && category === 'secondary' && 'w-[450px]'} ${option === 'frontend' && 'w-[450px]'} ${option === 'backend' && 'w-[720px]'} ${classes?.bgColorImages} ${classes?.bgOpacityImages} select-none transition-width ease-in-out duration-300  flex relative rounded-lg  shadow-2xl  px-6 py-6 mt-2 justify-center items-center`}>
+            <div className={`${option === 'languages' && category !== 'secondary' && 'w-[840px]'} ${option === 'languages' && category === 'secondary' && 'w-[450px]'} ${option === 'frontend' && 'w-[450px]'} ${option === 'backend' && 'w-[840px]'} ${classes?.bgColorImages} ${classes?.bgOpacityImages} select-none transition-width ease-in-out duration-300  flex relative rounded-lg  shadow-2xl  px-6 py-6 mt-2 justify-center items-center`}>
+                <TbHandMove size={22} className="absolute opacity-70 top-1.5 right-1.5" />
                 {option === 'languages' && (
                     <div>
                         <div className="absolute space-x-2 flex laptop:text-sm desktop:text-base justify-center items-center top-0.5 left-2">
@@ -196,37 +205,92 @@ export default function Tech() {
                         </div>
                         {category === 'primary' && (
                             <div className="space-x-6 flex justify-center mt-4 items-center">
-                                <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='tailwind-icon.svg' alt="tailwind-icon" />
-                                <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='html-icon.svg' alt="html-icon" />
-                                <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='typescript-icon.svg' alt="typescript-icon" />
-                                <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='css-icon.svg' alt="css-icon" />
-                                <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='javascript-icon.svg' alt="javascript-icon" />
-                                <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='git-icon.svg' alt="git-icon" />
+                                <div className="flex flex-col group justify-center items-center">
+                                    <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110  group-hover:-translate-y-2" width={110} height={110} priority={true} src='tailwind-icon.svg' alt="tailwind-icon" />
+                                    <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">Tailwind</p>
+                                </div>
+                                <div className="flex flex-col group justify-center items-center">
+                                    <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='html-icon.svg' alt="html-icon" />
+                                    <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">HTML5</p>
+                                </div>
+                                <div className="flex flex-col group justify-center items-center">
+                                    <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='typescript-icon.svg' alt="typescript-icon" />
+                                    <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">TypeScript</p>
+                                </div>
+                                <div className="flex flex-col group justify-center items-center">
+                                    <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='css-icon.svg' alt="css-icon" />
+                                    <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">CSS</p>
+                                </div>
+                                <div className="flex flex-col group justify-center items-center">
+                                    <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='javascript-icon.svg' alt="javascript-icon" />
+                                    <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">JavaScript</p>
+                                </div>
+                                <div className="flex flex-col group justify-center items-center">
+                                    <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='github-icon.svg' alt="git-icon" />
+                                    <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">GitHub</p>
+                                </div>
                             </div>
                         )}
                         {category === 'secondary' && (
                             <div className="space-x-6 flex justify-center  mt-4 items-center">
-                                <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='c-icon.svg' alt="c-icon" />
-                                <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='php-icon.svg' alt="php-icon" />
-                                <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='python-icon.svg' alt="python-icon" />
+                                <div className="flex flex-col group justify-center items-center">
+                                    <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='c-icon.svg' alt="c-icon" />
+                                    <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">C#</p>
+                                </div>
+                                <div className="flex flex-col group justify-center items-center">
+                                    <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='php-icon.svg' alt="php-icon" />
+                                    <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">Php</p>
+                                </div>
+                                <div className="flex flex-col group justify-center items-center">
+                                    <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='python-icon.svg' alt="python-icon" />
+                                    <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">Python</p>
+                                </div>
                             </div>
                         )}
                     </div>
                 )}
                 {option === 'frontend' && (
                     <div className="space-x-6 flex justify-center mt-4 items-center">
-                        <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='nextjs-icon.svg' alt="nextjs-icon" />
-                        <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='react-icon.svg' alt="react-icon" />
-                        <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='astro-icon.svg' alt="astro-icon" />
+                        <div className="flex flex-col group justify-center items-center">
+                            <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='nextjs-icon.svg' alt="nextjs-icon" />
+                            <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">Next Js</p>
+                        </div>
+                        <div className="flex flex-col group justify-center items-center">
+                            <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='react-icon.svg' alt="react-icon" />
+                            <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">React</p>
+                        </div>
+                        <div className="flex flex-col group justify-center items-center">
+                            <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='astro-icon.svg' alt="astro-icon" />
+                            <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">Astro</p>
+                        </div>
                     </div>
                 )}
                 {option === 'backend' && (
                     <div className="space-x-6 flex justify-center mt-4 items-center">
-                        <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='nodejs-icon.svg' alt="nodejs-icon" />
-                        <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='firebase-icon.svg' alt="firebase-icon" />
-                        <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='mongodb-icon.svg' alt="mongodb-icon" />
-                        <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='mysql-icon.svg' alt="mysql-icon" />
-                        <Image className="transition-transform duration-300 w-[110px] h-[110px] transform hover:scale-125 hover:-translate-y-2" quality={100} width={110} height={110} priority={true} src='microsoftsql-icon.svg' alt="microsoftsql-icon" />
+                        <div className="flex flex-col group justify-center items-center">
+                            <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='nodejs-icon.svg' alt="nodejs-icon" />
+                            <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">NodeJs</p>
+                        </div>
+                        <div className="flex flex-col group justify-center items-center">
+                            <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='firebase-icon.svg' alt="firebase-icon" />
+                            <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">Firebase</p>
+                        </div>
+                        <div className="flex flex-col group justify-center items-center">
+                            <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='mongodb-icon.svg' alt="mongodb-icon" />
+                            <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">MongoDB</p>
+                        </div>
+                        <div className="flex flex-col group justify-center items-center">
+                            <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='supabase-icon.svg' alt="mongodb-icon" />
+                            <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">MongoDB</p>
+                        </div>
+                        <div className="flex flex-col group justify-center items-center">
+                            <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='mysql-icon.svg' alt="mysql-icon" />
+                            <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">MySql</p>
+                        </div>
+                        <div className="flex flex-col group justify-center items-center">
+                            <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='microsoftsql-icon.svg' alt="microsoftsql-icon" />
+                            <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">SqlServer</p>
+                        </div>
                     </div>
                 )}
             </div>

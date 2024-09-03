@@ -141,7 +141,6 @@ export default function RootLayout({
             <div className={`absolute right-9 bottom-[42%] rounded-full ${classes?.bgLinesColor} h-16 w-1 `}></div>
             <button onClick={() => router.push('/')} className={`absolute -right-8 hover:underline transition duration-150 cursor-pointer bottom-[64%] font-semibold text-${colorMain}-500 transform rotate-90`}>@pablokampmann</button>
             <div className={`absolute right-9 bottom-[80%] rounded-full ${classes?.bgLinesColor} h-8 w-1 `}></div>
-            <p className="absolute bottom-1 justify-center text-xs flex w-full text-white">Esta aplicacion es completamente responsiva <MdOutlineDevices/></p>
             <ToneMode tone={tone} colorMain={colorMain} handleToneChange={handleToneChange} />
             <LanguageOptions tone={tone} language={language} colorMain={colorMain} handleLanguageChange={handleLanguageChange} />
             <NavBar tone={tone} language={language} colorMain={colorMain} handleColorChange={handleColorMainChange} />
