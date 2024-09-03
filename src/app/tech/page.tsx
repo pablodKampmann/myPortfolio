@@ -138,6 +138,7 @@ export default function Tech() {
                     hoverOpacityButtons: 'hover:bg-opacity-10',
                     hoverColorButtons: 'hover:bg-white',
                     textColorCategory: textColorCategory,
+                    borderColorProjectsCont: "border-emerald-950",
                     bgColorImages: 'bg-blue-950',
                     bgOpacityImages: 'bg-opacity-20',
                     bgColorTitle: bgColorTitle,
@@ -146,6 +147,7 @@ export default function Tech() {
                 },
                 light: {
                     textColorClass: "text-black",
+                    borderColorProjectsCont: "border-gray-400",
                     borderImagesColor: 'border-gray-400',
                     hoverOpacityButtons: 'hover:bg-opacity-20',
                     hoverColorButtons: 'hover:bg-gray-400',
@@ -182,7 +184,9 @@ export default function Tech() {
 
     return (
         <div className={`${classes?.textColorClass} flex flex-col  justify-center items-center h-full pb-[6%]`}>
-            <h1 className={` xl:text-red-500 lg:text-blue-500 md:text-yellow-500 sm:text-green-500   ${classes?.bgColorTitle} px-4 bg-opacity-30 py-4 flex justify-center items-center rounded-md`}>{texts?.technologies} <GrTechnology size={32} className={`ml-4 bg-white bg-opacity-90 p-1 rounded-full ${classes?.textColorTitleIcon}`} /></h1>
+            <div className={`${classes?.bgColorTitle} ${classes?.bgOpacityTitle} font-normal border-r-4 border-b-4   flex  ${classes?.borderColorProjectsCont} justify-center px-2 py-1.5 rounded shadow-2xl mb-8 items-center text-left text-4xl   `}>
+                {texts?.technologies} <GrTechnology className={`ml-4 ${tone === 'light' && 'bg-white'} bg-opacity-90 p-1 rounded-full `} />
+            </div>
             <h1 className="text-lg  text-center mt-4 w-[50%]">{texts?.info}</h1>
 
             <TbArrowWaveRightUp size={50} className={`${classes?.textColorArrow} opacity-20  mt-4 mb-6 rotate-90`} />
@@ -207,27 +211,27 @@ export default function Tech() {
                         </div>
                         {category === 'primary' && (
                             <div className="space-x-6 flex justify-center mt-4 items-center">
-                                <div className="flex flex-col group justify-center items-center">
+                                <div className="flex flex-col group hover:cursor-help	 justify-center items-center">
                                     <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110  group-hover:-translate-y-2" width={110} height={110} priority={true} src='tailwind-icon.svg' alt="tailwind-icon" />
                                     <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">Tailwind</p>
                                 </div>
-                                <div className="flex flex-col group justify-center items-center">
+                                <div className="flex flex-col group justify-center items-center hover:cursor-help">
                                     <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='html-icon.svg' alt="html-icon" />
                                     <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">HTML5</p>
                                 </div>
-                                <div className="flex flex-col group justify-center items-center">
+                                <div className="flex flex-col group justify-center items-center hover:cursor-help">
                                     <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='typescript-icon.svg' alt="typescript-icon" />
                                     <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">TypeScript</p>
                                 </div>
-                                <div className="flex flex-col group justify-center items-center">
+                                <div className="flex flex-col group justify-center items-center hover:cursor-help">
                                     <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='css-icon.svg' alt="css-icon" />
                                     <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">CSS</p>
                                 </div>
-                                <div className="flex flex-col group justify-center items-center">
+                                <div className="flex flex-col group justify-center items-center hover:cursor-help">
                                     <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='javascript-icon.svg' alt="javascript-icon" />
                                     <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">JavaScript</p>
                                 </div>
-                                <div className="flex flex-col group justify-center items-center">
+                                <div className="flex flex-col group justify-center items-center hover:cursor-help">
                                     <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='github-icon.svg' alt="git-icon" />
                                     <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">GitHub</p>
                                 </div>
@@ -235,15 +239,15 @@ export default function Tech() {
                         )}
                         {category === 'secondary' && (
                             <div className="space-x-6 flex justify-center  mt-4 items-center">
-                                <div className="flex flex-col group justify-center items-center">
+                                <div className="flex flex-col group justify-center items-center hover:cursor-help">
                                     <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='c-icon.svg' alt="c-icon" />
                                     <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">C#</p>
                                 </div>
-                                <div className="flex flex-col group justify-center items-center">
+                                <div className="flex flex-col group justify-center items-center hover:cursor-help">
                                     <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='php-icon.svg' alt="php-icon" />
                                     <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">Php</p>
                                 </div>
-                                <div className="flex flex-col group justify-center items-center">
+                                <div className="flex flex-col group justify-center items-center hover:cursor-help">
                                     <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='python-icon.svg' alt="python-icon" />
                                     <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">Python</p>
                                 </div>
@@ -253,15 +257,15 @@ export default function Tech() {
                 )}
                 {option === 'frontend' && (
                     <div className="space-x-6 flex justify-center mt-4 items-center">
-                        <div className="flex flex-col group justify-center items-center">
+                        <div className="flex flex-col group justify-center items-center hover:cursor-help">
                             <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='nextjs-icon.svg' alt="nextjs-icon" />
                             <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">Next Js</p>
                         </div>
-                        <div className="flex flex-col group justify-center items-center">
+                        <div className="flex flex-col group justify-center items-center hover:cursor-help">
                             <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='react-icon.svg' alt="react-icon" />
                             <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">React</p>
                         </div>
-                        <div className="flex flex-col group justify-center items-center">
+                        <div className="flex flex-col group justify-center items-center hover:cursor-help">
                             <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='astro-icon.svg' alt="astro-icon" />
                             <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">Astro</p>
                         </div>
@@ -269,27 +273,27 @@ export default function Tech() {
                 )}
                 {option === 'backend' && (
                     <div className="space-x-6 flex justify-center mt-4 items-center">
-                        <div className="flex flex-col group justify-center items-center">
+                        <div className="flex flex-col group justify-center items-center hover:cursor-help">
                             <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='nodejs-icon.svg' alt="nodejs-icon" />
                             <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">NodeJs</p>
                         </div>
-                        <div className="flex flex-col group justify-center items-center">
+                        <div className="flex flex-col group justify-center items-center hover:cursor-help">
                             <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='firebase-icon.svg' alt="firebase-icon" />
                             <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">Firebase</p>
                         </div>
-                        <div className="flex flex-col group justify-center items-center">
+                        <div className="flex flex-col group justify-center items-center hover:cursor-help">
                             <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='mongodb-icon.svg' alt="mongodb-icon" />
                             <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">MongoDB</p>
                         </div>
-                        <div className="flex flex-col group justify-center items-center">
+                        <div className="flex flex-col group justify-center items-center hover:cursor-help">
                             <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='supabase-icon.svg' alt="mongodb-icon" />
                             <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">MongoDB</p>
                         </div>
-                        <div className="flex flex-col group justify-center items-center">
+                        <div className="flex flex-col group justify-center items-center hover:cursor-help">
                             <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='mysql-icon.svg' alt="mysql-icon" />
                             <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">MySql</p>
                         </div>
-                        <div className="flex flex-col group justify-center items-center">
+                        <div className="flex flex-col group justify-center items-center hover:cursor-help">
                             <Image className="transition-transform  duration-300 w-[110px] h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2" width={110} height={110} priority={true} src='microsoftsql-icon.svg' alt="microsoftsql-icon" />
                             <p className="text-sm tracking-widest group-hover:opacity-100 opacity-0 mt-1.5 transition duration-150 font-[600]">SqlServer</p>
                         </div>

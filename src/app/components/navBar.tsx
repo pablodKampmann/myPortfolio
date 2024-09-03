@@ -164,7 +164,7 @@ export default function NavBar({ tone, language, colorMain, handleColorChange }:
     }, [showOptions]);
 
     return (
-        <div className={`w-full flex z-10 relative justify-between items-center ${classes?.bgMain} border-b-2 ${classes?.borderColor} transition select-none duration-200 ${classes?.bgMainOpacity} h-[10%] `} >
+        <div className={`w-full flex z-50 relative justify-between items-center ${classes?.bgMain} border-b-2 ${classes?.borderColor} transition select-none duration-200 ${classes?.bgMainOpacity} h-[10%] `} >
 
             <div className="ml-4 flex justify-center items-center">
                 {showCancelButton ? (
@@ -178,7 +178,7 @@ export default function NavBar({ tone, language, colorMain, handleColorChange }:
                 )}
 
                 {showOptions && (
-                    <div onClick={() => { setShowOptions(false); setShowCancelButton(false) }} className={` animate-move-from-left transition-opacity border-2 ${classes?.borderColor} duration-500 absolute  top-[12%] left-[1%] w-[130px] h-[175px] flex flex-col justify-center items-center ${classes?.bgColorShowOptions} ${classes?.bgOpacityShowOptions} shadow-2xl rounded-xl`}>
+                    <div onClick={() => { setShowOptions(false); setShowCancelButton(false) }} className={` animate-move-from-left transition-opacity border-2 ${classes?.borderColor} duration-500 absolute top-[120%] left-[1%] w-[130px] h-[175px] flex flex-col justify-center items-center ${classes?.bgColorShowOptions} ${classes?.bgOpacityShowOptions} shadow-2xl rounded-xl`}>
                         <h1 className={`text-xs font-bold -tracking-tighter ${classes?.textMain} mb-2.5 w-[80%] text-balance text-center`}>Seleccione el <span className={`${classes?.textIcon} font-bold text-sm`}>COLOR</span> primario de la interfaz</h1>
                         <div className="flex flex-col justify-center space-y-2 items-center ">
                             <div className="flex justify-center items-center space-x-4">
