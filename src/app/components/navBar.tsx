@@ -88,8 +88,8 @@ export default function NavBar({ tone, language, colorMain, handleColorChange }:
 
             setClassesTones({
                 dark: {
-                    bgMain: "bg-blue-950",
-                    bgMainOpacity: "bg-opacity-20",
+                    bgMain: "bg-[#090D1F]",
+                    bgMainOpacity: "bg-opacity-100",
                     textMain: "text-white",
                     bgOpacityButtonPressed: "bg-opacity-40",
                     bgOpacityHoverButtons: "hover:bg-opacity-20",
@@ -163,16 +163,40 @@ export default function NavBar({ tone, language, colorMain, handleColorChange }:
 
     }, [showOptions]);
 
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIsVisible(true);
+
+            // Apagar el fondo después de 300 ms
+            setTimeout(() => {
+                setIsVisible(false);
+            }, 1500); // Duración del "encendido"
+
+        }, 5000); // Intervalo de titileo
+
+        return () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
+       console.log(isVisible);
+       
+    }, [isVisible]);
+
+
+
+
     return (
         <div className={`w-full flex z-50 relative justify-between items-center ${classes?.bgMain} border-b-2 ${classes?.borderColor} transition select-none duration-200 ${classes?.bgMainOpacity} h-[10%] `} >
-            
+
             <div className="ml-4 flex justify-center items-center">
                 {showCancelButton ? (
                     <div className={`cursor-pointer  ${classes?.hoverBgColorIcon} ${classes?.hoverBgOpacityIcon} transition animate-[spin_0.5s_ease-out] duration-300 p-1 rounded-full`}>
                         <MdOutlineCancel onClick={() => { setShowOptions(false); setShowCancelButton(false) }} size={40} className={`${classes?.textIcon} `} />
                     </div>
                 ) : (
-                    <div className={`cursor-pointer ${classes?.hoverBgColorIcon} ${classes?.hoverBgOpacityIcon} transition duration-300  p-1 rounded-full`}>
+                    <div className={`cursor-pointer ${isVisible ? `${classes?.bgColorButtons} bg-opacity-10` : 'bg-transparent'} ${classes?.hoverBgColorIcon} ${classes?.hoverBgOpacityIcon} transition duration-300  p-1 rounded-full`}>
                         <SiVorondesign onClick={() => setIsClick(true)} size={40} className={`${classes?.textIcon} ${isClick ? '' : 'animate-[spin_5s_ease-in-out_infinite]  '}  `} />
                     </div>
                 )}

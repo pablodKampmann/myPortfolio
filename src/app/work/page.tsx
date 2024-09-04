@@ -132,14 +132,13 @@ export default function Work() {
       setClassesTones({
         dark: {
           textColorMain: "text-white",
-          borderColorProjectsCont: "border-gray-900",
+          borderColorProjectsCont: "border-emerald-950",
           bgColorProjectsCont: "bg-blue-950",
           bgOpacityProjectsCont: "bg-opacity-20",
           bgHoverColorProject: "hover:bg-blue-950",
           bgHoverOpacityProject: "hover:bg-opacity-20",
           borderHoverColorProject: "hover:border-white",
           borderHoverOpacityProject: "hover:border-opacity-10",
-          bgOpacityTitle: "bg-opacity-40",
           bgOpacityLinks: "bg-opacity-10",
           opacityImages: "opacity-50",
           bgOpacityLoaderImage: "bg-opacity-10",
@@ -147,6 +146,9 @@ export default function Work() {
           textColorHoverLinks: textColorHoverLinks,
           bgColorTitle: bgColorTitle,
           textColorSubTitle: textColorSubTitle,
+
+       
+
         },
         light: {
           textColorMain: "text-black",
@@ -157,7 +159,6 @@ export default function Work() {
           bgHoverOpacityProject: "hover:bg-opacity-30",
           borderHoverColorProject: "hover:border-gray-950",
           borderHoverOpacityProject: "hover:border-opacity-30",
-          bgOpacityTitle: "bg-opacity-80",
           bgOpacityLinks: "bg-opacity-100",
           opacityImages: "opacity-70",
           bgOpacityLoaderImage: "bg-opacity-100",
@@ -202,8 +203,9 @@ export default function Work() {
 
   return (
     <div className={`${classes?.textColorMain} flex flex-col justify-center items-center h-full pb-[4%]`}>
-      <div className={`${classes?.bgColorTitle} ${classes?.bgOpacityTitle} font-normal border-r-4 border-b-4 border-blue-950  flex  ${classes?.borderColorProjectsCont} justify-center px-2 py-1.5 rounded shadow-2xl mb-8 items-center text-left text-4xl   `}>
-        {texts?.title} <MdDesignServices className={`ml-4 bg-white bg-opacity-90 p-1 rounded-full`} />
+
+      <div className={`${classes?.bgColorTitle}  font-normal border-r-4 border-b-4   flex  ${classes?.borderColorProjectsCont} justify-center px-2 py-1.5 rounded shadow-2xl mb-8 items-center text-left text-4xl   `}>
+        {texts?.title} <MdDesignServices className={`ml-4 ${tone === 'light' && 'bg-white'} bg-opacity-90 p-1 rounded-full `} />
       </div>
       <div className={`flex h-[75%] relative  ${classes?.bgColorProjectsCont} ${classes?.bgOpacityProjectsCont} rounded-lg w-[70%]  shadow-2xl text-lg justify-center items-center `}>
         <div className='overflow-y-auto bg-transparent  overflow-x-hidden flex flex-col h-full '>

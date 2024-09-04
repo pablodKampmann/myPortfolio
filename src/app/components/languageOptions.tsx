@@ -95,12 +95,21 @@ export default function LanguageOptions({ tone, language, colorMain, handleLangu
         classes = classesTones?.light;
     }
 
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setOpen(false);
+        }, 5000);
+
+        return () => clearTimeout(timeoutId);
+
+    }, [open]);
+
     return (
         <button onClick={() => setOpen(!open)} className={`${open ? `${classes?.bgColor} ${classes?.bgOpacity} rounded-lg animate-move-from-bottom` : `${classes?.bgIconColor} ${classes?.bgIconOpacity} hover:bg-opacity-25  rounded-full p-1`} absolute ${classes?.textColor}  transition duration-200 bottom-3 right-3 z-10`}>
             <div className={`${open ? 'border-2 py-4 px-4' : 'cursor-pointer'}  select-none flex flex-col relative  ${classes?.borderColor} shadow-2xl rounded-lg  justify-center items-center`}>
                 {open && (
                     <div className={`absolute flex justify-center items-center w-8 h-8 top-1 right-1 ${classes?.bgHoverCloseButton} hover:bg-opacity-10  rounded-full cursor-pointer text-2xl `}>
-                        <IoIosClose className={`w-full h-full text-opacity-70 ${classes?.textColor}`}/>
+                        <IoIosClose className={`w-full h-full text-opacity-70 ${classes?.textColor}`} />
                     </div>
                 )}
                 <MdLanguage size={38} className={`${classes?.textIconColor}`} />

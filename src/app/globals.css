@@ -18,12 +18,9 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
+  background: linear-gradient(to bottom,
       transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
 @layer utilities {
@@ -34,7 +31,8 @@ body {
 
 /* Estilo básico de la barra de desplazamiento */
 :root {
-  --scrollbar-color: #059669; /* Color por defecto */
+  --scrollbar-color: #059669;
+  /* Color por defecto */
 }
 
 ::-webkit-scrollbar {
@@ -69,33 +67,44 @@ input::-webkit-inner-spin-button {
   transition: background-color 5s ease-in-out;
 }
 
+.about-me-container::-webkit-scrollbar {
+  width: 6px;
+}
 
 /* Mobile Layout */
 .mobile-layout {
-    display: none; /* Initially hide mobile layout */
+  display: none;
+  /* Initially hide mobile layout */
 }
 
 /* Desktop Layout */
 .desktop-layout {
-    display: none; /* Initially hide desktop layout */
+  display: none;
+  /* Initially hide desktop layout */
 }
 
 /* Media Query for Mobile Devices */
 @media only screen and (max-width: 768px) {
-    .mobile-layout {
-        display: block; /* Show mobile layout */
-    }
-    .desktop-layout {
-        display: none; /* Hide desktop layout on mobile devices */
-    }
+  .mobile-layout {
+    display: block;
+    /* Show mobile layout */
+  }
+
+  .desktop-layout {
+    display: none;
+    /* Hide desktop layout on mobile devices */
+  }
 }
 
 /* Media Query for Desktop Devices */
 @media only screen and (min-width: 769px) {
-    .mobile-layout {
-        display: none; /* Hide mobile layout on desktop devices */
-    }
-    .desktop-layout {
-        display: block; /* Show desktop layout */
-    }
+  .mobile-layout {
+    display: none;
+    /* Hide mobile layout on desktop devices */
+  }
+
+  .desktop-layout {
+    display: block;
+    /* Show desktop layout */
+  }
 }

@@ -18,7 +18,7 @@ export default function Loading() {
                     <defs>
                         <linearGradient id="my_gradient" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" stopColor="#059669" />
-                            <stop offset="100%" stopColor="#1CB5E0" />
+                            <stop offset="100%" stopColor="white" />
                         </linearGradient>
                     </defs>
                 </svg>

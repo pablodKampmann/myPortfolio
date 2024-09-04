@@ -209,10 +209,10 @@ export default function AboutMe() {
     <div className={`${classes?.textColorMain} flex flex-col justify-center items-center h-full pb-[6%]`}>
       <div className={`w-[50%] h-[65%] flex flex-col justify-start  p-8 relative bg-white ${classes?.bgOpacityMain} rounded-2xl shadow-2xl`}>
         <div className=''>
-          <h2 className='uppercase flex items-center  laptop:text-lg desktop:text-xl text-opacity-80'>{texts?.title_1}(  <span className={` underline ${classes?.decorationColor}`}> {texts?.title_2}</span>) <FaDev className={`ml-4 ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} p-1 rounded ${classes?.textMainColor}`} size={28} /></h2>
+          <h2 className='uppercase flex items-center   md:text-xs lg:text-sm xl:text-base 2xl:text-xl text-opacity-80'>{texts?.title_1}(  <span className={` underline ${classes?.decorationColor}`}> {texts?.title_2}</span>) <FaDev className={`ml-4 ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} p-1 rounded ${classes?.textMainColor}`} size={28} /></h2>
           <h1 className={`${classes?.textMainColor} font-semibold laptop:text-3xl desktop:text-4xl `}>Pablo Kampmann</h1>
         </div>
-        <div className='w-[70%] space-y-4  laptop:text-sm desktop:text-lg  mt-4'>
+        <div className='w-[70%] space-y-4 overflow-y-auto  md:text-xs lg:text-sm xl:text-base 2xl:text-lg about-me-container  mt-4'>
           <p className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2 rounded-md`}>{texts?.text_1}</p>
           <p className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo}  py-1 px-2  rounded-md`}>{texts?.text_2_part_1} <a onClick={() => router.push('/work')} className={`${classes?.textLinkColor} ${classes?.hoverTextLinkColor} hover:cursor-pointer transition duration-150`}>{texts?.text_link_1}</a>{texts?.text_2_part_2}</p>
           <p className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2  rounded-md`}>{texts?.text_3_part_1} <a onClick={() => router.push('/tech')} className={`${classes?.textLinkColor} ${classes?.hoverTextLinkColor} hover:cursor-pointer transition duration-150`}>{texts?.text_link_2} </a>{texts?.text_3_part_2}</p>
