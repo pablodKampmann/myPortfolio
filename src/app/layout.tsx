@@ -117,7 +117,7 @@ export default function RootLayout({
     if (classesTones) {
       const timeoutId = setTimeout(() => {
         setIsLoading(false);
-      }, 1000);
+      }, 500);
 
       return () => clearTimeout(timeoutId);
     }

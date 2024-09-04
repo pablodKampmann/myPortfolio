@@ -30,11 +30,11 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       animation: {
-        'move-from-left': 'move-from-left 0.2s ease-out',
+        'move-from-left': 'move-from-left 0.15s ease-out',
         'move-whatsapp': 'move-whatsapp 0.15s ease-out',
         'move-email': 'move-email 0.15s ease-out',
         'move-gitHub': 'move-gitHub 0.15s ease-out',
-        'move-from-bottom': 'move-from-bottom 0.2s ease-out',
+        'move-from-bottom': 'move-from-bottom 0.15s ease-out',
       },
       keyframes: {
         'move-from-left': {

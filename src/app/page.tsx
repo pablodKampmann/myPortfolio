@@ -221,13 +221,13 @@ export default function AboutMe() {
           <Image placeholder='blur' blurDataURL={imageBlur} className={`rounded-full border-4  ${classes?.borderColorImage}  shadow-2xl object-cover w-[200px] h-[200px]`} quality={100} width={959} height={1280} priority={true} src='/me-image.jpg' alt="me-image" />
           {openSocial && (
             <div className=''>
-              <button onClick={whatsAppContact} className={`absolute animate-move-whatsapp cursor-pointer transition duration-150 ${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2 rounded-full -left-12 top-[45%]`}>
+              <button onClick={whatsAppContact} className={`absolute animate-move-whatsapp cursor-pointer  ${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2 rounded-full -left-12 top-[45%]`}>
                 <IoLogoWhatsapp size={28} className={`${classes?.textColorMain} ${classes?.textOpacity} `} />
               </button>
-              <button onClick={emailContact} className={`absolute animate-move-email cursor-pointer transition duration-150 ${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2 rounded-full -left-8 top-[70%]`}>
+              <button onClick={emailContact} className={`absolute animate-move-email cursor-pointer  ${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2 rounded-full -left-8 top-[70%]`}>
                 <FaEnvelope size={24} className={`${classes?.textColorMain} ${classes?.textOpacity} `} />
               </button>
-              <button onClick={gitHubContact} className={`absolute animate-move-gitHub cursor-pointer transition duration-150 ${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2 rounded-full left-0 top-[90%]`}>
+              <button onClick={gitHubContact} className={`absolute animate-move-gitHub cursor-pointer  ${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2 rounded-full left-0 top-[90%]`}>
                 <FaGithub size={28} className={`${classes?.textColorMain} ${classes?.textOpacity} `} />
               </button>
             </div>

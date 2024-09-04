@@ -165,7 +165,7 @@ export default function NavBar({ tone, language, colorMain, handleColorChange }:
 
     return (
         <div className={`w-full flex z-50 relative justify-between items-center ${classes?.bgMain} border-b-2 ${classes?.borderColor} transition select-none duration-200 ${classes?.bgMainOpacity} h-[10%] `} >
-
+            
             <div className="ml-4 flex justify-center items-center">
                 {showCancelButton ? (
                     <div className={`cursor-pointer  ${classes?.hoverBgColorIcon} ${classes?.hoverBgOpacityIcon} transition animate-[spin_0.5s_ease-out] duration-300 p-1 rounded-full`}>

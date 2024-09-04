@@ -1,11 +1,29 @@
 import { SiVorondesign } from "react-icons/si";
 import { FaConnectdevelop } from "react-icons/fa";
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import CircularProgress, {
+    circularProgressClasses,
+    CircularProgressProps,
+} from '@mui/material/CircularProgress';
+import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 
 export default function Loading() {
     return (
         <div className="h-screen flex-col bg-blue-950 bg-opacity-20 space-y-8 select-none w-full flex justify-center items-center">
-            <FaConnectdevelop className='text-emerald-600 animate-[spin_1.5s_ease-out_infinite]' size={180} />
-            <h1 className='bg-emerald-500 text-lg bg-opacity-20 shadow-2xl py-1 px-2 rounded'>Please wait</h1>
+            <React.Fragment>
+                <svg width={0} height={0}>
+                    <defs>
+                        <linearGradient id="my_gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="#059669" />
+                            <stop offset="100%" stopColor="#1CB5E0" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <CircularProgress sx={{ 'svg circle': { stroke: 'url(#my_gradient)' } }} />
+            </React.Fragment>
         </div>
     );
 }
