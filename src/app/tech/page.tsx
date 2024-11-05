@@ -184,7 +184,7 @@ export default function Tech() {
 
     return (
         <div className={`${classes?.textColorClass} flex flex-col  justify-center items-center h-full pb-[6%]`}>
-            <div className={`${classes?.bgColorTitle}  font-normal border-r-4 border-b-4   flex  ${classes?.borderColorProjectsCont} justify-center px-2 py-1.5 rounded shadow-2xl mb-8 items-center text-left text-4xl   `}>
+            <div className={`${classes?.bgColorTitle}  font-normal border-r-4 border-b-4   flex  ${classes?.borderColorProjectsCont} justify-center px-2 py-1.5 pb-2 rounded-2xl shadow-2xl mb-8 items-center text-left text-4xl   `}>
                 {texts?.technologies} <GrTechnology className={`ml-4 ${tone === 'light' && 'bg-white'} bg-opacity-90 p-1 rounded-full `} />
             </div>
             <h1 className="text-lg  text-center mt-4 w-[50%]">{texts?.info}</h1>

@@ -57,8 +57,8 @@ export default function LanguageOptions({ tone, language, colorMain, handleLangu
 
             setClassesTones({
                 dark: {
-                    bgColor: "bg-blue-950",
-                    bgOpacity: "bg-opacity-20",
+                    bgColor: "bg-[#090D1F]",
+                    bgOpacity: "bg-opacity-100",
                     textColor: "text-white",
                     bgIconColor: "bg-gray-100",
                     bgIconOpacity: "bg-opacity-15",
@@ -105,14 +105,18 @@ export default function LanguageOptions({ tone, language, colorMain, handleLangu
     }, [open]);
 
     return (
-        <button onClick={() => setOpen(!open)} className={`${open ? `${classes?.bgColor} ${classes?.bgOpacity} rounded-lg animate-move-from-bottom` : `${classes?.bgIconColor} ${classes?.bgIconOpacity} hover:bg-opacity-25  rounded-full p-1`} absolute ${classes?.textColor}  transition duration-200 bottom-3 right-3 z-10`}>
-            <div className={`${open ? 'border-2 py-4 px-4' : 'cursor-pointer'}  select-none flex flex-col relative  ${classes?.borderColor} shadow-2xl rounded-lg  justify-center items-center`}>
+        <button
+            onClick={() => setOpen(!open)}
+            className={`${open ? `${classes?.bgColor} ${classes?.bgOpacity} rounded-xl transition-transform duration-300 transform translate-y-0` : `${classes?.bgIconColor} ${classes?.bgIconOpacity} hover:bg-opacity-25 rounded-full p-1 translate-y-0`} absolute ${classes?.textColor} transition duration-200 bottom-3 right-3 z-10`}
+        >
+            <div className={`${open ? 'border-2 py-4 px-4' : 'cursor-pointer'} select-none flex flex-col relative ${classes?.borderColor} shadow-2xl rounded-lg justify-center items-center`}>
                 {open && (
-                    <div className={`absolute flex justify-center items-center w-8 h-8 top-1 right-1 ${classes?.bgHoverCloseButton} hover:bg-opacity-10  rounded-full cursor-pointer text-2xl `}>
+                    <div className={`absolute flex justify-center items-center w-8 h-8 top-1 right-1 ${classes?.bgHoverCloseButton} hover:bg-opacity-10 rounded-full cursor-pointer text-2xl`}>
                         <IoIosClose className={`w-full h-full text-opacity-70 ${classes?.textColor}`} />
                     </div>
                 )}
-                <MdLanguage size={38} className={`${classes?.textIconColor}`} />
+                
+                <MdLanguage size={36} className={`${classes?.textIconColor}`} />
                 {open && language === "eng" && (
                     "Select Language"
                 )}
@@ -120,12 +124,13 @@ export default function LanguageOptions({ tone, language, colorMain, handleLangu
                     "Seleccionar Idioma"
                 )}
                 {open && (
-                    <div className="flex border-t-2 w-full space-y-2  flex-col">
+                    <div className="flex border-t-2 w-full space-y-2 flex-col">
                         <button onClick={() => handleLanguageChange('eng')} className={`${language === 'eng' ? `${classes?.textColorButtonSelected} ${classes?.textColorHoverButttons}` : ''} mt-2 text-left rounded px-2 cursor-pointer py-0.5 ${classes?.hoverButtonColor}`}>1. English</button>
                         <button onClick={() => handleLanguageChange('spa')} className={`${language === 'spa' ? `${classes?.textColorButtonSelected} ${classes?.textColorHoverButttons}` : ''} px-2 text-left rounded py-0.5 cursor-pointer ${classes?.hoverButtonColor}`}>2. Español</button>
                     </div>
                 )}
             </div>
         </button>
+
     );
 }

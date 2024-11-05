@@ -57,10 +57,11 @@ export default function Work() {
     },
     spa: {
       title: "Proyectos",
-      info_1: "Aplicación administrativa para una clínica de salud, especialmente orientada al área de odontología. Esta herramienta proporciona una solución integral para la gestión de pacientes, turnos, historias clínicas, tratamientos, finanzas, entre otras.",
-      info_2: "Aplicación móvil social que te ayuda a conseguir compañero de piso. Ofrece diversas formas de interacción, como 'matches', likes, chats y perfiles de usuarios, facilitando así la búsqueda y elección del compañero ideal.",
+      info_1: "Aplicación administrativa para una clínica odontologica. Esta herramienta proporciona una solución integral para la gestión de pacientes, turnos, historias clínicas, tratamientos, finanzas, entre otras.",
+      info_2: "Aplicación móvil social que te ayuda a conseguir compañero de piso. Ofrece diversas formas de interacción, como \"matches\", likes, chats y perfiles de usuarios, facilitando así la búsqueda y elección del compañero ideal.",
       info_3: "Clon de YouTube Music con diseño adaptable para todos los dispositivos. El clon ha sido creado manualmente, replicando el diseño original sin copiar código.",
       info_4: "Template completamente responsive que incluye una página de inicio de sesión, otra de registro y sus dos versiones móviles.",
+      info_5: "Aplicación administrativa diseñada para vendedores, que facilita la gestión de clientes, productos, pedidos y otros elementos clave del negocio.",
       category_1: "Escritorio",
       category_2: "Móvil",
     }
@@ -147,7 +148,7 @@ export default function Work() {
           bgColorTitle: bgColorTitle,
           textColorSubTitle: textColorSubTitle,
 
-       
+
 
         },
         light: {
@@ -204,7 +205,7 @@ export default function Work() {
   return (
     <div className={`${classes?.textColorMain} flex flex-col justify-center items-center h-full pb-[4%]`}>
 
-      <div className={`${classes?.bgColorTitle}  font-normal border-r-4 border-b-4   flex  ${classes?.borderColorProjectsCont} justify-center px-2 py-1.5 rounded shadow-2xl mb-8 items-center text-left text-4xl   `}>
+      <div className={`${classes?.bgColorTitle}  font-normal border-r-4 border-b-4   flex  ${classes?.borderColorProjectsCont} justify-center px-2 py-1.5 pb-2 rounded-2xl shadow-2xl mb-8 items-center text-left text-4xl   `}>
         {texts?.title} <MdDesignServices className={`ml-4 ${tone === 'light' && 'bg-white'} bg-opacity-90 p-1 rounded-full `} />
       </div>
       <div className={`flex h-[75%] relative  ${classes?.bgColorProjectsCont} ${classes?.bgOpacityProjectsCont} rounded-lg w-[70%]  shadow-2xl text-lg justify-center items-center `}>
@@ -212,9 +213,9 @@ export default function Work() {
 
           <div className=''>
 
-            <div className={`flex relative group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition duration-100 justify-center hover:py-10 border-transparent hover:border-b-2  ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject} p-8  transition-all transform duration-500 items-center`}>
+            <div className={`flex relative group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition duration-100 justify-center hover:py-14 border-transparent hover:border-b-2  ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject} p-10  transition-all transform duration-500 items-center`}>
 
-              <div className='font-bold desktop:text-xl w-[30%] '>
+              <div className='font-bold mr-auto desktop:text-xl w-[30%] '>
                 My RoomMate App <span className={`${classes?.textColorSubTitle}`}>({texts?.category_1})</span>
                 <p className='w-full laptop:text-sm desktop:text-lg  text-balance font-normal text-left'>{texts?.info_1}</p>
                 <div className={`bg-white w-fit px-3 py-2 mt-4 rounded-lg shadow-2xl ${classes?.bgOpacityLinks}`}>
@@ -227,20 +228,20 @@ export default function Work() {
                 </div>
               </div>
 
-              <Image placeholder='blur' blurDataURL={imageBlur} onLoad={() => setImageIsLoad(true)} className={`${classes?.opacityImages} ml-auto rounded-lg group-hover:opacity-100 shadow-2xl object-cover group-hover:h-[320px] group-hover:w-[68%]  trasform transition-all duration-700 w-[60%] h-[285px]`} quality={100} width={1919} height={917} priority={true} src='/dentalAgenda-image.png' alt="dentalAgenda-image" />
+              <Image placeholder='blur' blurDataURL={imageBlur} onLoad={() => setImageIsLoad(true)} className={`${classes?.opacityImages} mr-10 rounded-lg group-hover:opacity-100 shadow-2xl  group-hover:scale-110 trasform transition-all duration-700 w-[60%] h-auto`} quality={100} width={1919} height={917} priority={true} src='/dentalAgenda-image.png' alt="dentalAgenda-image" />
             </div>
 
 
-            <div className={`flex group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition  duration-100 justify-center hover:py-10 border-transparent hover:border-b-2 hover:border-t-2 ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject} p-8 transition-all transform duration-500  items-center`}>
+            <div className={`flex group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition  duration-100 justify-center hover:py-14 border-transparent hover:border-b-2 hover:border-t-2 ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject} p-10 transition-all transform duration-500  items-center`}>
               {!imageIsLoad ? (
                 <div className={`bg-white flex justify-center items-center ${classes?.bgOpacityLoaderImage} w-[60%] h-[280px] mr-auto rounded-lg shadow-2xl`}>
                   <ClipLoader color='#10b981' size={50} />
                 </div>
               ) : (
-                <Image placeholder='blur' blurDataURL={imageBlur} onLoad={() => setImageIsLoad(true)} className={`${classes?.opacityImages} rounded-lg shadow-2xl opacity-50 group-hover:opacity-100 object-cover group-hover:h-[380px] group-hover:w-[68%] mr-auto trasform transition-all duration-700 w-[60%] h-[335px]`} quality={100} width={1920} height={1080} priority={true} src='/MyRoomMate-image.png' alt="MyRoomMate-image" />
+                <Image placeholder='blur' blurDataURL={imageBlur} onLoad={() => setImageIsLoad(true)} className={`${classes?.opacityImages} rounded-lg shadow-2xl opacity-50 group-hover:opacity-100  group-hover:scale-110 ml-10 trasform transition-all duration-700 w-[60%] h-auto`} quality={100} width={1920} height={1080} priority={true} src='/MyRoomMate-image.png' alt="MyRoomMate-image" />
               )}
 
-              <div className='font-bold desktop:text-xl w-[30%]'>
+              <div className='font-bold ml-auto desktop:text-xl w-[30%]'>
                 My RoomMate App <br /> <span className={`${classes?.textColorSubTitle}`}>({texts?.category_1} & {texts?.category_2})</span>
                 <p className='w-full laptop:text-sm desktop:text-lg text-balance font-normal text-left'>{texts?.info_2}</p>
                 <div className={`bg-white w-fit px-3 py-2 mt-4 rounded-lg shadow-2xl ${classes?.bgOpacityLinks}`}>
@@ -255,10 +256,51 @@ export default function Work() {
 
             </div>
 
+            <div className={`flex relative group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition duration-100 justify-center hover:py-14 border-transparent hover:border-b-2  ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject} p-10  transition-all transform duration-500 items-center`}>
 
-            <div className={`flex group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition  duration-500 justify-center hover:py-10 border-transparent hover:border-b-2 hover:border-t-2 ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject}  p-8 transition-all transform duration-500 items-center`}>
+              <div className='font-bold mr-auto desktop:text-xl w-[30%] '>
+                Clients On The Map <span className={`${classes?.textColorSubTitle}`}>({texts?.category_1})</span>
+                <p className='w-full laptop:text-sm desktop:text-lg  text-balance font-normal text-left'>{texts?.info_5}</p>
+                <div className={`bg-white w-fit px-3 py-2 mt-4 rounded-lg shadow-2xl ${classes?.bgOpacityLinks}`}>
+                  <h2 className='flex justify-start items-center '>Deploy <GrDeploy className='ml-2' /></h2>
+                  <button className={`${classes?.textColorLinks} ${classes?.textColorHoverLinks} text-xs cursor-pointer tracking-tighter	break-normal text-left transition duration-300 `}>https://clients-on-the-map.vercel.app/</button>
+                </div>
+                <div className={`bg-white w-fit px-3 py-2 mt-4 rounded-lg shadow-2xl ${classes?.bgOpacityLinks}`}>
+                  <h2 className='flex justify-start items-center'>Repo <FaGithub className='ml-2' /></h2>
+                  <button  className={`${classes?.textColorLinks} ${classes?.textColorHoverLinks} text-xs cursor-pointer tracking-tighter	break-normal text-left transition duration-300 `}>https://github.com/pablodKampmann/clients-on-the-map</button>
+                </div>
+              </div>
 
-              <div className='font-bold desktop:text-xl w-[30%]'>
+              <Image placeholder='blur' blurDataURL={imageBlur} onLoad={() => setImageIsLoad(true)} className={`${classes?.opacityImages} mr-10 rounded-lg group-hover:opacity-100 shadow-2xl  group-hover:scale-110 trasform transition-all duration-700 w-[60%] h-auto`} quality={100} width={1919} height={918} priority={true} src='/ClientsOnTheMap-image.png' alt="ClientsOnTheMap-image" />
+            </div>
+
+            <div className={`flex group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition  duration-100 justify-center hover:py-14 border-transparent hover:border-t-2 ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject} p-10 transition-all transform duration-500  items-center`}>
+              {!imageIsLoad ? (
+                <div className={`bg-white flex justify-center items-center ${classes?.bgOpacityLoaderImage} w-[60%] h-[280px] mr-auto rounded-lg shadow-2xl`}>
+                  <ClipLoader color='#10b981' size={50} />
+                </div>
+              ) : (
+                <Image placeholder='blur' blurDataURL={imageBlur} onLoad={() => setImageIsLoad(true)} className={`${classes?.opacityImages} rounded-lg ml-10 flex shadow-2xl opacity-50 group-hover:opacity-100 group-hover:scale-110 trasform transition-all duration-700 w-[60%] h-auto`} quality={100} width={1919} height={918} priority={true} src='/loginAndRegister-image.png' alt="loginAndRegister-image" />
+              )}
+
+              <div className='font-bold ml-auto desktop:text-xl w-[25%]'>
+                Login & Register Template <br /><span className={`${classes?.textColorSubTitle}`}>({texts?.category_1} & {texts?.category_2})</span>
+                <p className='w-full laptop:text-sm desktop:text-lg text-balance font-normal text-left'>{texts?.info_4}</p>
+                <div className={`bg-white w-fit px-3 py-2 mt-4 rounded-lg shadow-2xl ${classes?.bgOpacityLinks}`}>
+                  <h2 className='flex justify-start items-center '>Deploy <GrDeploy className='ml-2' /></h2>
+                  <button onClick={() => window.open("https://login-register-template.vercel.app/login", "_blank")} className={`${classes?.textColorLinks} ${classes?.textColorHoverLinks} text-xs cursor-pointer tracking-tighter	break-normal text-left transition duration-300 `}>https://login-register-template.vercel.app/login</button>
+                </div>
+                <div className={`bg-white w-fit px-3 py-2 mt-4 rounded-lg shadow-2xl ${classes?.bgOpacityLinks}`}>
+                  <h2 className='flex justify-start items-center'>Repo <FaGithub className='ml-2' /></h2>
+                  <button onClick={() => window.open("https://github.com/pablodKampmann/login-register-template", "_blank")} className={`${classes?.textColorLinks} ${classes?.textColorHoverLinks} text-xs cursor-pointer tracking-tighter	break-normal text-left transition duration-300 `}>https://github.com/pablodKampmann/login-register-template</button>
+                </div>
+              </div>
+
+            </div>
+            
+            <div className={`flex group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition  duration-500 justify-center hover:py-14 border-transparent hover:border-b-2 hover:border-t-2 ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject}  p-10 transition-all transform duration-500 items-center`}>
+
+              <div className='font-bold desktop:text-xl mr-auto w-[30%]'>
                 YouTube Music CLONE <br /><span className={`${classes?.textColorSubTitle}`}>({texts?.category_1} & {texts?.category_2})</span>
                 <p className='w-full laptop:text-sm desktop:text-lg text-balance font-normal text-left'>{texts?.info_3}</p>
                 <div className={`bg-white w-[80%] px-3 py-2 mt-4 rounded-lg shadow-2xl ${classes?.bgOpacityLinks}`}>
@@ -276,35 +318,13 @@ export default function Work() {
                   <ClipLoader color='#10b981' size={50} />
                 </div>
               ) : (
-                <Image placeholder='blur' blurDataURL={imageBlur} onLoad={() => setImageIsLoad(true)} className={`${classes?.opacityImages} rounded-lg ml-auto flex shadow-2xl opacity-50 group-hover:opacity-100 object-cover group-hover:h-[340px] group-hover:w-[70%] trasform transition-all duration-700 w-[60%] h-[290px]`} quality={100} width={1919} height={914} priority={true} src='/youtubeMusic-image.png' alt="youtubeMusic-image" />
+                <Image placeholder='blur' blurDataURL={imageBlur} onLoad={() => setImageIsLoad(true)} className={`${classes?.opacityImages} rounded-lg mr-10 flex shadow-2xl opacity-50 group-hover:opacity-100  group-hover:scale-110 trasform transition-all duration-700 w-[60%] h-auto`} quality={100} width={1919} height={914} priority={true} src='/youtubeMusic-image.png' alt="youtubeMusic-image" />
               )}
             </div>
 
 
 
-            <div className={`flex group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition  duration-100 justify-center hover:py-10 border-transparent hover:border-t-2 ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject} p-8 transition-all transform duration-500  items-center`}>
-              {!imageIsLoad ? (
-                <div className={`bg-white flex justify-center items-center ${classes?.bgOpacityLoaderImage} w-[60%] h-[280px] mr-auto rounded-lg shadow-2xl`}>
-                  <ClipLoader color='#10b981' size={50} />
-                </div>
-              ) : (
-                <Image placeholder='blur' blurDataURL={imageBlur} onLoad={() => setImageIsLoad(true)} className={`${classes?.opacityImages} rounded-lg mr-auto flex shadow-2xl opacity-50 group-hover:opacity-100 object-cover group-hover:h-[340px] group-hover:w-[70%] trasform transition-all duration-700 w-[60%] h-[290px]`} quality={100} width={1919} height={918} priority={true} src='/loginAndRegister-image.png' alt="loginAndRegister-image" />
-              )}
-
-              <div className='font-bold desktop:text-xl w-[25%]'>
-                Login & Register Template <br /><span className={`${classes?.textColorSubTitle}`}>({texts?.category_1} & {texts?.category_2})</span>
-                <p className='w-full laptop:text-sm desktop:text-lg text-balance font-normal text-left'>{texts?.info_4}</p>
-                <div className={`bg-white w-fit px-3 py-2 mt-4 rounded-lg shadow-2xl ${classes?.bgOpacityLinks}`}>
-                  <h2 className='flex justify-start items-center '>Deploy <GrDeploy className='ml-2' /></h2>
-                  <button onClick={() => window.open("https://login-register-template.vercel.app/login", "_blank")} className={`${classes?.textColorLinks} ${classes?.textColorHoverLinks} text-xs cursor-pointer tracking-tighter	break-normal text-left transition duration-300 `}>https://login-register-template.vercel.app/login</button>
-                </div>
-                <div className={`bg-white w-fit px-3 py-2 mt-4 rounded-lg shadow-2xl ${classes?.bgOpacityLinks}`}>
-                  <h2 className='flex justify-start items-center'>Repo <FaGithub className='ml-2' /></h2>
-                  <button onClick={() => window.open("https://github.com/pablodKampmann/login-register-template", "_blank")} className={`${classes?.textColorLinks} ${classes?.textColorHoverLinks} text-xs cursor-pointer tracking-tighter	break-normal text-left transition duration-300 `}>https://github.com/pablodKampmann/login-register-template</button>
-                </div>
-              </div>
-
-            </div>
+           
 
 
 
