@@ -1,136 +1,134 @@
 import { MdLanguage } from "react-icons/md";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { IoIosClose } from "react-icons/io";
 
 interface LanguageOptionsProps {
-    tone: string;
-    language: string;
-    colorMain: string;
-    handleLanguageChange: (language: string) => void;
+  tone: string;
+  language: string;
+  colorMain: string;
+  handleLanguageChange: (language: string) => void;
 }
 
-export default function LanguageOptions({ tone, language, colorMain, handleLanguageChange }: LanguageOptionsProps) {
-    const [open, setOpen] = useState(false);
+export default function LanguageOptions({
+  tone,
+  language,
+  colorMain,
+  handleLanguageChange,
+}: LanguageOptionsProps) {
+  //TONE
+  const [classesTones, setClassesTones] = useState<any>(null);
 
-    //TONE
-    const [classesTones, setClassesTones] = useState<any>(null);
+  useEffect(() => {
+    const updateClassesTones = () => {
+      let bgColorMain = "";
+      let borderColorMain = "";
 
-    useEffect(() => {
-        const updateClassesTones = () => {
-            let textIconColor = '';
-            let borderColor = '';
-            let hoverButtonColor = '';
-            let textColorButtonSelected = '';
+      switch (colorMain) {
+        case "emerald":
+          bgColorMain = tone === "dark" ? "bg-emerald-600" : "bg-emerald-600";
+          borderColorMain =
+            tone === "dark" ? "border-emerald-600" : "border-emerald-600";
+          break;
+        case "rose":
+          bgColorMain = tone === "dark" ? "bg-rose-600" : "bg-rose-600";
+          borderColorMain =
+            tone === "dark" ? "border-rose-600" : "border-rose-600";
+          break;
+        case "blue":
+          bgColorMain = tone === "dark" ? "bg-blue-600" : "bg-blue-600";
+          borderColorMain =
+            tone === "dark" ? "border-blue-600" : "border-blue-600";
+          break;
+        case "yellow":
+          bgColorMain = tone === "dark" ? "bg-yellow-600" : "bg-yellow-600";
+          borderColorMain =
+            tone === "dark" ? "border-yellow-600" : "border-yellow-600";
+          break;
+        default:
+          break;
+      }
 
-            switch (colorMain) {
-                case 'emerald':
-                    textIconColor = tone === 'dark' ? "text-emerald-600" : "text-emerald-500";
-                    borderColor = tone === 'dark' ? "border-emerald-600" : "border-emerald-500";
-                    hoverButtonColor = tone === 'dark' ? "hover:bg-emerald-800" : "hover:bg-emerald-600";
-                    textColorButtonSelected = tone === 'dark' ? "text-emerald-500" : "text-emerald-500";
+      setClassesTones({
+        dark: {
+          bgColor: "bg-[#090D1F]",
+          textMain: "text-white",
+          bgHoverButton: "hover:bg-white",
+          bgOpacityHoverButton: "hover:bg-opacity-20",
+          textIcon: "text-black",
+          bgColorMain: bgColorMain,
+          borderColorMain: borderColorMain,
+        },
+        light: {
+          bgColor: "bg-white",
+          textMain: "text-black",
+          bgHoverButton: "hover:bg-black",
+          bgOpacityHoverButton: "hover:bg-opacity-20",
+          textIcon: "text-white",
+          bgColorMain: bgColorMain,
+          borderColorMain: borderColorMain,
+        },
+      });
+    };
 
-                    break;
-                case 'rose':
-                    textIconColor = tone === 'dark' ? "text-rose-600" : "text-rose-500";
-                    borderColor = tone === 'dark' ? "border-rose-600" : "border-rose-500";
-                    hoverButtonColor = tone === 'dark' ? "hover:bg-rose-800" : "hover:bg-rose-600";
-                    textColorButtonSelected = tone === 'dark' ? "text-rose-500" : "text-rose-500";
+    updateClassesTones();
+  }, [colorMain, tone]);
 
-                    break;
-                case 'blue':
-                    textIconColor = tone === 'dark' ? "text-blue-600" : "text-blue-500";
-                    borderColor = tone === 'dark' ? "border-blue-600" : "border-blue-500";
-                    hoverButtonColor = tone === 'dark' ? "hover:bg-blue-800" : "hover:bg-blue-600";
-                    textColorButtonSelected = tone === 'dark' ? "text-blue-500" : "text-blue-500";
+  let classes;
+  if (tone === "dark") {
+    classes = classesTones?.dark;
+  } else if (tone === "light") {
+    classes = classesTones?.light;
+  }
 
-                    break;
-                case 'yellow':
-                    textIconColor = tone === 'dark' ? "text-yellow-600" : "text-yellow-500";
-                    borderColor = tone === 'dark' ? "border-yellow-600" : "border-yellow-500";
-                    hoverButtonColor = tone === 'dark' ? "hover:bg-yellow-800" : "hover:bg-yellow-600";
-                    textColorButtonSelected = tone === 'dark' ? "text-yellow-500" : "text-yellow-500";
+  //LOGIC
+  const [open, setOpen] = useState(false);
 
-                    break;
-                default:
-                    break;
-            }
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setOpen(false);
+    }, 5000);
 
-            setClassesTones({
-                dark: {
-                    bgColor: "bg-[#090D1F]",
-                    bgOpacity: "bg-opacity-100",
-                    textColor: "text-white",
-                    bgIconColor: "bg-gray-100",
-                    bgIconOpacity: "bg-opacity-15",
-                    bgHoverCloseButton: "hover:bg-white",
-                    textIconColor: textIconColor,
-                    hoverButtonColor: hoverButtonColor,
-                    borderColor: borderColor,
-                    textColorButtonSelected: textColorButtonSelected,
-                    textColorHoverButttons: 'hover:text-black',
-                },
-                light: {
-                    bgColor: "bg-white",
-                    bgOpacity: "bg-opacity-100",
-                    textColor: "text-black",
-                    bgIconColor: "bg-white",
-                    bgIconOpacity: "bg-opacity-90",
-                    bgHoverCloseButton: "hover:bg-black",
-                    textIconColor: textIconColor,
-                    hoverButtonColor: hoverButtonColor,
-                    borderColor: borderColor,
-                    textColorButtonSelected: textColorButtonSelected,
-                    textColorHoverButttons: 'hover:text-black',
-                }
-            });
-        };
+    return () => clearTimeout(timeoutId);
+  }, [open]);
 
-        updateClassesTones();
-    }, [colorMain, tone]);
-
-    let classes;
-    if (tone === "dark") {
-        classes = classesTones?.dark;
-    } else if (tone === "light") {
-        classes = classesTones?.light;
-    }
-
-    useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            setOpen(false);
-        }, 5000);
-
-        return () => clearTimeout(timeoutId);
-
-    }, [open]);
-
-    return (
+  return (
+    <div className="">
+      <button
+        onClick={() => setOpen(!open)}
+        className={`absolute ${open ? "opacity-0" : "opacity-100"} ${classes?.bgColorMain} p-1.5 z-20 flex justify-center items-center rounded-full bottom-4 right-4`}
+      >
+        <MdLanguage className={`${classes?.textIcon}`} size={36} />
+      </button>
+      <div
+        onClick={() => setOpen(!open)}
+        className={`${classes?.bgColor} ${classes?.textMain} z-20 p-4 font-medium text-center flex-col rounded-xl border-2 ${classes?.borderColorMain} justify-center items-center transition duration-300 all h-fit w-fit absolute bottom-4 right-4 ${open ? "translate-y-0" : "translate-y-full opacity-0"}`}
+      >
         <button
-            onClick={() => setOpen(!open)}
-            className={`${open ? `${classes?.bgColor} ${classes?.bgOpacity} rounded-xl transition-transform duration-300 transform translate-y-0` : `${classes?.bgIconColor} ${classes?.bgIconOpacity} hover:bg-opacity-25 rounded-full p-1 translate-y-0`} absolute ${classes?.textColor} transition duration-200 bottom-3 right-3 z-10`}
+          className={`absolute ${classes?.bgOpacityHoverButton} ${classes?.bgHoverButton} rounded-full top-2 right-2`}
         >
-            <div className={`${open ? 'border-2 py-4 px-4' : 'cursor-pointer'} select-none flex flex-col relative ${classes?.borderColor} shadow-2xl rounded-lg justify-center items-center`}>
-                {open && (
-                    <div className={`absolute flex justify-center items-center w-8 h-8 top-1 right-1 ${classes?.bgHoverCloseButton} hover:bg-opacity-10 rounded-full cursor-pointer text-2xl`}>
-                        <IoIosClose className={`w-full h-full text-opacity-70 ${classes?.textColor}`} />
-                    </div>
-                )}
-                
-                <MdLanguage size={36} className={`${classes?.textIconColor}`} />
-                {open && language === "eng" && (
-                    "Select Language"
-                )}
-                {open && language === "spa" && (
-                    "Seleccionar Idioma"
-                )}
-                {open && (
-                    <div className="flex border-t-2 w-full space-y-2 flex-col">
-                        <button onClick={() => handleLanguageChange('eng')} className={`${language === 'eng' ? `${classes?.textColorButtonSelected} ${classes?.textColorHoverButttons}` : ''} mt-2 text-left rounded px-2 cursor-pointer py-0.5 ${classes?.hoverButtonColor}`}>1. English</button>
-                        <button onClick={() => handleLanguageChange('spa')} className={`${language === 'spa' ? `${classes?.textColorButtonSelected} ${classes?.textColorHoverButttons}` : ''} px-2 text-left rounded py-0.5 cursor-pointer ${classes?.hoverButtonColor}`}>2. Español</button>
-                    </div>
-                )}
-            </div>
+          <IoIosClose size={30} />
         </button>
-
-    );
+        <MdLanguage className={`${classes?.textMain} mt-1 w-full`} size={30} />
+        {open && language === "eng" && "Select Language"}
+        {open && language === "spa" && "Seleccionar Idioma"}
+        <div
+          className={`w-full h-0.5 mt-2 ${classes?.bgColorMain} rounded-full`}
+        ></div>
+        <div className=" mt-2 flex-col flex space-y-2 p-1">
+          <button
+            className={`${language === "spa" ? `${classes?.bgColorMain}` : `${classes?.bgOpacityHoverButton} ${classes?.bgHoverButton}`} w-fit pr-10 transition duration-150 text-start px-1.5 rounded-xl py-0.5`}
+            onClick={() => handleLanguageChange("spa")}
+          >
+            01. Español
+          </button>
+          <button
+            className={`${language === "eng" ? `${classes?.bgColorMain}` : `${classes?.bgOpacityHoverButton} ${classes?.bgHoverButton}`} w-fit pr-10 transition duration-150 text-start px-1.5 rounded-xl py-0.5`}
+            onClick={() => handleLanguageChange("eng")}
+          >
+            02. English
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }

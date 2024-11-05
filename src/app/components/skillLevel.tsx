@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
 interface SkillLevelProps {
   level: number;
-  bgColorMain?: string; 
+  bgColorMain?: string;
 }
 
 const SkillLevel: React.FC<SkillLevelProps> = ({ level, bgColorMain }) => {
@@ -12,7 +12,9 @@ const SkillLevel: React.FC<SkillLevelProps> = ({ level, bgColorMain }) => {
         <div
           key={i}
           className={`w-3 h-3 rounded-full ${
-            i < level ? bgColorMain || 'bg-emerald-600' : 'bg-gray-300 bg-opacity-85'
+            i < level
+              ? bgColorMain || "bg-emerald-600"
+              : "bg-gray-300 bg-opacity-85"
           }`}
         ></div>
       ))}
