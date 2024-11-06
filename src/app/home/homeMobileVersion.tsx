@@ -265,20 +265,20 @@ export default function HomeMobile() {
             >
               {texts?.title_2}
               <FaDev
-                className={`ml-4 ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} p-1 rounded ${classes?.textMainColor}`}
+                className={`ml-2 ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} p-1 rounded ${classes?.textMainColor}`}
                 size={28}
               />
             </span>
           </h2>
 
           <h1
-            className={`${classes?.textMainColor} font-semibold md:text-xs lg:text-xs xl:text-sm 2xl:text-base `}
+            className={`${classes?.textMainColor} font-semibold  `}
           >
             Pablo Kampmann
           </h1>
         </div>
         {selected === "developer" && (
-          <div className="w-[70%] h-fit space-y-4 overflow-y-auto componentsScroll md:text-xs lg:text-sm xl:text-base 2xl:text-lg about-me-container  mt-4">
+          <div className="w-[100%] h-fit space-y-4 overflow-y-auto componentsScroll  about-me-container  mt-4">
             <p
               className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2 rounded-md`}
             >
@@ -311,7 +311,7 @@ export default function HomeMobile() {
           </div>
         )}
         {selected === "studies" && (
-          <div className="w-[70%] h-fit space-y-4 overflow-y-auto  md:text-xs lg:text-sm xl:text-base 2xl:text-lg about-me-container  mt-4">
+          <div className="w-[100%] h-fit space-y-4 overflow-y-auto  about-me-container  mt-4">
             <p
               className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo}  py-1 px-2  rounded-md`}
             >
@@ -330,7 +330,7 @@ export default function HomeMobile() {
               {texts?.text_5}
             </p>
             <h2
-              className={`flex md:text-xs lg:text-sm xl:text-base 2xl:text-xl items-center underline ${classes?.decorationColor} ml-1`}
+              className={`flex  items-center underline ${classes?.decorationColor} ml-1`}
             >
               Titulos <IoSchool className="ml-2" />
             </h2>
@@ -349,7 +349,7 @@ export default function HomeMobile() {
           </div>
         )}
         {selected === "skills" && (
-          <div className="w-[70%] h-fit space-y-4 overflow-y-auto md:text-xs lg:text-sm xl:text-base 2xl:text-lg about-me-container mt-4">
+          <div className="w-[100%] h-fit space-y-4 overflow-y-auto text-sm tracking-tight about-me-container mt-4">
             <div
               className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2 rounded-lg flex justify-between items-center`}
             >
@@ -407,6 +407,8 @@ export default function HomeMobile() {
             src="/me-image.jpg"
             alt="me-image"
           />
+
+          {/** 
           {openSocial && (
             <div className="">
               <button
@@ -454,6 +456,8 @@ export default function HomeMobile() {
               />
             )}
           </button>
+*/}
+
         </div>
       </div>
     </div>
