@@ -8,6 +8,10 @@ import { TbFileCv } from "react-icons/tb";
 import { BsCloudDownload } from "react-icons/bs";
 import { GoSidebarExpand, GoSidebarCollapse } from "react-icons/go";
 import { languageTexts } from "./languageTexts";
+import {
+  TbLayoutSidebarRightExpand,
+  TbLayoutSidebarRightCollapse,
+} from "react-icons/tb";
 
 interface NavBarProps {
   tone: string;
@@ -202,11 +206,11 @@ export default function MobileVersion({
         >
           <button
             onClick={() => setOpenSideBar(!openSideBar)}
-            className={`${classes?.hoverBgColorIcon} p-2 rounded-full hover:bg-opacity-10 absolute left-4 top-2 `}
+            className={`${classes?.hoverBgColorIcon} p-2 rounded-full hover:bg-opacity-10 absolute left-1.5 top-1.5 `}
           >
-            <GoSidebarCollapse
+            <TbLayoutSidebarRightCollapse
               className={`${classes?.textColorNumber}`}
-              size={30}
+              size={32}
             />
           </button>
           <h1 className="flex justify-center uppercase font-semibold text-xl tracking-wide w-full">
@@ -251,7 +255,7 @@ export default function MobileVersion({
             </div>
           </Link>
           <div
-            className={`bg-transparent uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} hover:border-white ${classes?.hoverButton} hover:bg-opacity-70 hover:text-white transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3`}
+            className={`bg-transparent uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} hover:border-white ${classes?.hoverButton} hover:bg-opacity-70 hover:text-white transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3 text-sm`}
           >
             {texts?.repo}
             <LuGithub className="ml-2" size={34} />
@@ -363,9 +367,9 @@ export default function MobileVersion({
             onClick={() => setOpenSideBar(!openSideBar)}
             className={`${classes?.hoverBgColorIcon} p-2 rounded-full hover:bg-opacity-10`}
           >
-            <GoSidebarExpand
+            <TbLayoutSidebarRightExpand
               className={`${classes?.textColorNumber}`}
-              size={30}
+              size={32}
             />
           </button>
         </div>

@@ -102,6 +102,7 @@ export default function Work() {
       let textColorSubTitle = "";
       let textColorLinks = "";
       let textColorHoverLinks = "";
+      let borderColorProjectsCont = "";
 
       switch (colorMain) {
         case "emerald":
@@ -118,6 +119,8 @@ export default function Work() {
             tone === "dark"
               ? "hover:text-emerald-400"
               : "hover:text-emerald-400";
+          borderColorProjectsCont =
+            tone === "dark" ? "border-emerald-950" : "border-emerald-950";
 
           break;
         case "rose":
@@ -131,7 +134,8 @@ export default function Work() {
           textColorLinks = tone === "dark" ? "text-rose-500" : "text-rose-500";
           textColorHoverLinks =
             tone === "dark" ? "hover:text-rose-400" : "hover:text-rose-400";
-
+          borderColorProjectsCont =
+            tone === "dark" ? "border-rose-950" : "border-rose-950";
           break;
         case "blue":
           document.documentElement.style.setProperty(
@@ -144,7 +148,8 @@ export default function Work() {
           textColorLinks = tone === "dark" ? "text-blue-500" : "text-blue-500";
           textColorHoverLinks =
             tone === "dark" ? "hover:text-blue-400" : "hover:text-blue-400";
-
+          borderColorProjectsCont =
+            tone === "dark" ? "border-blue-950" : "border-blue-950";
           break;
         case "yellow":
           document.documentElement.style.setProperty(
@@ -158,7 +163,8 @@ export default function Work() {
             tone === "dark" ? "text-yellow-500" : "text-yellow-500";
           textColorHoverLinks =
             tone === "dark" ? "hover:text-yellow-400" : "hover:text-yellow-400";
-
+          borderColorProjectsCont =
+            tone === "dark" ? "border-yellow-950" : "border-yellow-950";
           break;
         default:
           break;
@@ -167,7 +173,7 @@ export default function Work() {
       setClassesTones({
         dark: {
           textColorMain: "text-white",
-          borderColorProjectsCont: "border-emerald-950",
+          borderColorProjectsCont: borderColorProjectsCont,
           bgColorProjectsCont: "bg-blue-950",
           bgOpacityProjectsCont: "bg-opacity-20",
           bgHoverColorProject: "hover:bg-blue-950",
@@ -238,7 +244,7 @@ export default function Work() {
       className={`${classes?.textColorMain} flex flex-col justify-center items-center h-full pb-[4%]`}
     >
       <div
-        className={`${classes?.bgColorTitle}  font-normal border-r-4 border-b-4   flex  ${classes?.borderColorProjectsCont} justify-center px-2 py-1.5 pb-2 rounded-2xl shadow-2xl mb-8 items-center text-left text-4xl   `}
+        className={`${classes?.bgColorTitle}  font-normal border-r-4 border-b-4   flex  ${classes?.borderColorProjectsCont} justify-center px-2 py-1.5 pb-2 rounded-2xl shadow-2xl mb-8 items-center text-left md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl    `}
       >
         {texts?.title}{" "}
         <MdDesignServices
@@ -246,19 +252,20 @@ export default function Work() {
         />
       </div>
       <div
-        className={`flex h-[75%] relative  ${classes?.bgColorProjectsCont} ${classes?.bgOpacityProjectsCont} rounded-lg w-[70%]  shadow-2xl text-lg justify-center items-center `}
+        className={`flex h-[75%] relative  ${classes?.bgColorProjectsCont} ${classes?.bgOpacityProjectsCont} rounded-2xl hover:rounded-2xl w-[70%]  shadow-2xl text-lg justify-center items-center `}
       >
         <div className="overflow-y-auto bg-transparent  overflow-x-hidden flex flex-col h-full ">
           <div className="">
+            {/* 1 */}
             <div
-              className={`flex relative group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition duration-100 justify-center hover:py-14 border-transparent hover:border-b-2  ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject} p-10  transition-all transform duration-500 items-center`}
+              className={`flex relative group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition md:text-xs lg:text-xs xl:text-xs 2xl:text-xl duration-100 justify-center hover:py-14 border-transparent hover:border-b-2  ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject} p-10  transition-all transform duration-500 items-center`}
             >
-              <div className="font-bold mr-auto desktop:text-xl w-[30%] ">
+              <div className="font-bold mr-auto w-[30%] ">
                 My RoomMate App{" "}
                 <span className={`${classes?.textColorSubTitle}`}>
                   ({texts?.category_1})
                 </span>
-                <p className="w-full laptop:text-sm desktop:text-lg  text-balance font-normal text-left">
+                <p className="w-full text-balance font-normal text-left">
                   {texts?.info_1}
                 </p>
                 <div
@@ -295,7 +302,6 @@ export default function Work() {
                   </button>
                 </div>
               </div>
-
               <Image
                 placeholder="blur"
                 blurDataURL={imageBlur}
@@ -309,9 +315,9 @@ export default function Work() {
                 alt="dentalAgenda-image"
               />
             </div>
-
+            {/* 2 */}
             <div
-              className={`flex group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition  duration-100 justify-center hover:py-14 border-transparent hover:border-b-2 hover:border-t-2 ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject} p-10 transition-all transform duration-500  items-center`}
+              className={`flex group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition md:text-xs lg:text-xs xl:text-xs 2xl:text-xl duration-100 justify-center hover:py-14 border-transparent hover:border-b-2 hover:border-t-2 ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject} p-10 transition-all transform duration-500  items-center`}
             >
               {!imageIsLoad ? (
                 <div
@@ -334,12 +340,12 @@ export default function Work() {
                 />
               )}
 
-              <div className="font-bold ml-auto desktop:text-xl w-[30%]">
+              <div className="font-bold ml-auto w-[30%]">
                 My RoomMate App <br />{" "}
                 <span className={`${classes?.textColorSubTitle}`}>
                   ({texts?.category_1} & {texts?.category_2})
                 </span>
-                <p className="w-full laptop:text-sm desktop:text-lg text-balance font-normal text-left">
+                <p className="w-fulltext-balance font-normal text-left">
                   {texts?.info_2}
                 </p>
                 <div
@@ -377,16 +383,16 @@ export default function Work() {
                 </div>
               </div>
             </div>
-
+            {/* 3 */}
             <div
-              className={`flex relative group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition duration-100 justify-center hover:py-14 border-transparent hover:border-b-2  ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject} p-10  transition-all transform duration-500 items-center`}
+              className={`flex relative group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} md:text-xs lg:text-xs xl:text-xs 2xl:text-xl transition duration-100 justify-center hover:py-14 border-transparent hover:border-b-2 hover:border-t-2  ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject} p-10  transition-all transform duration-500 items-center`}
             >
-              <div className="font-bold mr-auto desktop:text-xl w-[30%] ">
+              <div className="font-bold mr-auto  w-[30%] ">
                 Clients On The Map{" "}
                 <span className={`${classes?.textColorSubTitle}`}>
                   ({texts?.category_1})
                 </span>
-                <p className="w-full laptop:text-sm desktop:text-lg  text-balance font-normal text-left">
+                <p className="w-full text-balance font-normal text-left">
                   {texts?.info_5}
                 </p>
                 <div
@@ -428,9 +434,9 @@ export default function Work() {
                 alt="ClientsOnTheMap-image"
               />
             </div>
-
+            {/* 4 */}
             <div
-              className={`flex group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition  duration-100 justify-center hover:py-14 border-transparent hover:border-t-2 ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject} p-10 transition-all transform duration-500  items-center`}
+              className={`flex group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition md:text-xs lg:text-xs xl:text-xs 2xl:text-xl  duration-100 justify-center hover:py-14 border-transparent hover:border-t-2 hover:border-b-2 ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject} p-10 transition-all transform duration-500  items-center`}
             >
               {!imageIsLoad ? (
                 <div
@@ -452,13 +458,12 @@ export default function Work() {
                   alt="loginAndRegister-image"
                 />
               )}
-
-              <div className="font-bold ml-auto desktop:text-xl w-[25%]">
+              <div className="font-bold ml-auto  w-[25%]">
                 Login & Register Template <br />
                 <span className={`${classes?.textColorSubTitle}`}>
                   ({texts?.category_1} & {texts?.category_2})
                 </span>
-                <p className="w-full laptop:text-sm desktop:text-lg text-balance font-normal text-left">
+                <p className="w-fulltext-balance font-normal text-left">
                   {texts?.info_4}
                 </p>
                 <div
@@ -499,16 +504,16 @@ export default function Work() {
                 </div>
               </div>
             </div>
-
+            {/* 5 */}
             <div
-              className={`flex group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition  duration-500 justify-center hover:py-14 border-transparent hover:border-b-2 hover:border-t-2 ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject}  p-10 transition-all transform duration-500 items-center`}
+              className={`flex group ${classes?.bgHoverOpacityProject} ${classes?.bgHoverColorProject} transition md:text-xs lg:text-xs xl:text-xs 2xl:text-xl  duration-500 justify-center hover:py-14 border-transparent hover:border-t-2 ${classes?.borderHoverColorProject} ${classes?.borderHoverOpacityProject}  p-10 transition-all transform duration-500 items-center`}
             >
-              <div className="font-bold desktop:text-xl mr-auto w-[30%]">
+              <div className="font-bold  mr-auto w-[30%]">
                 YouTube Music CLONE <br />
                 <span className={`${classes?.textColorSubTitle}`}>
                   ({texts?.category_1} & {texts?.category_2})
                 </span>
-                <p className="w-full laptop:text-sm desktop:text-lg text-balance font-normal text-left">
+                <p className="w-fulltext-balance font-normal text-left">
                   {texts?.info_3}
                 </p>
                 <div

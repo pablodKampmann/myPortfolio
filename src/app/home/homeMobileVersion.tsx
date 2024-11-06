@@ -80,6 +80,10 @@ export default function HomeMobile() {
 
       switch (colorMain) {
         case "emerald":
+          document.documentElement.style.setProperty(
+            "--scrollbar-color",
+            "#059669",
+          );
           bgMain = tone === "dark" ? "bg-emerald-600" : "bg-emerald-600";
           textMainColor =
             tone === "dark" ? "text-emerald-600" : "text-emerald-600";
@@ -98,6 +102,10 @@ export default function HomeMobile() {
 
           break;
         case "rose":
+          document.documentElement.style.setProperty(
+            "--scrollbar-color",
+            "#E11D48",
+          );
           bgMain = tone === "dark" ? "bg-rose-600" : "bg-rose-600";
           textMainColor = tone === "dark" ? "text-rose-600" : "text-rose-600";
           textLinkColor = tone === "dark" ? "text-rose-600" : "text-rose-600";
@@ -110,6 +118,10 @@ export default function HomeMobile() {
 
           break;
         case "blue":
+          document.documentElement.style.setProperty(
+            "--scrollbar-color",
+            "#2563EB",
+          );
           bgMain = tone === "dark" ? "bg-blue-600" : "bg-blue-600";
           textMainColor = tone === "dark" ? "text-blue-600" : "text-blue-600";
           textLinkColor = tone === "dark" ? "text-blue-600" : "text-blue-600";
@@ -122,6 +134,10 @@ export default function HomeMobile() {
 
           break;
         case "yellow":
+          document.documentElement.style.setProperty(
+            "--scrollbar-color",
+            "#C88904",
+          );
           bgMain = tone === "dark" ? "bg-yellow-600" : "bg-yellow-600";
           textMainColor =
             tone === "dark" ? "text-yellow-600" : "text-yellow-600";
@@ -217,43 +233,44 @@ export default function HomeMobile() {
       className={`${classes?.textColorMain} flex flex-col justify-center items-center h-full pb-[6%]`}
     >
       <div
-        className={`flex justify-start sm:text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl tracking-wide border-b-2 ${classes?.borderColorImage} w-[50%]`}
+        className={`flex mt-6 justify-start text-xs tracking-wide border-b-2 ${classes?.borderColorImage} w-[90%]`}
       >
         <button
           onClick={() => setSelected("developer")}
-          className={`${selected === "developer" ? `${classes?.bgMain}` : `hover:bg-opacity-20 bg-white ${classes?.bgOpacityMain}`} transition duration-100  px-3 py-1 rounded-tl-lg`}
+          className={`${selected === "developer" ? `${classes?.bgMain}` : `hover:bg-opacity-20 bg-white ${classes?.bgOpacityMain}`} transition duration-100  px-1 py-2 rounded-tl-lg`}
         >
           Desarrollador
         </button>
         <button
           onClick={() => setSelected("studies")}
-          className={`${selected === "studies" ? `${classes?.bgMain}` : `hover:bg-opacity-20 bg-white ${classes?.bgOpacityMain}`} transition duration-100  px-3 `}
+          className={`${selected === "studies" ? `${classes?.bgMain}` : `hover:bg-opacity-20 bg-white ${classes?.bgOpacityMain}`} transition duration-100  px-1 `}
         >
           Estudios
         </button>
         <button
           onClick={() => setSelected("skills")}
-          className={`${selected === "skills" ? `${classes?.bgMain}` : ` hover:bg-opacity-20 bg-white ${classes?.bgOpacityMain}`} transition duration-100  px-3 rounded-tr-lg`}
+          className={`${selected === "skills" ? `${classes?.bgMain}` : ` hover:bg-opacity-20 bg-white ${classes?.bgOpacityMain}`} transition duration-100  px-1 rounded-tr-lg`}
         >
           Habilidades
         </button>
       </div>
       <div
-        className={`w-[50%] h-[65%] flex flex-col justify-start  p-8 pt-6 relative bg-white ${classes?.bgOpacityMain} rounded-b-2xl rounded-tr-2xl shadow-2xl`}
+        className={`w-[90%] h-[70%]  flex flex-col justify-start  p-4 relative bg-white ${classes?.bgOpacityMain} rounded-b-2xl rounded-tr-2xl shadow-2xl`}
       >
         <div>
-          <h2 className="uppercase flex items-center md:text-xs lg:text-sm xl:text-base 2xl:text-xl text-opacity-80">
-            {texts?.title_1}({" "}
-            <span className={` underline ${classes?.decorationColor}`}>
-              {" "}
+          <h2 className="uppercase flex flex-col items-start text-sm text-opacity-80">
+            <span>{texts?.title_1}</span>
+            <span
+              className={`underline flex justify-center items-center ${classes?.decorationColor}`}
+            >
               {texts?.title_2}
+              <FaDev
+                className={`ml-4 ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} p-1 rounded ${classes?.textMainColor}`}
+                size={28}
+              />
             </span>
-            ){" "}
-            <FaDev
-              className={`ml-4 ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} p-1 rounded ${classes?.textMainColor}`}
-              size={28}
-            />
           </h2>
+
           <h1
             className={`${classes?.textMainColor} font-semibold md:text-xs lg:text-xs xl:text-sm 2xl:text-base `}
           >
@@ -261,7 +278,7 @@ export default function HomeMobile() {
           </h1>
         </div>
         {selected === "developer" && (
-          <div className="w-[70%] h-fit space-y-4 overflow-y-auto  md:text-xs lg:text-sm xl:text-base 2xl:text-lg about-me-container  mt-4">
+          <div className="w-[70%] h-fit space-y-4 overflow-y-auto componentsScroll md:text-xs lg:text-sm xl:text-base 2xl:text-lg about-me-container  mt-4">
             <p
               className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2 rounded-md`}
             >
@@ -378,11 +395,11 @@ export default function HomeMobile() {
           </div>
         )}
 
-        <div className="absolute -top-10 -right-10">
+        <div className="absolute -top-10 -right-4">
           <Image
             placeholder="blur"
             blurDataURL={imageBlur}
-            className={`rounded-full border-4  ${classes?.borderColorImage}  shadow-2xl object-cover w-[200px] h-[200px]`}
+            className={`rounded-full border-4  ${classes?.borderColorImage}  shadow-2xl object-cover w-[120px] h-[120px]`}
             quality={10}
             width={959}
             height={1280}
