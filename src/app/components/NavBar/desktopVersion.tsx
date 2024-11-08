@@ -216,7 +216,7 @@ export default function DesktopVersion({
             setShowOptions(false);
             setShowCancelButton(false);
           }}
-          className={`border-2 ${classes?.borderColor} duration-300 transform transition-all ${showOptions ? "translate-x-0" : "-translate-x-full opacity-0"} absolute top-[120%] left-[1%] w-[130px] h-[175px] flex flex-col justify-center items-center ${classes?.bgColorShowOptions} ${classes?.bgOpacityShowOptions} shadow-2xl rounded-xl`}
+          className={`border-2 ${classes?.borderColor} duration-300 transform transition-all ${showOptions ? "translate-x-0" : "-translate-x-full opacity-0"} absolute top-[120%] left-[1%] w-[120px] h-[200px] flex flex-col justify-center items-center ${classes?.bgColorShowOptions} ${classes?.bgOpacityShowOptions} shadow-2xl rounded-xl`}
         >
           <h1
             className={`text-sm font-medium  ${classes?.textMain} mb-2.5 w-[80%] text-balance text-center`}

@@ -258,7 +258,7 @@ export default function HomeMobile() {
         className={`w-[90%] h-[70%]  flex flex-col justify-start  p-4 relative bg-white ${classes?.bgOpacityMain} rounded-b-2xl rounded-tr-2xl shadow-2xl`}
       >
         <div>
-          <h2 className="uppercase flex flex-col items-start text-sm text-opacity-80">
+          <h2 className="uppercase flex flex-col items-start text-base text-opacity-80">
             <span>{texts?.title_1}</span>
             <span
               className={`underline flex justify-center items-center ${classes?.decorationColor}`}
@@ -266,7 +266,7 @@ export default function HomeMobile() {
               {texts?.title_2}
               <FaDev
                 className={`ml-2 ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} p-1 rounded ${classes?.textMainColor}`}
-                size={28}
+                size={24}
               />
             </span>
           </h2>

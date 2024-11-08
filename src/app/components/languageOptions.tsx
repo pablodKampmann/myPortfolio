@@ -116,13 +116,13 @@ export default function LanguageOptions({
         ></div>
         <div className=" mt-2 flex-col flex space-y-2 p-1">
           <button
-            className={`${language === "spa" ? `${classes?.bgColorMain}` : `${classes?.bgOpacityHoverButton} ${classes?.bgHoverButton}`} w-fit pr-10 transition duration-150 text-start px-1.5 rounded-xl py-0.5`}
+            className={`${language === "spa" ? `${classes?.bgColorMain}` : `${classes?.bgOpacityHoverButton} ${classes?.bgHoverButton}`} w-fit pr-10 transition duration-150 text-start px-3 rounded-xl py-0.5`}
             onClick={() => handleLanguageChange("spa")}
           >
             01. Español
           </button>
           <button
-            className={`${language === "eng" ? `${classes?.bgColorMain}` : `${classes?.bgOpacityHoverButton} ${classes?.bgHoverButton}`} w-fit pr-10 transition duration-150 text-start px-1.5 rounded-xl py-0.5`}
+            className={`${language === "eng" ? `${classes?.bgColorMain}` : `${classes?.bgOpacityHoverButton} ${classes?.bgHoverButton}`} w-fit pr-10 transition duration-150 text-start px-3 rounded-xl py-0.5`}
             onClick={() => handleLanguageChange("eng")}
           >
             02. English

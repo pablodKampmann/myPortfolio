@@ -111,6 +111,8 @@ export default function MobileVersion({
           hoverBgColorIcon: "hover:bg-white",
           hoverBgOpacityIcon: "hover:bg-opacity-10",
           bgOpacityButtons: "bg-opacity-[4%]",
+          hoverBorderButtons: "hover:border-white",
+          hoverTextButtons: "hover:text-white",
         },
         light: {
           bgMain: "bg-white",
@@ -132,6 +134,8 @@ export default function MobileVersion({
           hoverBgColorIcon: "hover:bg-black",
           hoverBgOpacityIcon: "hover:bg-opacity-10",
           bgOpacityButtons: "bg-opacity-[8%]",
+          hoverBorderButtons: "hover:border-black",
+          hoverTextButtons: "hover:text-black",
         },
       });
     };
@@ -255,14 +259,14 @@ export default function MobileVersion({
             </div>
           </Link>
           <div
-            className={`bg-transparent uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} hover:border-white ${classes?.hoverButton} hover:bg-opacity-70 hover:text-white transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3 text-sm`}
+            className={`bg-transparent uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} ${classes?.hoverBorderButtons} ${classes?.hoverButton} hover:bg-opacity-70 ${classes?.hoverTextButtons} transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3 text-sm`}
           >
             {texts?.repo}
             <LuGithub className="ml-2" size={34} />
           </div>
 
           <div
-            className={`bg-transparent group relative uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} hover:border-white ${classes?.hoverButton} hover:bg-opacity-70 hover:text-white transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3`}
+            className={`bg-transparent group relative uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} ${classes?.hoverBorderButtons} ${classes?.hoverButton} hover:bg-opacity-70 ${classes?.hoverTextButtons} transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3`}
           >
             <TbFileCv className="opacity-100 group-hover:opacity-0" size={34} />
             <BsCloudDownload
@@ -308,7 +312,7 @@ export default function MobileVersion({
               setShowOptions(false);
               setShowCancelButton(false);
             }}
-            className={`border-2 ${classes?.borderColor} duration-300 transform transition-all ${showOptions ? "translate-x-0" : "-translate-x-full opacity-0"} absolute top-[120%] left-[1%] w-[130px] h-[175px] flex flex-col justify-center items-center ${classes?.bgColorShowOptions} ${classes?.bgOpacityShowOptions} shadow-2xl rounded-xl`}
+            className={`border-2 ${classes?.borderColor} duration-300 transform transition-all ${showOptions ? "translate-x-0" : "-translate-x-full opacity-0"} absolute top-[120%] left-[1%] w-[120px] h-[200px] flex flex-col justify-center items-center ${classes?.bgColorShowOptions} ${classes?.bgOpacityShowOptions} shadow-2xl rounded-xl`}
           >
             <h1
               className={`text-sm font-medium  ${classes?.textMain} mb-2.5 w-[80%] text-balance text-center`}
