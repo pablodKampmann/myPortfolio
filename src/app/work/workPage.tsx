@@ -278,7 +278,7 @@ export default function WorkPage() {
 
             {/* Projects container */}
             <div
-                className={`flex h-[62%] sm:h-[65%] xl:h-[68%] 2xl:h-[72%] relative ${classes?.bgColorProjectsCont} ${classes?.bgOpacityProjectsCont} rounded-2xl w-[92%] sm:w-[88%] md:w-[78%] lg:w-[72%] xl:w-[68%] shadow-2xl justify-center items-center`}
+                className={`flex h-[55%] sm:h-[60%] xl:h-[68%] 2xl:h-[72%] relative ${classes?.bgColorProjectsCont} ${classes?.bgOpacityProjectsCont} rounded-2xl w-[92%] sm:w-[88%] md:w-[78%] lg:w-[72%] xl:w-[68%] shadow-2xl justify-center items-center`}
             >
                 <div className="overflow-y-auto bg-transparent overflow-x-hidden flex flex-col h-full w-full">
                     {projects.map((p, i) => {

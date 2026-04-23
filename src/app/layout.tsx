@@ -120,15 +120,25 @@ export default function RootLayout({
     setTimeout(() => setReady(true), 1000);
   }, []);
 
+  useEffect(() => {
+    const setVh = () => {
+      document.documentElement.style.setProperty("--real-vh", `${window.innerHeight}px`);
+    };
+    setVh();
+    window.addEventListener("resize", setVh);
+    return () => window.removeEventListener("resize", setVh);
+  }, []);
+
   const router = useRouter();
 
   return (
     <html lang="en">
       <body className={inter.className}>
         <div className="absolute w-full">{!ready && <Loading />}</div>
-        <div className={`${ready ? "opacity-100" : "opacity-0"} h-svh overflow-hidden`}>
+        <div className={`${ready ? "opacity-100" : "opacity-0"} overflow-hidden`} style={{ height: "var(--real-vh, 100svh)" }}>
           <div
-            className={`h-svh overflow-hidden relative ${classes?.bgMainColor} transition duration-200 ${classes?.bgMainOpacity}`}
+            className={`overflow-hidden relative ${classes?.bgMainColor} transition duration-200 ${classes?.bgMainOpacity}`}
+            style={{ height: "var(--real-vh, 100svh)" }}
           >
             <div
               className={`absolute md:opacity-100 lg:opacity-100 xl:opacity-100 opacity-0 left-9 bottom-[16%] rounded-full ${classes?.bgLinesColor} h-36 w-1 z-10`}

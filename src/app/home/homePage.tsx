@@ -185,7 +185,7 @@ export default function HomePage() {
       </div>
 
       {/* Main card */}
-      <div className={`w-[90%] md:w-[50%] h-[70%] md:h-[65%] flex flex-col justify-start p-4 md:p-8 md:pt-6 relative bg-white ${classes?.bgOpacityMain} rounded-b-2xl rounded-tr-2xl shadow-2xl`}>
+      <div className={`w-[90%] md:w-[50%] h-[57%] md:h-[65%] flex flex-col justify-start p-4 md:p-8 md:pt-6 relative bg-white ${classes?.bgOpacityMain} rounded-b-2xl rounded-tr-2xl shadow-2xl`}>
 
         {/* Header */}
         <div>
