@@ -117,7 +117,7 @@ export default function RootLayout({
     const color = localStorage.getItem("colorMain");
     if (tone) setTone(tone);
     if (color) setColorMain(color);
-    setReady(true);
+    setTimeout(() => setReady(true), 1000);
   }, []);
 
   const router = useRouter();

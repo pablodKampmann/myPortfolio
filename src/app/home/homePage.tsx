@@ -165,7 +165,7 @@ export default function HomePage() {
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
-    <div className={`${classes?.textColorMain} flex flex-col justify-center items-center h-full pb-[6%]`}>
+    <div className={`${classes?.textColorMain} flex flex-col justify-center items-center h-full pt-16 pb-24 md:pt-0 md:pb-[6%]`}>
 
       {/* Tab bar */}
       <div className={`flex mt-6 md:mt-0 justify-start text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl tracking-wide border-b-2 ${classes?.borderColorImage} w-[90%] md:w-[50%]`}>

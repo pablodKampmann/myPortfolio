@@ -263,7 +263,7 @@ export default function WorkPage() {
 
     // ── Render ────────────────────────────────────────────────────────────────
     return (
-        <div className={`${classes?.textColorMain} flex flex-col justify-center items-center h-full pb-[4%]`}>
+        <div className={`${classes?.textColorMain} flex flex-col justify-center items-center h-full pt-16 pb-24 md:pt-0 md:pb-[4%]`}>
 
             {/* Page title */}
             <div
