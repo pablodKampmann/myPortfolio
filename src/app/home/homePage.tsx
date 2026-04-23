@@ -10,11 +10,13 @@ import { useRouter } from "next/navigation";
 import SkillLevel from "../components/skillLevel";
 import { IoSchool } from "react-icons/io5";
 import { languageTexts } from "./languageTexts";
+import PuffLoader from "react-spinners/PuffLoader";
 
 export default function HomePage() {
   const imageBlur =
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8XwMAAoABfYJLKisAAAAASUVORK5CYII=";
   const router = useRouter();
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // ── LocalStorage listener ────────────────────────────────────────────────
   useEffect(() => {
@@ -154,6 +156,13 @@ export default function HomePage() {
   const linkCls = `${classes?.textLinkColor} ${classes?.hoverTextLinkColor} hover:cursor-pointer transition duration-150`;
   const paraCls = `${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2 rounded-md`;
 
+  const LOADER_COLOR: Record<string, string> = {
+    emerald: "#059669",
+    rose: "#e11d48",
+    blue: "#2563eb",
+    yellow: "#eab308",
+  };
+
   // ── Render ────────────────────────────────────────────────────────────────
   return (
     <div className={`${classes?.textColorMain} flex flex-col justify-center items-center h-full pb-[6%]`}>
@@ -252,13 +261,17 @@ export default function HomePage() {
 
         {/* Avatar + social (social hidden on mobile) */}
         <div className="absolute -top-10 -right-4 md:-right-10">
+          {!imageLoaded && (
+            <div className={`rounded-full border-4 ${classes?.borderColorImage} shadow-2xl w-[120px] h-[120px] md:w-[200px] md:h-[200px] flex justify-center items-center`}>
+              <PuffLoader color={LOADER_COLOR[colorMain] ?? "#059669"} size={100} speedMultiplier={2.5} />
+            </div>
+          )}
           <Image
-            placeholder="blur"
-            blurDataURL={imageBlur}
-            className={`rounded-full border-4 ${classes?.borderColorImage} shadow-2xl object-cover w-[120px] h-[120px] md:w-[200px] md:h-[200px]`}
-            quality={10}
-            width={959}
-            height={1280}
+            className={`rounded-full object-cover border-4 ${classes?.borderColorImage} shadow-2xl w-[120px] h-[120px] md:w-[200px] md:h-[200px] ${!imageLoaded ? "hidden" : ""}`}
+            onLoad={() => setImageLoaded(true)}
+            quality={85}
+            width={400}
+            height={400}
             priority={true}
             src="/me-image.jpg"
             alt="me-image"
