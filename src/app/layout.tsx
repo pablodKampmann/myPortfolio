@@ -131,25 +131,25 @@ export default function RootLayout({
             className={`h-screen overflow-hidden relative ${classes?.bgMainColor} transition duration-200 ${classes?.bgMainOpacity}`}
           >
             <div
-              className={`absolute xl:opacity-100 opacity-0 left-9 bottom-[14%] rounded-full ${classes?.bgLinesColor} h-36 w-1 z-10`}
+              className={`absolute md:opacity-100 lg:opacity-100 xl:opacity-100 opacity-0 left-9 bottom-[16%] rounded-full ${classes?.bgLinesColor} h-36 w-1 z-10`}
             ></div>
             <div
-              className={`absolute xl:opacity-100 opacity-0 left-9 bottom-[40%] rounded-full ${classes?.bgLinesColor} h-4 w-1 z-10`}
+              className={`absolute md:opacity-100 lg:opacity-100 xl:opacity-100 opacity-0 left-9 bottom-[40%] rounded-full ${classes?.bgLinesColor} h-4 w-1 z-10`}
             ></div>
             <div
-              className={`absolute xl:opacity-100 opacity-0 left-9 bottom-[48%] rounded-full ${classes?.bgLinesColor} h-16 w-1 z-10`}
+              className={`absolute md:opacity-100 lg:opacity-100 xl:opacity-100 opacity-0 left-9 bottom-[48%] rounded-full ${classes?.bgLinesColor} h-16 w-1 z-10`}
             ></div>
             <div
-              className={`absolute xl:opacity-100 opacity-0 right-9 bottom-[42%] rounded-full ${classes?.bgLinesColor} h-16 w-1 z-10`}
+              className={`absolute md:opacity-100 lg:opacity-100 xl:opacity-100 opacity-0 right-9 bottom-[42%] rounded-full ${classes?.bgLinesColor} h-16 w-1 z-10`}
             ></div>
             <button
               onClick={() => router.push("/")}
-              className={`absolute xl:opacity-100 opacity-0 -right-8 hover:underline transition duration-150 cursor-pointer bottom-[64%] font-semibold text-${colorMain}-500 transform rotate-90 z-10`}
+              className={`absolute md:opacity-100 lg:opacity-100 xl:opacity-100 opacity-0 -right-8 hover:underline transition duration-150 cursor-pointer bottom-[64%] font-semibold text-${colorMain}-500 transform rotate-90 z-10`}
             >
               @pablokampmann
             </button>
             <div
-              className={`absolute right-9 xl:opacity-100 opacity-0 bottom-[80%] rounded-full ${classes?.bgLinesColor} h-8 w-1 z-10`}
+              className={`absolute md:opacity-100 lg:opacity-100 right-9 xl:opacity-100 opacity-0 bottom-[80%] rounded-full ${classes?.bgLinesColor} h-8 w-1 z-10`}
             ></div>
             <ToneMode
               tone={tone}
