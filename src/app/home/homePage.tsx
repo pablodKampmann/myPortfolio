@@ -146,11 +146,11 @@ export default function HomePage() {
   const skills: { key: keyof typeof texts; level: number }[] = [
     { key: "skill_1", level: 4 },
     { key: "skill_2", level: 3 },
-    { key: "skill_3", level: 4 },
-    { key: "skill_4", level: 5 },
     { key: "skill_5", level: 5 },
-    { key: "skill_6", level: 4 },
-    { key: "skill_7", level: 3 },
+    { key: "skill_4", level: 4 },
+    { key: "skill_6", level: 5 },
+    { key: "skill_7", level: 4 },
+    { key: "skill_8", level: 3 },
   ];
 
   const linkCls = `${classes?.textLinkColor} ${classes?.hoverTextLinkColor} hover:cursor-pointer transition duration-150`;
@@ -234,15 +234,14 @@ export default function HomePage() {
               <a onClick={() => window.open("https://uap.edu.ar/", "_blank")} className={linkCls}>{texts?.text_link_4}</a>
               {texts?.text_4_part_2}
             </p>
-            <p className={paraCls}>{texts?.text_5}</p>
             <h2 className={`flex items-center underline ${classes?.decorationColor} ml-1 md:text-xs lg:text-sm xl:text-base 2xl:text-xl`}>
               Titulos <IoSchool className="ml-2" />
             </h2>
             <p className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2 w-fit rounded-md`}>
-              {texts?.degree_1}{" "}<span className={classes?.textMainColor}>90%</span>
+              {texts?.degree_1}{" "}<span className={classes?.textMainColor}>95%</span>
             </p>
             <p className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2 w-fit rounded-md`}>
-              {texts?.degree_2}{" "}<span className={classes?.textMainColor}>70%</span>
+              {texts?.degree_2}{" "}<span className={classes?.textMainColor}>90%</span>
             </p>
           </div>
         )}

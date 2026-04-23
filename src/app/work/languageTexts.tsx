@@ -16,10 +16,8 @@ export const languageTexts = {
     },
     spa: {
         title: "Proyectos",
-        info_1:
-            "Aplicación administrativa para una clínica odontologica. Esta herramienta proporciona una solución integral para la gestión de pacientes, turnos, historias clínicas, tratamientos, finanzas, entre otras.",
-        info_2:
-            'Aplicación móvil social que te ayuda a conseguir compañero de piso. Ofrece diversas formas de interacción, como "matches", likes, chats y perfiles de usuarios, facilitando así la búsqueda y elección del compañero ideal.',
+        info_1: "Aplicación administrativa para una clínica odontológica. Esta herramienta proporciona una solución integral para la gestión de pacientes, turnos, historias clínicas, tratamientos, finanzas, entre otras.",
+        info_2: 'Aplicación móvil social que te ayuda a conseguir roommate. Ofrece diversas formas de interacción, como "matches", likes, chats y perfiles de usuarios, facilitando así la búsqueda y elección del compañero ideal.',
         info_3:
             "Clon de YouTube Music con diseño adaptable para todos los dispositivos. El clon ha sido creado manualmente, replicando el diseño original sin copiar código.",
         info_4:
