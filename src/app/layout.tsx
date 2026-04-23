@@ -110,27 +110,23 @@ export default function RootLayout({
   };
 
   //LOADING
-  const [isLoading, setIsLoading] = useState(true);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (classesTones) {
-      const timeoutId = setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
-
-      return () => clearTimeout(timeoutId);
-    }
-  }, [classesTones]);
+    const tone = localStorage.getItem("tone");
+    const color = localStorage.getItem("colorMain");
+    if (tone) setTone(tone);
+    if (color) setColorMain(color);
+    setReady(true);
+  }, []);
 
   const router = useRouter();
 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="absolute w-full">{isLoading && <Loading />}</div>
-        <div
-          className={`${!isLoading ? "opacity-100" : "opacity-0 "} overflow-hidden`}
-        >
+        <div className="absolute w-full">{!ready && <Loading />}</div>
+        <div className={`${ready ? "opacity-100" : "opacity-0"} overflow-hidden`}>
           <div
             className={`h-screen overflow-hidden relative ${classes?.bgMainColor} transition duration-200 ${classes?.bgMainOpacity}`}
           >
