@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { MdDesignServices } from "react-icons/md";
 import { GrDeploy } from "react-icons/gr";
-import ClipLoader from "react-spinners/ClipLoader";
+import RiseLoader from "react-spinners/RiseLoader";
 import { languageTexts } from "./languageTexts";
 
 const LOADER_COLOR: Record<string, string> = {
@@ -134,6 +134,7 @@ export default function WorkPage() {
                 textColorHoverLinks,
                 bgColorTitle,
                 textColorSubTitle,
+                bgColorLoaderImage: "bg-white",
             },
             light: {
                 textColorMain: "text-black",
@@ -146,11 +147,12 @@ export default function WorkPage() {
                 borderHoverOpacityProject: "hover:border-opacity-30",
                 bgOpacityLinks: "bg-opacity-100",
                 opacityImages: "opacity-70",
-                bgOpacityLoaderImage: "bg-opacity-100",
+                bgOpacityLoaderImage: "bg-opacity-70",
                 textColorLinks,
                 textColorHoverLinks,
                 bgColorTitle,
                 textColorSubTitle,
+                bgColorLoaderImage: "bg-gray-300",
             },
         });
     }, [colorMain, tone]);
@@ -158,14 +160,9 @@ export default function WorkPage() {
     const classes: any = tone === "dark" ? classesTones?.dark : classesTones?.light;
 
     // ── Image loading ────────────────────────────────────────────────────────
-    const [imageIsLoad, setImageIsLoad] = useState(false);
+    const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([false, false, false, false, false]);
     const imageBlur =
         "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8XwMAAoABfYJLKisAAAAASUVORK5CYII=";
-
-    useEffect(() => {
-        const id = setTimeout(() => setImageIsLoad(true), 500);
-        return () => clearTimeout(id);
-    }, []);
 
     // ── Scroll-reveal (mobile IntersectionObserver) ──────────────────────────
     const [inViewStates, setInViewStates] = useState([false, false, false, false, false]);
@@ -334,32 +331,39 @@ export default function WorkPage() {
                                     </div>
                                 </div>
 
-                                {/* ── Desktop loader ── */}
-                                {p.hasLoader && !imageIsLoad && (
-                                    <div
-                                        className={[
-                                            "hidden md:flex justify-center items-center bg-white rounded-lg shadow-2xl",
-                                            classes?.bgOpacityLoaderImage,
-                                            p.imageLeft ? "order-1 md:order-1" : "",
-                                            "w-[58%] h-64 md:mx-8 lg:mx-10",
-                                        ].join(" ")}
+                                {/* ── Loader ── */}
+                                {!imagesLoaded[i] && (
+                                    <div className={[
+                                        `flex justify-center items-center ${classes?.bgColorLoaderImage} rounded-lg shadow-2xl`,
+                                        classes?.bgOpacityLoaderImage,
+                                        p.imageLeft ? "order-2 md:order-1" : "",
+                                        "w-[85%] sm:w-[78%] md:w-[58%] md:mx-8 lg:mx-10",
+                                        "my-5 sm:my-6 md:my-0",
+                                    ].join(" ")}
+                                        style={{ aspectRatio: `${p.width} / ${p.height}` }}
                                     >
-                                        <ClipLoader color={LOADER_COLOR[colorMain] ?? "#059669"} size={50} />
+                                        <RiseLoader color={LOADER_COLOR[colorMain] ?? "#059669"} size={12} />
                                     </div>
                                 )}
 
                                 {/* ── Image ── */}
                                 <Image
                                     ref={(el) => { imageRefs.current[i] = el; }}
+                                    onLoad={() => {
+                                        setImagesLoaded(prev => {
+                                            const next = [...prev];
+                                            next[i] = true;
+                                            return next;
+                                        });
+                                    }}
                                     placeholder="blur"
                                     blurDataURL={imageBlur}
-                                    onLoad={() => setImageIsLoad(true)}
                                     className={[
                                         imgCls(i),
-                                        p.hasLoader && !imageIsLoad ? "md:hidden" : "",
+                                        !imagesLoaded[i] ? "invisible h-0" : "",
                                         p.imageLeft ? "order-2 md:order-1" : "",
                                     ].join(" ")}
-                                    quality={100}
+                                    quality={85}
                                     width={p.width}
                                     height={p.height}
                                     priority={true}
