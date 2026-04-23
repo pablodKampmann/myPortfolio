@@ -55,7 +55,7 @@ body {
 
 /* Cambiar el color del pulgar al pasar el mouse */
 ::-webkit-scrollbar-thumb:hover {
-  background: #06a875;
+  background: var(--scrollbar-color);
 }
 
 /* Quitar los botones de incremento y decremento de los input tipo número */

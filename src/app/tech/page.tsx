@@ -72,6 +72,7 @@ export default function Tech() {
       let textColorArrow = "";
       let textColorCategory = "";
       let textColorTitleIcon = "";
+      let borderColorProjectsCont = "";
 
       switch (colorMain) {
         case "emerald":
@@ -79,24 +80,28 @@ export default function Tech() {
           textColorArrow = "text-emerald-600";
           textColorCategory = tone === "dark" ? "text-emerald-400" : "text-emerald-600";
           textColorTitleIcon = "text-emerald-700";
+          borderColorProjectsCont = "border-emerald-950";
           break;
         case "rose":
           bgColorTitle = "bg-rose-600";
           textColorArrow = "text-rose-600";
           textColorCategory = tone === "dark" ? "text-rose-400" : "text-rose-600";
           textColorTitleIcon = "text-rose-700";
+          borderColorProjectsCont = "border-rose-950";
           break;
         case "blue":
           bgColorTitle = "bg-blue-600";
           textColorArrow = "text-blue-600";
           textColorCategory = tone === "dark" ? "text-blue-400" : "text-blue-600";
           textColorTitleIcon = "text-blue-700";
+          borderColorProjectsCont = "border-blue-950";
           break;
         case "yellow":
           bgColorTitle = "bg-yellow-600";
           textColorArrow = "text-yellow-600";
           textColorCategory = tone === "dark" ? "text-yellow-400" : "text-yellow-600";
           textColorTitleIcon = "text-yellow-700";
+          borderColorProjectsCont = "border-yellow-950";
           break;
         default:
           break;
@@ -109,7 +114,7 @@ export default function Tech() {
           hoverOpacityButtons: "hover:bg-opacity-10",
           hoverColorButtons: "hover:bg-white",
           textColorCategory,
-          borderColorProjectsCont: "border-emerald-950",
+          borderColorProjectsCont,
           bgColorImages: "bg-blue-950",
           bgOpacityImages: "bg-opacity-20",
           bgColorTitle,

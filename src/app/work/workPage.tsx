@@ -7,6 +7,13 @@ import { GrDeploy } from "react-icons/gr";
 import ClipLoader from "react-spinners/ClipLoader";
 import { languageTexts } from "./languageTexts";
 
+const LOADER_COLOR: Record<string, string> = {
+    emerald: "#059669",
+    rose: "#e11d48",
+    blue: "#2563eb",
+    yellow: "#eab308",
+};
+
 // ─── Project data ──────────────────────────────────────────────────────────────
 type ProjectDef = {
     title: string;
@@ -337,7 +344,7 @@ export default function WorkPage() {
                                             "w-[58%] h-64 md:mx-8 lg:mx-10",
                                         ].join(" ")}
                                     >
-                                        <ClipLoader color="#10b981" size={50} />
+                                        <ClipLoader color={LOADER_COLOR[colorMain] ?? "#059669"} size={50} />
                                     </div>
                                 )}
 
