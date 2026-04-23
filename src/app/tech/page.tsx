@@ -183,7 +183,7 @@ export default function Tech() {
   );
 
   return (
-    <div className={`${classes?.textColorClass} flex flex-col justify-center items-center h-full pt-16 pb-24 md:pt-0 md:pb-[6%] px-3`}>
+    <div className={`${classes?.textColorClass} flex flex-col justify-start md:justify-center items-center h-full pt-16 pb-20 md:pt-0 md:pb-[6%] px-3`}>
 
       {/* Title */}
       <div
