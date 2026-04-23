@@ -126,9 +126,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="absolute w-full">{!ready && <Loading />}</div>
-        <div className={`${ready ? "opacity-100" : "opacity-0"} h-screen overflow-hidden`}>
+        <div className={`${ready ? "opacity-100" : "opacity-0"} h-svh overflow-hidden`}>
           <div
-            className={`h-screen overflow-hidden relative ${classes?.bgMainColor} transition duration-200 ${classes?.bgMainOpacity}`}
+            className={`h-svh overflow-hidden relative ${classes?.bgMainColor} transition duration-200 ${classes?.bgMainOpacity}`}
           >
             <div
               className={`absolute md:opacity-100 lg:opacity-100 xl:opacity-100 opacity-0 left-9 bottom-[16%] rounded-full ${classes?.bgLinesColor} h-36 w-1 z-10`}
