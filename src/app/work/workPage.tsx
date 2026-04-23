@@ -331,45 +331,46 @@ export default function WorkPage() {
                                     </div>
                                 </div>
 
-                                {/* ── Loader ── */}
-                                {!imagesLoaded[i] && (
-                                    <div className={[
-                                        `flex justify-center items-center ${classes?.bgColorLoaderImage} rounded-lg shadow-2xl`,
-                                        classes?.bgOpacityLoaderImage,
-                                        p.imageLeft ? "order-2 md:order-1" : "",
-                                        "w-[85%] sm:w-[78%] md:w-[58%] md:mx-8 lg:mx-10",
-                                        "my-5 sm:my-6 md:my-0",
-                                    ].join(" ")}
-                                        style={{ aspectRatio: `${p.width} / ${p.height}` }}
-                                    >
-                                        <RiseLoader color={LOADER_COLOR[colorMain] ?? "#059669"} size={12} />
-                                    </div>
-                                )}
-
-                                {/* ── Image ── */}
-                                <Image
-                                    ref={(el) => { imageRefs.current[i] = el; }}
-                                    onLoad={() => {
-                                        setImagesLoaded(prev => {
-                                            const next = [...prev];
-                                            next[i] = true;
-                                            return next;
-                                        });
-                                    }}
-                                    placeholder="blur"
-                                    blurDataURL={imageBlur}
-                                    className={[
-                                        imgCls(i),
-                                        !imagesLoaded[i] ? "invisible h-0" : "",
-                                        p.imageLeft ? "order-2 md:order-1" : "",
-                                    ].join(" ")}
-                                    quality={85}
-                                    width={p.width}
-                                    height={p.height}
-                                    priority={true}
-                                    src={p.src}
-                                    alt={p.src.replace("/", "").replace(".png", "")}
-                                />
+                                {/* ── Loader + Image wrapper ── */}
+                                <div className={[
+                                    "w-[85%] sm:w-[78%] md:w-[58%] lg:w-[60%]",
+                                    "my-5 sm:my-6 md:my-0 md:mx-8 lg:mx-10",
+                                    p.imageLeft ? "order-2 md:order-1" : "",
+                                ].join(" ")}
+                                    style={{ aspectRatio: `${p.width} / ${p.height}` }}
+                                >
+                                    {!imagesLoaded[i] && (
+                                        <div className={[
+                                            "flex justify-center items-center rounded-lg shadow-2xl w-full h-full",
+                                            classes?.bgColorLoaderImage,
+                                            classes?.bgOpacityLoaderImage,
+                                        ].join(" ")}>
+                                            <RiseLoader color={LOADER_COLOR[colorMain] ?? "#059669"} size={12} />
+                                        </div>
+                                    )}
+                                    <Image
+                                        ref={(el) => { imageRefs.current[i] = el; }}
+                                        className={[
+                                            "rounded-lg shadow-2xl transform transition-all duration-700 w-full h-full object-cover",
+                                            inViewStates[i] ? "scale-110 opacity-100" : classes?.opacityImages,
+                                            "md:group-hover:scale-110 md:group-hover:opacity-100",
+                                            !imagesLoaded[i] ? "invisible absolute" : "",
+                                        ].join(" ")}
+                                        onLoad={() => {
+                                            setImagesLoaded(prev => {
+                                                const next = [...prev];
+                                                next[i] = true;
+                                                return next;
+                                            });
+                                        }}
+                                        quality={85}
+                                        width={p.width}
+                                        height={p.height}
+                                        priority={true}
+                                        src={p.src}
+                                        alt={p.src.replace("/", "").replace(".png", "")}
+                                    />
+                                </div>
 
                                 {/* ── Deploy — mobile only (after image) ── */}
                                 <div className="md:hidden order-3 w-full mt-3">
