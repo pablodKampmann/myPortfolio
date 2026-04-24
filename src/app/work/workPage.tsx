@@ -7,6 +7,8 @@ import { GrDeploy } from "react-icons/gr";
 import RiseLoader from "react-spinners/RiseLoader";
 import { languageTexts } from "./languageTexts";
 import { useTheme } from "../context/ThemeContext";
+import { HiSquare3Stack3D } from "react-icons/hi2";
+import { MdScreenshotMonitor } from "react-icons/md";
 
 const LOADER_COLOR: Record<string, string> = {
     emerald: "#059669",
@@ -116,6 +118,8 @@ type ProjectDef = {
     imageLeft: boolean;
     hasLoader: boolean;
     textWidth: string;
+    stack: string[];
+    devices: string[];
 };
 
 // ─── Component ─────────────────────────────────────────────────────────────────
@@ -171,6 +175,8 @@ export default function WorkPage() {
             src: "/images/projects/dentalAgenda-image.png",
             width: 1919, height: 917,
             imageLeft: false, hasLoader: false, textWidth: "md:w-[32%]",
+            stack: ["Next.js", "Firebase", "TypeScript", "Tailwind", "React"],
+            devices: ["Desktop", "Mobile"],
         },
         {
             title: "My RoomMate App",
@@ -180,6 +186,8 @@ export default function WorkPage() {
             src: "/images/projects/MyRoomMate-image.png",
             width: 1920, height: 1080,
             imageLeft: true, hasLoader: true, textWidth: "md:w-[32%]",
+            stack: ["Astro", "Firebase", "JavaScript", "CSS", "React"],
+            devices: ["Desktop", "Mobile"],
         },
         {
             title: "Clients On The Map",
@@ -189,6 +197,8 @@ export default function WorkPage() {
             src: "/images/projects/ClientsOnTheMap-image.png",
             width: 1919, height: 918,
             imageLeft: false, hasLoader: false, textWidth: "md:w-[32%]",
+            stack: ["Next.js", "Supabase", "TypeScript", "Tailwind", "React"],
+            devices: ["Desktop", "Mobile"],
         },
         {
             title: "Login & Register Template",
@@ -197,7 +207,9 @@ export default function WorkPage() {
             deployUrl: "https://login-register-template.vercel.app/login",
             src: "/images/projects/loginAndRegister-image.png",
             width: 1919, height: 918,
-            imageLeft: true, hasLoader: true, textWidth: "md:w-[26%]",
+            imageLeft: true, hasLoader: true, textWidth: "md:w-[32%]",
+            stack: ["Next.js", "TypeScript", "Tailwind", "React"],
+            devices: ["Desktop", "Mobile"],
         },
         {
             title: "YouTube Music CLONE",
@@ -207,21 +219,20 @@ export default function WorkPage() {
             src: "/images/projects/youtubeMusic-image.png",
             width: 1919, height: 914,
             imageLeft: false, hasLoader: true, textWidth: "md:w-[32%]",
+            stack: ["Next.js", "TypeScript", "Tailwind", "React"],
+            devices: ["Desktop", "Mobile"],
         },
     ];
 
     // ── Helpers ──────────────────────────────────────────────────────────────
-    const deployBox = (p: ProjectDef) => (
+    const infoBox = (title: string, items: string[], icon: React.ReactNode) => (
         <div className={`bg-white w-fit px-3 py-2 rounded-lg shadow-2xl ${tone === "light" ? "border" : ""} ${classes?.bgOpacityLinks}`}>
             <h2 className="flex items-center text-sm font-semibold">
-                Deploy <GrDeploy className="ml-2" />
+                {title} <span className="ml-2">{icon}</span>
             </h2>
-            <button
-                onClick={p.deployUrl ? () => window.open(p.deployUrl!, "_blank") : undefined}
-                className={`${classes?.textColorLinks} ${classes?.textColorHoverLinks} text-xs cursor-pointer tracking-tighter break-all text-left transition duration-300`}
-            >
-                {p.deployUrl ?? "https://clients-on-the-map.vercel.app/"}
-            </button>
+            <p className={`${classes?.textColorLinks} text-xs tracking-normal`}>
+                {items.join(", ")}
+            </p>
         </div>
     );
 
@@ -235,7 +246,7 @@ export default function WorkPage() {
             >
                 {texts.title}{" "}
                 <MdDesignServices
-                    size={26}
+                    size={34}
                     className={`ml-2 md:ml-3 lg:ml-4 ${tone === "light" ? "bg-white" : ""} bg-opacity-90 p-1 rounded-full`}
                 />
             </div>
@@ -249,7 +260,7 @@ export default function WorkPage() {
                         const isFirst = i === 0;
                         const isLast = i === projects.length - 1;
                         const borderCls = [
-                            !isLast ? "border-b" : "",
+                            !isLast ? "border-b border-white border-opacity-10" : "",
                             !isFirst ? "border-t md:border-t-0" : "",
                             "md:border-transparent",
                             !isFirst ? "md:hover:border-t-2" : "",
@@ -270,7 +281,7 @@ export default function WorkPage() {
                                     borderCls,
                                     classes?.borderHoverColorProject,
                                     classes?.borderHoverOpacityProject,
-                                    "p-4 sm:p-6 md:p-7 lg:p-9 xl:p-10",
+                                    "p-2 sm:p-3 md:p-4 lg:p-5 xl:p-6 rounded-2xl",
                                 ].join(" ")}
                             >
                                 {/* ── Text column ── */}
@@ -290,8 +301,9 @@ export default function WorkPage() {
                                     <p className="w-full font-normal mt-1 leading-relaxed">{p.info}</p>
 
                                     {/* Deploy — desktop only (inside text column) */}
-                                    <div className="hidden md:block mt-4">
-                                        {deployBox(p)}
+                                    <div className="hidden md:flex flex-wrap gap-2 mt-4">
+                                        {infoBox("Stack", p.stack, <HiSquare3Stack3D size={16} />)}
+                                        {infoBox("Dispositivos", p.devices, <MdScreenshotMonitor size={16} />)}
                                     </div>
                                 </div>
 
@@ -316,7 +328,8 @@ export default function WorkPage() {
                                         ref={(el) => { imageRefs.current[i] = el; }}
                                         className={[
                                             "rounded-lg shadow-2xl transform transition-all duration-700 w-full h-full object-cover",
-                                            inViewStates[i] ? "scale-110 opacity-100" : classes?.opacityImages,
+                                            "md:opacity-50 md:group-hover:scale-110 md:group-hover:opacity-100",
+                                            inViewStates[i] ? "scale-110 opacity-100 md:scale-100 md:opacity-50" : classes?.opacityImages,
                                             "md:group-hover:scale-110 md:group-hover:opacity-100",
                                             !imagesLoaded[i] ? "invisible absolute" : "",
                                         ].join(" ")}
@@ -337,8 +350,9 @@ export default function WorkPage() {
                                 </div>
 
                                 {/* ── Deploy — mobile only (after image) ── */}
-                                <div className="md:hidden order-3 w-full mt-3">
-                                    {deployBox(p)}
+                                <div className="md:hidden flex flex-wrap gap-2 mt-3 w-full">
+                                    {infoBox("Stack", p.stack, <HiSquare3Stack3D size={16} />)}
+                                    {infoBox("Dispositivos", p.devices, <MdScreenshotMonitor size={16} />)}
                                 </div>
                             </div>
                         );
