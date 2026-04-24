@@ -252,7 +252,7 @@ export default function HomePage() {
             {openSocial && (
               <div>
                 <button
-                  onClick={() => window.open("https://wa.me/+543413466408", "_blank")}
+                  onClick={() => window.open("https://wa.me/543413466408", "_blank")}
                   className={`absolute animate-move-whatsapp cursor-pointer ${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2 rounded-full -left-12 top-[45%]`}
                 >
                   <IoLogoWhatsapp size={28} className={`${classes?.textColorMain} ${classes?.textOpacity}`} />

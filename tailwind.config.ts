@@ -34,8 +34,14 @@ const config: Config = {
         "move-email": "move-email 0.15s ease-out",
         "move-gitHub": "move-gitHub 0.15s ease-out",
         "move-from-bottom": "move-from-bottom 0.15s ease-out",
+        sway: 'sway 3s ease-in-out infinite',
       },
       keyframes: {
+        sway: {
+          '0%, 100%': { transform: 'rotate(0deg)' },
+          '33%': { transform: 'rotate(10deg)' },
+          '66%': { transform: 'rotate(-10deg)' },
+        },
         "move-from-bottom": {
           "0%": { opacity: "0", transform: "translateY(100%)" },
           "100%": { opacity: "1", transform: "translateY(0%)" },
