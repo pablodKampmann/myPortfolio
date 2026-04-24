@@ -8,7 +8,6 @@ import React, { useState, useEffect } from "react";
 import ToneMode from "./components/toneMode";
 import Loading from "./components/loading";
 import { useRouter } from "next/navigation";
-import { MdOutlineDevices } from "react-icons/md";
 import { ThemeContext } from "./context/ThemeContext";
 
 const inter = Inter({ subsets: ["latin"], weight: ["400"] });
@@ -162,17 +161,6 @@ export default function RootLayout({
             <div
               className={`absolute md:opacity-100 lg:opacity-100 right-9 xl:opacity-100 opacity-0 bottom-[80%] rounded-full ${classes?.bgLinesColor} h-8 w-1 z-10`}
             ></div>
-            <ToneMode
-              tone={tone}
-              colorMain={colorMain}
-              handleToneChange={handleToneChange}
-            />
-            <LanguageOptions
-              tone={tone}
-              language={language}
-              colorMain={colorMain}
-              handleLanguageChange={handleLanguageChange}
-            />
             <NavBar
               tone={tone}
               language={language}
@@ -181,6 +169,8 @@ export default function RootLayout({
             />
 
             <ThemeContext.Provider value={{ tone, colorMain, language }}>
+              <ToneMode handleToneChange={handleToneChange} />
+              <LanguageOptions handleLanguageChange={handleLanguageChange} />
               {children}
             </ThemeContext.Provider>
           </div>

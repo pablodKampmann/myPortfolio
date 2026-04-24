@@ -1,16 +1,13 @@
 import { MdDarkMode, MdOutlineDarkMode } from "react-icons/md";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useTheme } from "../context/ThemeContext";
+
 interface ToneOptionsProps {
-  tone: string;
-  colorMain: string;
   handleToneChange: (tone: string) => void;
 }
 
-export default function ToneMode({
-  tone,
-  colorMain,
-  handleToneChange,
-}: ToneOptionsProps) {
+export default function ToneMode({ handleToneChange }: ToneOptionsProps) {
+  const { tone, colorMain } = useTheme();
   function handleClick() {
     if (tone === "dark") {
       handleToneChange("light");
@@ -29,28 +26,24 @@ export default function ToneMode({
 
       switch (colorMain) {
         case "emerald":
-          bgColorMain = tone === "dark" ? "bg-emerald-600" : "bg-emerald-600";
+          bgColorMain = tone === "dark" ? "bg-emerald-600" : "bg-emerald-500";
           bgColorMainHover =
-            tone === "dark" ? "hover:bg-emerald-600" : "hover:bg-emerald-600";
-
+            tone === "dark" ? "hover:bg-emerald-600" : "hover:bg-emerald-500";
           break;
         case "rose":
-          bgColorMain = tone === "dark" ? "bg-rose-600" : "bg-rose-600";
+          bgColorMain = tone === "dark" ? "bg-rose-600" : "bg-rose-500";
           bgColorMainHover =
-            tone === "dark" ? "hover:bg-rose-600" : "hover:bg-rose-600";
-
+            tone === "dark" ? "hover:bg-rose-600" : "hover:bg-rose-500";
           break;
         case "blue":
-          bgColorMain = tone === "dark" ? "bg-blue-600" : "bg-blue-600";
+          bgColorMain = tone === "dark" ? "bg-blue-600" : "bg-blue-500";
           bgColorMainHover =
-            tone === "dark" ? "hover:bg-blue-600" : "hover:bg-blue-600";
-
+            tone === "dark" ? "hover:bg-blue-600" : "hover:bg-blue-500";
           break;
         case "yellow":
-          bgColorMain = tone === "dark" ? "bg-yellow-600" : "bg-yellow-600";
+          bgColorMain = tone === "dark" ? "bg-yellow-600" : "bg-yellow-500";
           bgColorMainHover =
-            tone === "dark" ? "hover:bg-yellow-600" : "hover:bg-yellow-600";
-
+            tone === "dark" ? "hover:bg-yellow-600" : "hover:bg-yellow-500";
           break;
         default:
           break;

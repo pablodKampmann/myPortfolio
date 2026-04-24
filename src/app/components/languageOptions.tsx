@@ -1,20 +1,14 @@
 import { MdLanguage } from "react-icons/md";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { IoIosClose } from "react-icons/io";
+import { useTheme } from "../context/ThemeContext";
 
 interface LanguageOptionsProps {
-  tone: string;
-  language: string;
-  colorMain: string;
   handleLanguageChange: (language: string) => void;
 }
 
-export default function LanguageOptions({
-  tone,
-  language,
-  colorMain,
-  handleLanguageChange,
-}: LanguageOptionsProps) {
+export default function LanguageOptions({ handleLanguageChange }: LanguageOptionsProps) {
+  const { tone, colorMain, language } = useTheme();
   //TONE
   const [classesTones, setClassesTones] = useState<any>(null);
 
@@ -25,24 +19,24 @@ export default function LanguageOptions({
 
       switch (colorMain) {
         case "emerald":
-          bgColorMain = tone === "dark" ? "bg-emerald-600" : "bg-emerald-600";
+          bgColorMain = tone === "dark" ? "bg-emerald-600" : "bg-emerald-500";
           borderColorMain =
-            tone === "dark" ? "border-emerald-600" : "border-emerald-600";
+            tone === "dark" ? "border-emerald-600" : "border-emerald-500";
           break;
         case "rose":
-          bgColorMain = tone === "dark" ? "bg-rose-600" : "bg-rose-600";
+          bgColorMain = tone === "dark" ? "bg-rose-600" : "bg-rose-500";
           borderColorMain =
-            tone === "dark" ? "border-rose-600" : "border-rose-600";
+            tone === "dark" ? "border-rose-600" : "border-rose-500";
           break;
         case "blue":
-          bgColorMain = tone === "dark" ? "bg-blue-600" : "bg-blue-600";
+          bgColorMain = tone === "dark" ? "bg-blue-600" : "bg-blue-500";
           borderColorMain =
-            tone === "dark" ? "border-blue-600" : "border-blue-600";
+            tone === "dark" ? "border-blue-600" : "border-blue-500";
           break;
         case "yellow":
-          bgColorMain = tone === "dark" ? "bg-yellow-600" : "bg-yellow-600";
+          bgColorMain = tone === "dark" ? "bg-yellow-600" : "bg-yellow-500";
           borderColorMain =
-            tone === "dark" ? "border-yellow-600" : "border-yellow-600";
+            tone === "dark" ? "border-yellow-600" : "border-yellow-500";
           break;
         default:
           break;
