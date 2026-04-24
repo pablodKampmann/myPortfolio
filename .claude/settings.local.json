@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(npx tsc *)",
-      "Bash(awk '{print \"  \" $0}')"
+      "Bash(awk '{print \"  \" $0}')",
+      "Bash(echo \"exit:$?\")"
     ]
   }
 }

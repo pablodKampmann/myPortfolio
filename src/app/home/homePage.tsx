@@ -155,7 +155,7 @@ export default function HomePage() {
               {texts?.text_4_part_2}
             </p>
             <h2 className={`flex items-center underline ${classes?.decorationColor} ml-1 md:text-xs lg:text-sm xl:text-base 2xl:text-xl`}>
-              Titulos <IoSchool className="ml-2" />
+              Títulos <IoSchool className="ml-2" />
             </h2>
             <p className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2 w-fit rounded-md`}>
               {texts?.degree_1}{" "}<span className={classes?.textMainColor}>95%</span>
@@ -177,6 +177,32 @@ export default function HomePage() {
             ))}
           </div>
         )}
+
+        {/* Mobile social buttons */}
+        <div className="md:hidden mt-auto flex justify-center items-center gap-5 pt-3 pb-1">
+          <a
+            href="https://wa.me/5493413466408"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2.5 rounded-full transition duration-150`}
+          >
+            <IoLogoWhatsapp size={24} className={classes?.textMainColor} />
+          </a>
+          <a
+            href="mailto:pablo7kamp@gmail.com"
+            className={`${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2.5 rounded-full transition duration-150`}
+          >
+            <FaEnvelope size={22} className={classes?.textMainColor} />
+          </a>
+          <a
+            href="https://github.com/pablodKampmann"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2.5 rounded-full transition duration-150`}
+          >
+            <FaGithub size={24} className={classes?.textMainColor} />
+          </a>
+        </div>
 
         {/* Avatar + social (social hidden on mobile) */}
         <div className="absolute -top-10 -right-4 md:-right-10">

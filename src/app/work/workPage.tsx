@@ -107,7 +107,7 @@ export default function WorkPage() {
                     }
                 });
             },
-            { threshold: 0.4 },
+            { threshold: 0.15 },
         );
         imageRefs.current.forEach((r) => r && observer.observe(r));
         return () => { imageRefs.current.forEach((r) => r && observer.unobserve(r)); };
