@@ -152,9 +152,9 @@ export default function NavBar({
 
   const colorButtons = [
     { key: "emerald", bg: "bg-emerald-600" },
-    { key: "rose",    bg: "bg-rose-600" },
-    { key: "blue",    bg: "bg-blue-600" },
-    { key: "yellow",  bg: "bg-yellow-600" },
+    { key: "rose", bg: "bg-rose-600" },
+    { key: "blue", bg: "bg-blue-600" },
+    { key: "yellow", bg: "bg-yellow-600" },
   ];
 
   const colorPicker = (
@@ -191,9 +191,9 @@ export default function NavBar({
   );
 
   const navLinks = [
-    { href: "/",      label: texts?.about,        num: "01" },
-    { href: "/work",  label: texts?.work,          num: "02" },
-    { href: "/tech",  label: texts?.technologies,  num: "03" },
+    { href: "/", label: texts?.about, num: "01" },
+    { href: "/work", label: texts?.work, num: "02" },
+    { href: "/tech", label: texts?.technologies, num: "03" },
   ];
 
   return (
@@ -228,14 +228,15 @@ export default function NavBar({
               </div>
             </Link>
           ))}
-          <div className={`bg-transparent uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} ${classes?.hoverBorderButtons} ${classes?.hoverButtton} hover:bg-opacity-70 ${classes?.hoverTextButtons} transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3 text-sm`}>
+          <div onClick={() => window.open("https://github.com/pablodKampmann/myPortfolio", "_blank")} className={`bg-transparent uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} ${classes?.hoverBorderButtons} ${classes?.hoverButtton} hover:bg-opacity-70 ${classes?.hoverTextButtons} transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3 text-sm`}>
             {texts?.repo}
             <LuGithub className="ml-2" size={34} />
           </div>
-          <div className={`bg-transparent group relative uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} ${classes?.hoverBorderButtons} ${classes?.hoverButtton} hover:bg-opacity-70 ${classes?.hoverTextButtons} transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3`}>
+
+          <a href="/Pablo-Kampmann-CV.pdf" download className={`bg-transparent group relative uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} ${classes?.hoverBorderButtons} ${classes?.hoverButtton} hover:bg-opacity-70 ${classes?.hoverTextButtons} transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3`}>
             <TbFileCv className="opacity-100 group-hover:opacity-0" size={34} />
             <BsCloudDownload className="absolute opacity-0 group-hover:opacity-100" size={34} />
-          </div>
+          </a>
         </div>
       </div>
 
@@ -275,14 +276,14 @@ export default function NavBar({
               </div>
             </Link>
           ))}
-          <div className={`bg-transparent uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} hover:border-white ${classes?.hoverButtton} hover:bg-opacity-70 hover:text-white transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3`}>
+          <div onClick={() => window.open("https://github.com/pablodKampmann/myPortfolio", "_blank")} className={`bg-transparent uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} hover:border-white ${classes?.hoverButtton} hover:bg-opacity-70 hover:text-white transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3`}>
             {texts?.repo}
             <LuGithub className="ml-2" size={34} />
           </div>
-          <div className={`bg-transparent group relative uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} hover:border-white ${classes?.hoverButtton} hover:bg-opacity-70 hover:text-white transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3`}>
+          <a href="/Pablo-Kampmann-CV.pdf" download className={`bg-transparent group relative uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} hover:border-white ${classes?.hoverButtton} hover:bg-opacity-70 hover:text-white transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3`}>
             <TbFileCv className="opacity-100 group-hover:opacity-0" size={34} />
             <BsCloudDownload className="absolute opacity-0 group-hover:opacity-100" size={34} />
-          </div>
+          </a>
         </div>
 
         {/* Mobile hamburger */}
