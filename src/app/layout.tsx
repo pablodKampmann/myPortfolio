@@ -9,6 +9,7 @@ import ToneMode from "./components/toneMode";
 import Loading from "./components/loading";
 import { useRouter } from "next/navigation";
 import { MdOutlineDevices } from "react-icons/md";
+import { ThemeContext } from "./context/ThemeContext";
 
 const inter = Inter({ subsets: ["latin"], weight: ["400"] });
 
@@ -179,7 +180,9 @@ export default function RootLayout({
               handleColorChange={handleColorMainChange}
             />
 
-            {children}
+            <ThemeContext.Provider value={{ tone, colorMain, language }}>
+              {children}
+            </ThemeContext.Provider>
           </div>
         </div>
       </body>

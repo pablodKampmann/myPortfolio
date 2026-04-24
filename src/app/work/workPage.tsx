@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { MdDesignServices } from "react-icons/md";
 import { GrDeploy } from "react-icons/gr";
 import RiseLoader from "react-spinners/RiseLoader";
 import { languageTexts } from "./languageTexts";
+import { useTheme } from "../context/ThemeContext";
 
 const LOADER_COLOR: Record<string, string> = {
     emerald: "#059669",
@@ -13,6 +14,95 @@ const LOADER_COLOR: Record<string, string> = {
     blue: "#2563eb",
     yellow: "#eab308",
 };
+
+const SCROLLBAR: Record<string, string> = {
+    emerald: "#059669",
+    rose: "#e11d48",
+    blue: "#2563eb",
+    yellow: "#eab308",
+};
+
+const TITLE: Record<string, string> = {
+    emerald: "bg-emerald-600",
+    rose: "bg-rose-600",
+    blue: "bg-blue-600",
+    yellow: "bg-yellow-600",
+};
+
+const SUBTITLE: Record<string, string> = {
+    emerald: "text-emerald-800",
+    rose: "text-rose-800",
+    blue: "text-blue-800",
+    yellow: "text-yellow-800",
+};
+
+const LINKS: Record<string, string> = {
+    emerald: "text-emerald-500",
+    rose: "text-rose-500",
+    blue: "text-blue-500",
+    yellow: "text-yellow-500",
+};
+
+const LINKS_HOVER: Record<string, string> = {
+    emerald: "hover:text-emerald-400",
+    rose: "hover:text-rose-400",
+    blue: "hover:text-blue-400",
+    yellow: "hover:text-yellow-400",
+};
+
+const BORDER: Record<string, string> = {
+    emerald: "border-emerald-950",
+    rose: "border-rose-950",
+    blue: "border-blue-950",
+    yellow: "border-yellow-950",
+};
+
+function computeClasses(colorMain: string) {
+    const bgColorTitle = TITLE[colorMain] ?? "bg-emerald-600";
+    const textColorSubTitle = SUBTITLE[colorMain] ?? "text-emerald-800";
+    const textColorLinks = LINKS[colorMain] ?? "text-emerald-500";
+    const textColorHoverLinks = LINKS_HOVER[colorMain] ?? "hover:text-emerald-400";
+    const borderColorProjectsCont = BORDER[colorMain] ?? "border-emerald-950";
+
+    return {
+        dark: {
+            textColorMain: "text-white",
+            borderColorProjectsCont,
+            bgColorProjectsCont: "bg-white",
+            bgOpacityProjectsCont: "bg-opacity-10",
+            bgHoverColorProject: "hover:bg-white",
+            bgHoverOpacityProject: "hover:bg-opacity-10",
+            borderHoverColorProject: "hover:border-white",
+            borderHoverOpacityProject: "hover:border-opacity-10",
+            bgOpacityLinks: "bg-opacity-10",
+            opacityImages: "opacity-50",
+            bgOpacityLoaderImage: "bg-opacity-10",
+            textColorLinks,
+            textColorHoverLinks,
+            bgColorTitle,
+            textColorSubTitle,
+            bgColorLoaderImage: "bg-white",
+        },
+        light: {
+            textColorMain: "text-black",
+            borderColorProjectsCont: "border-gray-400",
+            bgColorProjectsCont: "bg-white",
+            bgOpacityProjectsCont: "bg-opacity-90",
+            bgHoverColorProject: "hover:bg-gray-300",
+            bgHoverOpacityProject: "hover:bg-opacity-30",
+            borderHoverColorProject: "hover:border-gray-950",
+            borderHoverOpacityProject: "hover:border-opacity-30",
+            bgOpacityLinks: "bg-opacity-100",
+            opacityImages: "opacity-70",
+            bgOpacityLoaderImage: "bg-opacity-70",
+            textColorLinks,
+            textColorHoverLinks,
+            bgColorTitle,
+            textColorSubTitle,
+            bgColorLoaderImage: "bg-gray-300",
+        },
+    };
+}
 
 // ─── Project data ──────────────────────────────────────────────────────────────
 type ProjectDef = {
@@ -30,139 +120,22 @@ type ProjectDef = {
 
 // ─── Component ─────────────────────────────────────────────────────────────────
 export default function WorkPage() {
-    // ── LocalStorage listener ────────────────────────────────────────────────
-    useEffect(() => {
-        const onStorage = () => {
-            const lang = localStorage.getItem("language");
-            if (lang) setLanguage(lang);
-            const tn = localStorage.getItem("tone");
-            if (tn) setTone(tn);
-            const cm = localStorage.getItem("colorMain");
-            if (cm) setColorMain(cm);
-        };
-        window.addEventListener("storage", onStorage);
-        return () => window.removeEventListener("storage", onStorage);
-    }, []);
+    const { tone, colorMain, language } = useTheme();
 
-    // ── Language ─────────────────────────────────────────────────────────────
-    const [language, setLanguage] = useState<string>("spa");
-    useEffect(() => {
-        const v = localStorage.getItem("language");
-        if (v) setLanguage(v);
-    }, []);
-
-    const texts = language === "eng" ? languageTexts.eng : languageTexts.spa;
-
-    // ── Tone / color ─────────────────────────────────────────────────────────
-    const [tone, setTone] = useState<string>("dark");
-    const [classesTones, setClassesTones] = useState<any>(null);
-    const [colorMain, setColorMain] = useState<string>("emerald");
+    const classesTones = computeClasses(colorMain);
+    const classes = tone === "dark" ? classesTones.dark : classesTones.light;
 
     useEffect(() => {
-        const v = localStorage.getItem("tone");
-        if (v) setTone(v);
-    }, []);
-
-    useEffect(() => {
-        const v = localStorage.getItem("colorMain");
-        if (v) setColorMain(v);
-    }, []);
-
-    useEffect(() => {
-        const SCROLLBAR: Record<string, string> = {
-            emerald: "#059669",
-            rose: "#e11d48",
-            blue: "#2563eb",
-            yellow: "#eab308",
-        };
-        const TITLE: Record<string, string> = {
-            emerald: "bg-emerald-600",
-            rose: "bg-rose-600",
-            blue: "bg-blue-600",
-            yellow: "bg-yellow-600",
-        };
-        const SUBTITLE: Record<string, string> = {
-            emerald: "text-emerald-800",
-            rose: "text-rose-800",
-            blue: "text-blue-800",
-            yellow: "text-yellow-800",
-        };
-        const LINKS: Record<string, string> = {
-            emerald: "text-emerald-500",
-            rose: "text-rose-500",
-            blue: "text-blue-500",
-            yellow: "text-yellow-500",
-        };
-        const LINKS_HOVER: Record<string, string> = {
-            emerald: "hover:text-emerald-400",
-            rose: "hover:text-rose-400",
-            blue: "hover:text-blue-400",
-            yellow: "hover:text-yellow-400",
-        };
-        const BORDER: Record<string, string> = {
-            emerald: "border-emerald-950",
-            rose: "border-rose-950",
-            blue: "border-blue-950",
-            yellow: "border-yellow-950",
-        };
-
         document.documentElement.style.setProperty(
             "--scrollbar-color",
             SCROLLBAR[colorMain] ?? "#059669",
         );
+    }, [colorMain]);
 
-        const bgColorTitle = TITLE[colorMain] ?? "bg-emerald-600";
-        const textColorSubTitle = SUBTITLE[colorMain] ?? "text-emerald-800";
-        const textColorLinks = LINKS[colorMain] ?? "text-emerald-500";
-        const textColorHoverLinks = LINKS_HOVER[colorMain] ?? "hover:text-emerald-400";
-        const borderColorProjectsCont = BORDER[colorMain] ?? "border-emerald-950";
-
-        setClassesTones({
-            dark: {
-                textColorMain: "text-white",
-                borderColorProjectsCont,
-                bgColorProjectsCont: "bg-white",
-                bgOpacityProjectsCont: "bg-opacity-10",
-                bgHoverColorProject: "hover:bg-white",
-                bgHoverOpacityProject: "hover:bg-opacity-10",
-                borderHoverColorProject: "hover:border-white",
-                borderHoverOpacityProject: "hover:border-opacity-10",
-                bgOpacityLinks: "bg-opacity-10",
-                opacityImages: "opacity-50",
-                bgOpacityLoaderImage: "bg-opacity-10",
-                textColorLinks,
-                textColorHoverLinks,
-                bgColorTitle,
-                textColorSubTitle,
-                bgColorLoaderImage: "bg-white",
-            },
-            light: {
-                textColorMain: "text-black",
-                borderColorProjectsCont: "border-gray-400",
-                bgColorProjectsCont: "bg-white",
-                bgOpacityProjectsCont: "bg-opacity-90",
-                bgHoverColorProject: "hover:bg-gray-300",
-                bgHoverOpacityProject: "hover:bg-opacity-30",
-                borderHoverColorProject: "hover:border-gray-950",
-                borderHoverOpacityProject: "hover:border-opacity-30",
-                bgOpacityLinks: "bg-opacity-100",
-                opacityImages: "opacity-70",
-                bgOpacityLoaderImage: "bg-opacity-70",
-                textColorLinks,
-                textColorHoverLinks,
-                bgColorTitle,
-                textColorSubTitle,
-                bgColorLoaderImage: "bg-gray-300",
-            },
-        });
-    }, [colorMain, tone]);
-
-    const classes: any = tone === "dark" ? classesTones?.dark : classesTones?.light;
+    const texts = language === "eng" ? languageTexts.eng : languageTexts.spa;
 
     // ── Image loading ────────────────────────────────────────────────────────
     const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([false, false, false, false, false]);
-    const imageBlur =
-        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8XwMAAoABfYJLKisAAAAASUVORK5CYII=";
 
     // ── Scroll-reveal (mobile IntersectionObserver) ──────────────────────────
     const [inViewStates, setInViewStates] = useState([false, false, false, false, false]);
@@ -238,15 +211,6 @@ export default function WorkPage() {
     ];
 
     // ── Helpers ──────────────────────────────────────────────────────────────
-    const imgCls = (i: number) =>
-        [
-            "rounded-lg shadow-2xl transform transition-all duration-700",
-            "w-[85%] sm:w-[78%] md:w-[58%] lg:w-[60%] h-auto",
-            "my-5 sm:my-6 md:my-0 md:mx-8 lg:mx-10",
-            inViewStates[i] ? "scale-110 opacity-100" : classes?.opacityImages,
-            "md:group-hover:scale-110 md:group-hover:opacity-100",
-        ].join(" ");
-
     const deployBox = (p: ProjectDef) => (
         <div className={`bg-white w-fit px-3 py-2 rounded-lg shadow-2xl ${tone === "light" ? "border" : ""} ${classes?.bgOpacityLinks}`}>
             <h2 className="flex items-center text-sm font-semibold">

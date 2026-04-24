@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { FaDev, FaGithub, FaEnvelope } from "react-icons/fa";
 import { SlOptionsVertical } from "react-icons/sl";
@@ -11,133 +11,113 @@ import SkillLevel from "../components/skillLevel";
 import { IoSchool } from "react-icons/io5";
 import { languageTexts } from "./languageTexts";
 import PuffLoader from "react-spinners/PuffLoader";
+import { useTheme } from "../context/ThemeContext";
+
+const SCROLLBAR: Record<string, string> = {
+  emerald: "#059669",
+  rose: "#E11D48",
+  blue: "#2563EB",
+  yellow: "#C88904",
+};
+
+function computeClasses(colorMain: string) {
+  let bgMain = "";
+  let textMainColor = "";
+  let textLinkColor = "";
+  let hoverTextLinkColor = "";
+  let borderColorImage = "";
+  let decorationColor = "";
+
+  switch (colorMain) {
+    case "emerald":
+      bgMain = "bg-emerald-600";
+      textMainColor = "text-emerald-600";
+      textLinkColor = "text-emerald-600";
+      hoverTextLinkColor = "hover:text-emerald-400";
+      borderColorImage = "border-emerald-600";
+      decorationColor = "decoration-emerald-600";
+      break;
+    case "rose":
+      bgMain = "bg-rose-600";
+      textMainColor = "text-rose-600";
+      textLinkColor = "text-rose-600";
+      hoverTextLinkColor = "hover:text-rose-400";
+      borderColorImage = "border-rose-600";
+      decorationColor = "decoration-rose-600";
+      break;
+    case "blue":
+      bgMain = "bg-blue-600";
+      textMainColor = "text-blue-600";
+      textLinkColor = "text-blue-600";
+      hoverTextLinkColor = "hover:text-blue-400";
+      borderColorImage = "border-blue-600";
+      decorationColor = "decoration-blue-600";
+      break;
+    case "yellow":
+      bgMain = "bg-yellow-600";
+      textMainColor = "text-yellow-600";
+      textLinkColor = "text-yellow-600";
+      hoverTextLinkColor = "hover:text-yellow-400";
+      borderColorImage = "border-yellow-600";
+      decorationColor = "decoration-yellow-600";
+      break;
+  }
+
+  return {
+    dark: {
+      bgMain,
+      textMainColor,
+      bgOpacityMain: "bg-opacity-10",
+      textColorMain: "text-white",
+      bgTextInfo: "bg-white",
+      bgOpacityTextInfo: "bg-opacity-10",
+      textOpacity: "text-opacity-100",
+      hoverBgColor: "hover:bg-white",
+      hoverBgOpacity: "hover:bg-opacity-10",
+      textLinkColor,
+      hoverTextLinkColor,
+      borderColorImage,
+      decorationColor,
+    },
+    light: {
+      bgMain,
+      textMainColor,
+      bgOpacityMain: "bg-opacity-100",
+      textColorMain: "text-black",
+      bgTextInfo: "bg-black",
+      bgOpacityTextInfo: "bg-opacity-10",
+      textOpacity: "text-opacity-60",
+      hoverBgColor: "hover:bg-black",
+      hoverBgOpacity: "hover:bg-opacity-10",
+      textLinkColor,
+      hoverTextLinkColor,
+      borderColorImage,
+      decorationColor,
+    },
+  };
+}
+
+const LOADER_COLOR: Record<string, string> = {
+  emerald: "#059669",
+  rose: "#e11d48",
+  blue: "#2563eb",
+  yellow: "#eab308",
+};
 
 export default function HomePage() {
-  const imageBlur =
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8XwMAAoABfYJLKisAAAAASUVORK5CYII=";
   const router = useRouter();
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  // ── LocalStorage listener ────────────────────────────────────────────────
-  useEffect(() => {
-    const onStorage = () => {
-      const lang = localStorage.getItem("language");
-      if (lang) setLanguage(lang);
-      const tn = localStorage.getItem("tone");
-      if (tn) setTone(tn);
-      const cm = localStorage.getItem("colorMain");
-      if (cm) setColorMain(cm);
-    };
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
-  }, []);
+  const { tone, colorMain, language } = useTheme();
 
-  // ── Language ─────────────────────────────────────────────────────────────
-  const [language, setLanguage] = useState<string>("spa");
   useEffect(() => {
-    const v = localStorage.getItem("language");
-    if (v) setLanguage(v);
-  }, []);
+    document.documentElement.style.setProperty("--scrollbar-color", SCROLLBAR[colorMain] ?? "#059669");
+  }, [colorMain]);
+
   const texts = language === "eng" ? languageTexts.eng : languageTexts.spa;
 
-  // ── Tone / color ─────────────────────────────────────────────────────────
-  const [tone, setTone] = useState<string>("dark");
-  const [classesTones, setClassesTones] = useState<any>(null);
-  const [colorMain, setColorMain] = useState<string>("emerald");
-
-  useEffect(() => {
-    const v = localStorage.getItem("tone");
-    if (v) setTone(v);
-  }, []);
-  useEffect(() => {
-    const v = localStorage.getItem("colorMain");
-    if (v) setColorMain(v);
-  }, []);
-
-  useEffect(() => {
-    let bgMain = "";
-    let textMainColor = "";
-    let textLinkColor = "";
-    let hoverTextLinkColor = "";
-    let borderColorImage = "";
-    let decorationColor = "";
-
-    switch (colorMain) {
-      case "emerald":
-        document.documentElement.style.setProperty("--scrollbar-color", "#059669");
-        bgMain = "bg-emerald-600";
-        textMainColor = "text-emerald-600";
-        textLinkColor = "text-emerald-600";
-        hoverTextLinkColor = "hover:text-emerald-400";
-        borderColorImage = "border-emerald-600";
-        decorationColor = "decoration-emerald-600";
-        break;
-      case "rose":
-        document.documentElement.style.setProperty("--scrollbar-color", "#E11D48");
-        bgMain = "bg-rose-600";
-        textMainColor = "text-rose-600";
-        textLinkColor = "text-rose-600";
-        hoverTextLinkColor = "hover:text-rose-400";
-        borderColorImage = "border-rose-600";
-        decorationColor = "decoration-rose-600";
-        break;
-      case "blue":
-        document.documentElement.style.setProperty("--scrollbar-color", "#2563EB");
-        bgMain = "bg-blue-600";
-        textMainColor = "text-blue-600";
-        textLinkColor = "text-blue-600";
-        hoverTextLinkColor = "hover:text-blue-400";
-        borderColorImage = "border-blue-600";
-        decorationColor = "decoration-blue-600";
-        break;
-      case "yellow":
-        document.documentElement.style.setProperty("--scrollbar-color", "#C88904");
-        bgMain = "bg-yellow-600";
-        textMainColor = "text-yellow-600";
-        textLinkColor = "text-yellow-600";
-        hoverTextLinkColor = "hover:text-yellow-400";
-        borderColorImage = "border-yellow-600";
-        decorationColor = "decoration-yellow-600";
-        break;
-      default:
-        break;
-    }
-
-    setClassesTones({
-      dark: {
-        bgMain,
-        textMainColor,
-        bgOpacityMain: "bg-opacity-10",
-        textColorMain: "text-white",
-        bgTextInfo: "bg-white",
-        bgOpacityTextInfo: "bg-opacity-10",
-        textOpacity: "text-opacity-100",
-        hoverBgColor: "hover:bg-white",
-        hoverBgOpacity: "hover:bg-opacity-10",
-        textLinkColor,
-        hoverTextLinkColor,
-        borderColorImage,
-        decorationColor,
-      },
-      light: {
-        bgMain,
-        textMainColor,
-        bgOpacityMain: "bg-opacity-100",
-        textColorMain: "text-black",
-        bgTextInfo: "bg-black",
-        bgOpacityTextInfo: "bg-opacity-10",
-        textOpacity: "text-opacity-60",
-        hoverBgColor: "hover:bg-black",
-        hoverBgOpacity: "hover:bg-opacity-10",
-        textLinkColor,
-        hoverTextLinkColor,
-        borderColorImage,
-        decorationColor,
-      },
-    });
-  }, [colorMain, tone]);
-
-  const classes: any = tone === "dark" ? classesTones?.dark : classesTones?.light;
+  const classesTones = computeClasses(colorMain);
+  const classes = tone === "dark" ? classesTones.dark : classesTones.light;
 
   // ── Interactions ─────────────────────────────────────────────────────────
   const [openSocial, setOpenSocial] = useState(false);
@@ -155,13 +135,6 @@ export default function HomePage() {
 
   const linkCls = `${classes?.textLinkColor} ${classes?.hoverTextLinkColor} hover:cursor-pointer transition duration-150`;
   const paraCls = `${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2 rounded-md`;
-
-  const LOADER_COLOR: Record<string, string> = {
-    emerald: "#059669",
-    rose: "#e11d48",
-    blue: "#2563eb",
-    yellow: "#eab308",
-  };
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (

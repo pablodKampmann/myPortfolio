@@ -6,38 +6,91 @@ import { GrTechnology } from "react-icons/gr";
 import { TbArrowWaveRightUp } from "react-icons/tb";
 import { TbHandMove } from "react-icons/tb";
 import HashLoader from "react-spinners/HashLoader";
+import { useTheme } from "../context/ThemeContext";
+
+const LOADER_COLOR: Record<string, string> = {
+  emerald: "#059669",
+  rose: "#e11d48",
+  blue: "#2563eb",
+  yellow: "#eab308",
+};
+
+function computeClasses(tone: string, colorMain: string) {
+  let bgColorTitle = "";
+  let textColorArrow = "";
+  let textColorCategory = "";
+  let textColorTitleIcon = "";
+  let borderColorProjectsCont = "";
+
+  switch (colorMain) {
+    case "emerald":
+      bgColorTitle = "bg-emerald-600";
+      textColorArrow = "text-emerald-600";
+      textColorCategory = tone === "dark" ? "text-emerald-400" : "text-emerald-600";
+      textColorTitleIcon = "text-emerald-700";
+      borderColorProjectsCont = "border-emerald-950";
+      break;
+    case "rose":
+      bgColorTitle = "bg-rose-600";
+      textColorArrow = "text-rose-600";
+      textColorCategory = tone === "dark" ? "text-rose-400" : "text-rose-600";
+      textColorTitleIcon = "text-rose-700";
+      borderColorProjectsCont = "border-rose-950";
+      break;
+    case "blue":
+      bgColorTitle = "bg-blue-600";
+      textColorArrow = "text-blue-600";
+      textColorCategory = tone === "dark" ? "text-blue-400" : "text-blue-600";
+      textColorTitleIcon = "text-blue-700";
+      borderColorProjectsCont = "border-blue-950";
+      break;
+    case "yellow":
+      bgColorTitle = "bg-yellow-600";
+      textColorArrow = "text-yellow-600";
+      textColorCategory = tone === "dark" ? "text-yellow-400" : "text-yellow-600";
+      textColorTitleIcon = "text-yellow-700";
+      borderColorProjectsCont = "border-yellow-950";
+      break;
+  }
+
+  return {
+    dark: {
+      textColorClass: "text-white",
+      borderImagesColor: "border-gray-900",
+      hoverOpacityButtons: "hover:bg-opacity-10",
+      hoverColorButtons: "hover:bg-white",
+      textColorCategory,
+      borderColorProjectsCont,
+      bgColorImages: "bg-white",
+      bgOpacityImages: "bg-opacity-10",
+      bgColorTitle,
+      textColorArrow,
+      textColorTitleIcon,
+    },
+    light: {
+      textColorClass: "text-black",
+      borderColorProjectsCont: "border-gray-400",
+      borderImagesColor: "border-gray-400",
+      hoverOpacityButtons: "hover:bg-opacity-20",
+      hoverColorButtons: "hover:bg-gray-400",
+      textColorCategory,
+      bgColorImages: "bg-white",
+      bgOpacityImages: "bg-opacity-90",
+      bgColorTitle,
+      textColorArrow,
+      textColorTitleIcon,
+    },
+  };
+}
 
 export default function Tech() {
+  const { tone, colorMain, language } = useTheme();
   const [option, setOption] = useState("frontend");
-  const LOADER_COLOR: Record<string, string> = {
-    emerald: "#059669",
-    rose: "#e11d48",
-    blue: "#2563eb",
-    yellow: "#eab308",
-  };
+
+  const classesTones = computeClasses(tone, colorMain);
+  const classes = tone === "dark" ? classesTones.dark : classesTones.light;
 
   const [iconsLoaded, setIconsLoaded] = useState<Record<string, boolean>>({});
-
-  //LISTENER DEL LOCALSTORAGE
-  useEffect(() => {
-    const handleItemChange = () => {
-      const storedLanguage = localStorage.getItem("language");
-      if (storedLanguage) setLanguage(storedLanguage);
-      const storedTone = localStorage.getItem("tone");
-      if (storedTone) setTone(storedTone);
-      const storedColorMain = localStorage.getItem("colorMain");
-      if (storedColorMain) setColorMain(storedColorMain);
-    };
-    window.addEventListener("storage", handleItemChange);
-    return () => window.removeEventListener("storage", handleItemChange);
-  }, []);
-
-  //LANGUAGE
-  const [language, setLanguage] = useState<string>("spa");
-  useEffect(() => {
-    const v = localStorage.getItem("language");
-    setLanguage(v ?? "spa");
-  }, []);
 
   const languageTexts = {
     eng: {
@@ -61,93 +114,6 @@ export default function Tech() {
   };
 
   const texts = language === "eng" ? languageTexts.eng : languageTexts.spa;
-
-  //TONE
-  const [tone, setTone] = useState<string>("dark");
-  const [classesTones, setClassesTones] = useState<any>(null);
-  const [colorMain, setColorMain] = useState<string>("emerald");
-
-  useEffect(() => {
-    const v = localStorage.getItem("tone");
-    setTone(v ?? "dark");
-  }, []);
-
-  useEffect(() => {
-    const v = localStorage.getItem("colorMain");
-    setColorMain(v ?? "emerald");
-  }, []);
-
-  useEffect(() => {
-    let bgColorTitle = "";
-    let textColorArrow = "";
-    let textColorCategory = "";
-    let textColorTitleIcon = "";
-    let borderColorProjectsCont = "";
-
-    switch (colorMain) {
-      case "emerald":
-        bgColorTitle = "bg-emerald-600";
-        textColorArrow = "text-emerald-600";
-        textColorCategory = tone === "dark" ? "text-emerald-400" : "text-emerald-600";
-        textColorTitleIcon = "text-emerald-700";
-        borderColorProjectsCont = "border-emerald-950";
-        break;
-      case "rose":
-        bgColorTitle = "bg-rose-600";
-        textColorArrow = "text-rose-600";
-        textColorCategory = tone === "dark" ? "text-rose-400" : "text-rose-600";
-        textColorTitleIcon = "text-rose-700";
-        borderColorProjectsCont = "border-rose-950";
-        break;
-      case "blue":
-        bgColorTitle = "bg-blue-600";
-        textColorArrow = "text-blue-600";
-        textColorCategory = tone === "dark" ? "text-blue-400" : "text-blue-600";
-        textColorTitleIcon = "text-blue-700";
-        borderColorProjectsCont = "border-blue-950";
-        break;
-      case "yellow":
-        bgColorTitle = "bg-yellow-600";
-        textColorArrow = "text-yellow-600";
-        textColorCategory = tone === "dark" ? "text-yellow-400" : "text-yellow-600";
-        textColorTitleIcon = "text-yellow-700";
-        borderColorProjectsCont = "border-yellow-950";
-        break;
-      default:
-        break;
-    }
-
-    setClassesTones({
-      dark: {
-        textColorClass: "text-white",
-        borderImagesColor: "border-gray-900",
-        hoverOpacityButtons: "hover:bg-opacity-10",
-        hoverColorButtons: "hover:bg-white",
-        textColorCategory,
-        borderColorProjectsCont,
-        bgColorImages: "bg-white",
-        bgOpacityImages: "bg-opacity-10",
-        bgColorTitle,
-        textColorArrow,
-        textColorTitleIcon,
-      },
-      light: {
-        textColorClass: "text-black",
-        borderColorProjectsCont: "border-gray-400",
-        borderImagesColor: "border-gray-400",
-        hoverOpacityButtons: "hover:bg-opacity-20",
-        hoverColorButtons: "hover:bg-gray-400",
-        textColorCategory,
-        bgColorImages: "bg-white",
-        bgOpacityImages: "bg-opacity-90",
-        bgColorTitle,
-        textColorArrow,
-        textColorTitleIcon,
-      },
-    });
-  }, [colorMain, tone]);
-
-  const classes: any = tone === "dark" ? classesTones?.dark : classesTones?.light;
 
   // Mobile tap state
   const [activeIcon, setActiveIcon] = useState<string | null>(null);
