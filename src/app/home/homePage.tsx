@@ -13,60 +13,14 @@ import { languageTexts } from "./languageTexts";
 import PuffLoader from "react-spinners/PuffLoader";
 import { useTheme } from "../context/ThemeContext";
 
-const SCROLLBAR: Record<string, string> = {
-  emerald: "#059669",
-  rose: "#E11D48",
-  blue: "#2563EB",
-  yellow: "#C88904",
-};
+import { LOADER_COLOR, SCROLLBAR_COLOR, getColorClasses } from "../lib/themeClasses";
 
 function computeClasses(colorMain: string) {
-  let bgMain = "";
-  let textMainColor = "";
-  let textLinkColor = "";
-  let hoverTextLinkColor = "";
-  let borderColorImage = "";
-  let decorationColor = "";
-
-  switch (colorMain) {
-    case "emerald":
-      bgMain = "bg-emerald-600";
-      textMainColor = "text-emerald-600";
-      textLinkColor = "text-emerald-600";
-      hoverTextLinkColor = "hover:text-emerald-400";
-      borderColorImage = "border-emerald-600";
-      decorationColor = "decoration-emerald-600";
-      break;
-    case "rose":
-      bgMain = "bg-rose-600";
-      textMainColor = "text-rose-600";
-      textLinkColor = "text-rose-600";
-      hoverTextLinkColor = "hover:text-rose-400";
-      borderColorImage = "border-rose-600";
-      decorationColor = "decoration-rose-600";
-      break;
-    case "blue":
-      bgMain = "bg-blue-600";
-      textMainColor = "text-blue-600";
-      textLinkColor = "text-blue-600";
-      hoverTextLinkColor = "hover:text-blue-400";
-      borderColorImage = "border-blue-600";
-      decorationColor = "decoration-blue-600";
-      break;
-    case "yellow":
-      bgMain = "bg-yellow-600";
-      textMainColor = "text-yellow-600";
-      textLinkColor = "text-yellow-600";
-      hoverTextLinkColor = "hover:text-yellow-400";
-      borderColorImage = "border-yellow-600";
-      decorationColor = "decoration-yellow-600";
-      break;
-  }
-
+  const c = getColorClasses(colorMain);
   return {
     dark: {
-      bgMain,
-      textMainColor,
+      bgMain: c.bg600,
+      textMainColor: c.text600,
       bgOpacityMain: "bg-opacity-10",
       textColorMain: "text-white",
       bgTextInfo: "bg-white",
@@ -74,14 +28,14 @@ function computeClasses(colorMain: string) {
       textOpacity: "text-opacity-100",
       hoverBgColor: "hover:bg-white",
       hoverBgOpacity: "hover:bg-opacity-10",
-      textLinkColor,
-      hoverTextLinkColor,
-      borderColorImage,
-      decorationColor,
+      textLinkColor: c.text600,
+      hoverTextLinkColor: c.hoverText400,
+      borderColorImage: c.border600,
+      decorationColor: c.decoration600,
     },
     light: {
-      bgMain,
-      textMainColor,
+      bgMain: c.bg600,
+      textMainColor: c.text600,
       bgOpacityMain: "bg-opacity-100",
       textColorMain: "text-black",
       bgTextInfo: "bg-black",
@@ -89,20 +43,13 @@ function computeClasses(colorMain: string) {
       textOpacity: "text-opacity-60",
       hoverBgColor: "hover:bg-black",
       hoverBgOpacity: "hover:bg-opacity-10",
-      textLinkColor,
-      hoverTextLinkColor,
-      borderColorImage,
-      decorationColor,
+      textLinkColor: c.text600,
+      hoverTextLinkColor: c.hoverText400,
+      borderColorImage: c.border600,
+      decorationColor: c.decoration600,
     },
   };
 }
-
-const LOADER_COLOR: Record<string, string> = {
-  emerald: "#059669",
-  rose: "#e11d48",
-  blue: "#2563eb",
-  yellow: "#eab308",
-};
 
 export default function HomePage() {
   const router = useRouter();
@@ -111,7 +58,7 @@ export default function HomePage() {
   const { tone, colorMain, language } = useTheme();
 
   useEffect(() => {
-    document.documentElement.style.setProperty("--scrollbar-color", SCROLLBAR[colorMain] ?? "#059669");
+    document.documentElement.style.setProperty("--scrollbar-color", SCROLLBAR_COLOR[colorMain] ?? "#059669");
   }, [colorMain]);
 
   const texts = language === "eng" ? languageTexts.eng : languageTexts.spa;

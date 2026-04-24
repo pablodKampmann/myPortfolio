@@ -20,13 +20,6 @@ export default function RootLayout({
   //LANGUAGE
   const [language, setLanguage] = useState<string>("spa");
 
-  useEffect(() => {
-    const storedLanguage = localStorage.getItem("language");
-    if (storedLanguage) {
-      setLanguage(storedLanguage);
-    }
-  }, []);
-
   const handleLanguageChange = (newLanguage: string) => {
     setLanguage(newLanguage);
     localStorage.setItem("language", newLanguage);
@@ -37,13 +30,6 @@ export default function RootLayout({
   const [tone, setTone] = useState<string>("dark");
   const [classesTones, setClassesTones] = useState<any>(null);
   const [colorMain, setColorMain] = useState<string>("emerald");
-
-  useEffect(() => {
-    const storedTone = localStorage.getItem("tone");
-    if (storedTone) {
-      setTone(storedTone);
-    }
-  }, []);
 
   const handleToneChange = (newTone: string) => {
     setTone(newTone);
@@ -95,14 +81,6 @@ export default function RootLayout({
     classes = classesTones?.light;
   }
 
-  //COLOR MAIN
-  useEffect(() => {
-    const storedTone = localStorage.getItem("colorMain");
-    if (storedTone) {
-      setColorMain(storedTone);
-    }
-  }, []);
-
   const handleColorMainChange = (newColor: string) => {
     setColorMain(newColor);
     localStorage.setItem("colorMain", newColor);
@@ -113,10 +91,12 @@ export default function RootLayout({
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const tone = localStorage.getItem("tone");
-    const color = localStorage.getItem("colorMain");
-    if (tone) setTone(tone);
-    if (color) setColorMain(color);
+    const storedLanguage = localStorage.getItem("language");
+    const storedTone = localStorage.getItem("tone");
+    const storedColor = localStorage.getItem("colorMain");
+    if (storedLanguage) setLanguage(storedLanguage);
+    if (storedTone) setTone(storedTone);
+    if (storedColor) setColorMain(storedColor);
     setTimeout(() => setReady(true), 1000);
   }, []);
 
@@ -161,16 +141,10 @@ export default function RootLayout({
             <div
               className={`absolute md:opacity-100 lg:opacity-100 right-9 xl:opacity-100 opacity-0 bottom-[80%] rounded-full ${classes?.bgLinesColor} h-8 w-1 z-10`}
             ></div>
-            <NavBar
-              tone={tone}
-              language={language}
-              colorMain={colorMain}
-              handleColorChange={handleColorMainChange}
-            />
-
-            <ThemeContext.Provider value={{ tone, colorMain, language }}>
-              <ToneMode handleToneChange={handleToneChange} />
-              <LanguageOptions handleLanguageChange={handleLanguageChange} />
+            <ThemeContext.Provider value={{ tone, colorMain, language, handleToneChange, handleColorChange: handleColorMainChange, handleLanguageChange }}>
+              <NavBar />
+              <ToneMode />
+              <LanguageOptions />
               {children}
             </ThemeContext.Provider>
           </div>

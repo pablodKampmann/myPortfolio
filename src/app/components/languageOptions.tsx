@@ -3,12 +3,8 @@ import { useState, useEffect } from "react";
 import { IoIosClose } from "react-icons/io";
 import { useTheme } from "../context/ThemeContext";
 
-interface LanguageOptionsProps {
-  handleLanguageChange: (language: string) => void;
-}
-
-export default function LanguageOptions({ handleLanguageChange }: LanguageOptionsProps) {
-  const { tone, colorMain, language } = useTheme();
+export default function LanguageOptions() {
+  const { tone, colorMain, language, handleLanguageChange } = useTheme();
   //TONE
   const [classesTones, setClassesTones] = useState<any>(null);
 

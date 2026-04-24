@@ -10,66 +10,14 @@ import { useTheme } from "../context/ThemeContext";
 import { HiSquare3Stack3D } from "react-icons/hi2";
 import { MdScreenshotMonitor } from "react-icons/md";
 
-const LOADER_COLOR: Record<string, string> = {
-    emerald: "#059669",
-    rose: "#e11d48",
-    blue: "#2563eb",
-    yellow: "#eab308",
-};
-
-const SCROLLBAR: Record<string, string> = {
-    emerald: "#059669",
-    rose: "#e11d48",
-    blue: "#2563eb",
-    yellow: "#eab308",
-};
-
-const TITLE: Record<string, string> = {
-    emerald: "bg-emerald-600",
-    rose: "bg-rose-600",
-    blue: "bg-blue-600",
-    yellow: "bg-yellow-600",
-};
-
-const SUBTITLE: Record<string, string> = {
-    emerald: "text-emerald-800",
-    rose: "text-rose-800",
-    blue: "text-blue-800",
-    yellow: "text-yellow-800",
-};
-
-const LINKS: Record<string, string> = {
-    emerald: "text-emerald-500",
-    rose: "text-rose-500",
-    blue: "text-blue-500",
-    yellow: "text-yellow-500",
-};
-
-const LINKS_HOVER: Record<string, string> = {
-    emerald: "hover:text-emerald-400",
-    rose: "hover:text-rose-400",
-    blue: "hover:text-blue-400",
-    yellow: "hover:text-yellow-400",
-};
-
-const BORDER: Record<string, string> = {
-    emerald: "border-emerald-950",
-    rose: "border-rose-950",
-    blue: "border-blue-950",
-    yellow: "border-yellow-950",
-};
+import { LOADER_COLOR, SCROLLBAR_COLOR, getColorClasses } from "../lib/themeClasses";
 
 function computeClasses(colorMain: string) {
-    const bgColorTitle = TITLE[colorMain] ?? "bg-emerald-600";
-    const textColorSubTitle = SUBTITLE[colorMain] ?? "text-emerald-800";
-    const textColorLinks = LINKS[colorMain] ?? "text-emerald-500";
-    const textColorHoverLinks = LINKS_HOVER[colorMain] ?? "hover:text-emerald-400";
-    const borderColorProjectsCont = BORDER[colorMain] ?? "border-emerald-950";
-
+    const c = getColorClasses(colorMain);
     return {
         dark: {
             textColorMain: "text-white",
-            borderColorProjectsCont,
+            borderColorProjectsCont: c.border950,
             bgColorProjectsCont: "bg-white",
             bgOpacityProjectsCont: "bg-opacity-10",
             bgHoverColorProject: "hover:bg-white",
@@ -79,10 +27,10 @@ function computeClasses(colorMain: string) {
             bgOpacityLinks: "bg-opacity-10",
             opacityImages: "opacity-50",
             bgOpacityLoaderImage: "bg-opacity-10",
-            textColorLinks,
-            textColorHoverLinks,
-            bgColorTitle,
-            textColorSubTitle,
+            textColorLinks: c.text500,
+            textColorHoverLinks: c.hoverText400,
+            bgColorTitle: c.bg600,
+            textColorSubTitle: c.text800,
             bgColorLoaderImage: "bg-white",
         },
         light: {
@@ -97,10 +45,10 @@ function computeClasses(colorMain: string) {
             bgOpacityLinks: "bg-opacity-100",
             opacityImages: "opacity-70",
             bgOpacityLoaderImage: "bg-opacity-70",
-            textColorLinks,
-            textColorHoverLinks,
-            bgColorTitle,
-            textColorSubTitle,
+            textColorLinks: c.text500,
+            textColorHoverLinks: c.hoverText400,
+            bgColorTitle: c.bg600,
+            textColorSubTitle: c.text800,
             bgColorLoaderImage: "bg-gray-300",
         },
     };
@@ -132,7 +80,7 @@ export default function WorkPage() {
     useEffect(() => {
         document.documentElement.style.setProperty(
             "--scrollbar-color",
-            SCROLLBAR[colorMain] ?? "#059669",
+            SCROLLBAR_COLOR[colorMain] ?? "#059669",
         );
     }, [colorMain]);
 

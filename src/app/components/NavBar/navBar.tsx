@@ -9,117 +9,65 @@ import { LuGithub } from "react-icons/lu";
 import { TbFileCv, TbLayoutSidebarRightExpand, TbLayoutSidebarRightCollapse } from "react-icons/tb";
 import { BsCloudDownload } from "react-icons/bs";
 import { languageTexts } from "./languageTexts";
+import { useTheme } from "../../context/ThemeContext";
+import { getColorClasses } from "../../lib/themeClasses";
 
-interface NavBarProps {
-  tone: string;
-  language: string;
-  colorMain: string;
-  handleColorChange: (language: string) => void;
-}
-
-export default function NavBar({
-  tone,
-  language,
-  colorMain,
-  handleColorChange,
-}: NavBarProps) {
+export default function NavBar() {
+  const { tone, language, colorMain, handleColorChange } = useTheme();
   const pathname = usePathname();
   const [showOptions, setShowOptions] = useState(false);
   const [openSideBar, setOpenSideBar] = useState(false);
 
   const texts = language === "eng" ? languageTexts.eng : languageTexts.spa;
 
-  const [classesTones, setClassesTones] = useState<any>(null);
+  const c = getColorClasses(colorMain);
+  const colorPart = {
+    borderColor: c.border600,
+    textIcon: c.text600,
+    bgPageSelected: c.bg600,
+    textColorNumber: c.text600,
+    hoverButtton: c.hoverBg600,
+  };
+  const classesTones = {
+    dark: {
+      bgMain: "bg-[#090D1F]",
+      bgMainOpacity: "bg-opacity-100",
+      textMain: "text-white",
+      bgOpacityButtonPressed: "bg-opacity-40",
+      bgOpacityHoverButtons: "hover:bg-opacity-20",
+      ...colorPart,
+      bgColorButtons: "bg-white",
+      bgColorShowOptions: "bg-[#090D1F]",
+      bgOpacityShowOptions: "bg-opacity-100",
+      borderColorColourSelected: "border-white",
+      borderOpacityColourSelected: "border-opacity-100",
+      hoverBgColorIcon: "hover:bg-white",
+      hoverBgOpacityIcon: "hover:bg-opacity-10",
+      bgOpacityButtons: "bg-opacity-[4%]",
+      hoverBorderButtons: "hover:border-white",
+      hoverTextButtons: "hover:text-white",
+    },
+    light: {
+      bgMain: "bg-white",
+      bgMainOpacity: "bg-opacity-100",
+      textMain: "text-black",
+      bgOpacityButtonPressed: "bg-opacity-20",
+      bgOpacityHoverButtons: "hover:bg-opacity-20",
+      ...colorPart,
+      bgColorButtons: "bg-black",
+      bgColorShowOptions: "bg-white",
+      bgOpacityShowOptions: "bg-opacity-100",
+      borderColorColourSelected: "border-black",
+      borderOpacityColourSelected: "border-opacity-60",
+      hoverBgColorIcon: "hover:bg-black",
+      hoverBgOpacityIcon: "hover:bg-opacity-10",
+      bgOpacityButtons: "bg-opacity-[8%]",
+      hoverBorderButtons: "hover:border-black",
+      hoverTextButtons: "hover:text-black",
+    },
+  };
 
-  useEffect(() => {
-    let borderColor = "";
-    let textIcon = "";
-    let bgPageSelected = "";
-    let textColorNumber = "";
-    let hoverButtton = "";
-
-    switch (colorMain) {
-      case "emerald":
-        borderColor = "border-emerald-600";
-        textIcon = "text-emerald-600";
-        bgPageSelected = "bg-emerald-600";
-        textColorNumber = "text-emerald-600";
-        hoverButtton = "hover:bg-emerald-600";
-        break;
-      case "rose":
-        borderColor = "border-rose-600";
-        textIcon = "text-rose-600";
-        bgPageSelected = "bg-rose-600";
-        textColorNumber = "text-rose-600";
-        hoverButtton = "hover:bg-rose-600";
-        break;
-      case "blue":
-        borderColor = "border-blue-600";
-        textIcon = "text-blue-600";
-        bgPageSelected = "bg-blue-600";
-        textColorNumber = "text-blue-600";
-        hoverButtton = "hover:bg-blue-600";
-        break;
-      case "yellow":
-        borderColor = "border-yellow-600";
-        textIcon = "text-yellow-600";
-        bgPageSelected = "bg-yellow-600";
-        textColorNumber = "text-yellow-600";
-        hoverButtton = "hover:bg-yellow-600";
-        break;
-      default:
-        break;
-    }
-
-    setClassesTones({
-      dark: {
-        bgMain: "bg-[#090D1F]",
-        bgMainOpacity: "bg-opacity-100",
-        textMain: "text-white",
-        bgOpacityButtonPressed: "bg-opacity-40",
-        bgOpacityHoverButtons: "hover:bg-opacity-20",
-        borderColor,
-        textIcon,
-        bgColorButtons: "bg-white",
-        bgPageSelected,
-        textColorNumber,
-        hoverButtton,
-        bgColorShowOptions: "bg-[#090D1F]",
-        bgOpacityShowOptions: "bg-opacity-100",
-        borderColorColourSelected: "border-white",
-        borderOpacityColourSelected: "border-opacity-100",
-        hoverBgColorIcon: "hover:bg-white",
-        hoverBgOpacityIcon: "hover:bg-opacity-10",
-        bgOpacityButtons: "bg-opacity-[4%]",
-        hoverBorderButtons: "hover:border-white",
-        hoverTextButtons: "hover:text-white",
-      },
-      light: {
-        bgMain: "bg-white",
-        bgMainOpacity: "bg-opacity-100",
-        textMain: "text-black",
-        bgOpacityButtonPressed: "bg-opacity-20",
-        bgOpacityHoverButtons: "hover:bg-opacity-20",
-        borderColor,
-        textIcon,
-        bgColorButtons: "bg-black",
-        bgPageSelected,
-        textColorNumber,
-        hoverButtton,
-        bgColorShowOptions: "bg-white",
-        bgOpacityShowOptions: "bg-opacity-100",
-        borderColorColourSelected: "border-black",
-        borderOpacityColourSelected: "border-opacity-60",
-        hoverBgColorIcon: "hover:bg-black",
-        hoverBgOpacityIcon: "hover:bg-opacity-10",
-        bgOpacityButtons: "bg-opacity-[8%]",
-        hoverBorderButtons: "hover:border-black",
-        hoverTextButtons: "hover:text-black",
-      },
-    });
-  }, [colorMain, tone]);
-
-  const classes = tone === "dark" ? classesTones?.dark : classesTones?.light;
+  const classes = tone === "dark" ? classesTones.dark : classesTones.light;
 
   const [isClick, setIsClick] = useState(false);
   const [showCancelButton, setShowCancelButton] = useState(false);
