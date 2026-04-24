@@ -5,9 +5,18 @@ import React, { useState, useEffect } from "react";
 import { GrTechnology } from "react-icons/gr";
 import { TbArrowWaveRightUp } from "react-icons/tb";
 import { TbHandMove } from "react-icons/tb";
+import HashLoader from "react-spinners/HashLoader";
 
 export default function Tech() {
   const [option, setOption] = useState("frontend");
+  const LOADER_COLOR: Record<string, string> = {
+    emerald: "#059669",
+    rose: "#e11d48",
+    blue: "#2563eb",
+    yellow: "#eab308",
+  };
+
+  const [iconsLoaded, setIconsLoaded] = useState<Record<string, boolean>>({});
 
   //LISTENER DEL LOCALSTORAGE
   useEffect(() => {
@@ -203,16 +212,20 @@ export default function Tech() {
       {icons.map(({ src, label }) => {
         const tapped = activeIcon === src;
         return (
-          <div
-            key={src}
-            className="flex flex-col group hover:cursor-help justify-center items-center"
-            onTouchStart={() => setActiveIcon(src)}
-          >
-            <Image
-              className={`transition-transform duration-300 w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[110px] lg:h-[110px] transform group-hover:scale-110 group-hover:-translate-y-2${tapped ? " scale-110 -translate-y-2" : ""}`}
-              width={110} height={110} priority src={src} alt={src}
-            />
-            <p className={`text-xs sm:text-sm tracking-widest mt-3 transition duration-150 font-[600] opacity-100`}>
+          <div key={src} className="flex flex-col group hover:cursor-help justify-center items-center" onTouchStart={() => setActiveIcon(src)}>
+            <div className="relative w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-[110px] lg:h-[110px]">
+              {!iconsLoaded[src] && (
+                <div className="absolute inset-0 flex justify-center items-center">
+                  <HashLoader speedMultiplier={2.5} color={LOADER_COLOR[colorMain] ?? "#059669"} size={50} />
+                </div>
+              )}
+              <Image
+                className={`transition-transform duration-300 w-full h-full transform group-hover:scale-110 group-hover:-translate-y-2${tapped ? " scale-110 -translate-y-2" : ""} ${!iconsLoaded[src] ? "invisible" : ""}`}
+                width={110} height={110} priority src={src} alt={src}
+                onLoad={() => setIconsLoaded(prev => ({ ...prev, [src]: true }))}
+              />
+            </div>
+            <p className={`text-xs sm:text-sm tracking-widest mt-1 sm:mt-2.5 transition duration-150 font-[600] opacity-100`}>
               {label}
             </p>
           </div>
