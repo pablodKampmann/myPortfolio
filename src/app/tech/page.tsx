@@ -33,7 +33,7 @@ export default function Tech() {
   const languageTexts = {
     eng: {
       technologies: "Technologies",
-      info: "> These are the technologies I work with and have worked with. I'm not limited to them, but they're the ones I know well and use day to day.",
+      info: "These are the technologies I work with and have worked with. I'm not limited to them, but they're the ones I know well and use day to day.",
       option_1: "Frontend",
       option_2: "Languages",
       option_3: "Backend",
