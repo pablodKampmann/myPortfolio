@@ -272,7 +272,7 @@ export default function HomePage() {
             width={400}
             height={400}
             priority={true}
-            src="/me-image.jpg"
+            src="/images/profile/me-image.jpg"
             alt="me-image"
           />
           <div className="hidden md:block">

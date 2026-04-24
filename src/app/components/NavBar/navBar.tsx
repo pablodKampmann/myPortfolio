@@ -233,7 +233,7 @@ export default function NavBar({
             <LuGithub className="ml-2" size={34} />
           </div>
 
-          <a href="/Pablo-Kampmann-CV.pdf" download className={`bg-transparent group relative uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} ${classes?.hoverBorderButtons} ${classes?.hoverButtton} hover:bg-opacity-70 ${classes?.hoverTextButtons} transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3`}>
+          <a href="/documents/Pablo-Kampmann-CV.pdf" download className={`bg-transparent group relative uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} ${classes?.hoverBorderButtons} ${classes?.hoverButtton} hover:bg-opacity-70 ${classes?.hoverTextButtons} transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3`}>
             <TbFileCv className="opacity-100 group-hover:opacity-0" size={34} />
             <BsCloudDownload className="absolute opacity-0 group-hover:opacity-100" size={34} />
           </a>
@@ -280,7 +280,7 @@ export default function NavBar({
             {texts?.repo}
             <LuGithub className="ml-2" size={34} />
           </div>
-          <a href="/Pablo-Kampmann-CV.pdf" download className={`bg-transparent group relative uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} hover:border-white ${classes?.hoverButtton} hover:bg-opacity-70 hover:text-white transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3`}>
+          <a href="/documents/Pablo-Kampmann-CV.pdf" download className={`bg-transparent group relative uppercase font-semibold whitespace-nowrap tracking-widest border-2 ${classes?.textColorNumber} hover:border-white ${classes?.hoverButtton} hover:bg-opacity-70 hover:text-white transition duration-150 cursor-pointer flex justify-center items-center ${classes?.borderColor} rounded-md py-1 px-3`}>
             <TbFileCv className="opacity-100 group-hover:opacity-0" size={34} />
             <BsCloudDownload className="absolute opacity-0 group-hover:opacity-100" size={34} />
           </a>

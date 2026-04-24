@@ -158,33 +158,33 @@ export default function Tech() {
 
   const iconSets: Record<string, { src: string; label: string }[]> = {
     frontend: [
-      { src: "nextjs-icon.svg", label: "Next.js" },
-      { src: "react-icon.svg", label: "React" },
-      { src: "astro-icon.svg", label: "Astro" },
+      { src: "/icons/nextjs-icon.svg", label: "Next.js" },
+      { src: "/icons/react-icon.svg", label: "React" },
+      { src: "/icons/astro-icon.svg", label: "Astro" },
     ],
     languages: [
-      { src: "html-icon.svg", label: "HTML5" },
-      { src: "css-icon.svg", label: "CSS" },
-      { src: "javascript-icon.svg", label: "JavaScript" },
-      { src: "typescript-icon.svg", label: "TypeScript" },
-      { src: "tailwind-icon.svg", label: "Tailwind" },
+      { src: "/icons/html-icon.svg", label: "HTML5" },
+      { src: "/icons/css-icon.svg", label: "CSS" },
+      { src: "/icons/javascript-icon.svg", label: "JavaScript" },
+      { src: "/icons/typescript-icon.svg", label: "TypeScript" },
+      { src: "/icons/tailwind-icon.svg", label: "Tailwind" },
     ],
     backend: [
-      { src: "nodejs-icon.svg", label: "NodeJs" },
-      { src: "firebase-icon.svg", label: "Firebase" },
-      { src: "mongodb-icon.svg", label: "MongoDB" },
-      { src: "supabase-icon.svg", label: "Supabase" },
-      { src: "mysql-icon.svg", label: "MySql" },
-      { src: "microsoftsql-icon.svg", label: "SqlServer" },
+      { src: "/icons/nodejs-icon.svg", label: "NodeJs" },
+      { src: "/icons/firebase-icon.svg", label: "Firebase" },
+      { src: "/icons/mongodb-icon.svg", label: "MongoDB" },
+      { src: "/icons/supabase-icon.svg", label: "Supabase" },
+      { src: "/icons/mysql-icon.svg", label: "MySql" },
+      { src: "/icons/microsoftsql-icon.svg", label: "SqlServer" },
     ],
     tools: [
-      { src: "github-icon.svg", label: "GitHub" },
-      { src: "vercel-icon.svg", label: "Vercel" },
+      { src: "/icons/github-icon.svg", label: "GitHub" },
+      { src: "/icons/vercel-icon.svg", label: "Vercel" },
     ],
     other: [
-      { src: "c-icon.svg", label: "C#" },
-      { src: "php-icon.svg", label: "PHP" },
-      { src: "python-icon.svg", label: "Python" },
+      { src: "/icons/c-icon.svg", label: "C#" },
+      { src: "/icons/php-icon.svg", label: "PHP" },
+      { src: "/icons/python-icon.svg", label: "Python" },
     ],
   };
 
