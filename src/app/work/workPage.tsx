@@ -24,6 +24,7 @@ function computeClasses(colorMain: string) {
             bgHoverOpacityProject: "hover:bg-opacity-10",
             borderHoverColorProject: "hover:border-white",
             borderHoverOpacityProject: "hover:border-opacity-10",
+            bgColorLinks: "bg-white",
             bgOpacityLinks: "bg-opacity-10",
             opacityImages: "opacity-50",
             bgOpacityLoaderImage: "bg-opacity-10",
@@ -42,7 +43,8 @@ function computeClasses(colorMain: string) {
             bgHoverOpacityProject: "hover:bg-opacity-30",
             borderHoverColorProject: "hover:border-gray-950",
             borderHoverOpacityProject: "hover:border-opacity-30",
-            bgOpacityLinks: "bg-opacity-100",
+            bgColorLinks: "bg-black",
+            bgOpacityLinks: "bg-opacity-10",
             opacityImages: "opacity-70",
             bgOpacityLoaderImage: "bg-opacity-70",
             textColorLinks: c.text500,
@@ -174,7 +176,7 @@ export default function WorkPage() {
 
     // ── Helpers ──────────────────────────────────────────────────────────────
     const infoBox = (title: string, items: string[], icon: React.ReactNode) => (
-        <div className={`bg-white w-fit px-3 py-2 rounded-lg shadow-2xl ${tone === "light" ? "border" : ""} ${classes?.bgOpacityLinks}`}>
+        <div className={`${classes?.bgColorLinks} w-fit px-3 py-2 rounded-lg shadow-2xl ${classes?.bgOpacityLinks}`}>
             <h2 className="flex items-center text-sm font-semibold">
                 {title} <span className="ml-2">{icon}</span>
             </h2>

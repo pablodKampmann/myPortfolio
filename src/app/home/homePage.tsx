@@ -87,7 +87,6 @@ export default function HomePage() {
   const classesTones = computeClasses(colorMain);
   const classes = tone === "dark" ? classesTones.dark : classesTones.light;
 
-  // ── Interactions ─────────────────────────────────────────────────────────
   const [openSocial, setOpenSocial] = useState(false);
   const [selected, setSelected] = useState<string>("developer");
 
@@ -104,12 +103,155 @@ export default function HomePage() {
   const linkCls = `${classes?.textLinkColor} ${classes?.hoverTextLinkColor} hover:cursor-pointer transition duration-150`;
   const paraCls = `${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2 rounded-md`;
 
+  const sectionTitle = (label: string, icon?: React.ReactNode) => (
+    <h3 className={`text-base font-semibold border-b-2 ${classes?.borderColorImage} pb-1 mb-3 flex items-center gap-2`}>
+      {label}{icon}
+    </h3>
+  );
+
   // ── Render ────────────────────────────────────────────────────────────────
   return (
-    <div className={`${classes?.textColorMain} flex flex-col justify-center items-center h-full pb-[6%]`}>
+    <div className={`${classes?.textColorMain} flex flex-col items-center h-full overflow-y-auto md:overflow-visible md:justify-center pt-16 md:pt-0 pb-6 md:pb-[6%]`}>
+
+      {/* ═══ MOBILE LAYOUT ══════════════════════════════════════════════ */}
+      <div className="md:hidden w-full px-4 pt-8 pb-8">
+
+        {/* Profile header */}
+        <div className="flex items-start justify-between mb-6">
+          <div className="flex-1 pr-4">
+            <h2 className="uppercase text-sm leading-snug">
+              {texts?.title_1}
+              <span className={`underline flex items-center gap-1 ${classes?.decorationColor}`}>
+                {texts?.title_2}
+                <FaDev
+                  className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} p-1 rounded ${classes?.textMainColor}`}
+                  size={22}
+                />
+              </span>
+            </h2>
+            <h1 className={`${classes?.textMainColor} font-semibold text-xl mt-1`}>Pablo Kampmann</h1>
+          </div>
+          <div className="relative shrink-0">
+            {!imageLoaded && (
+              <div className={`rounded-full border-4 ${classes?.borderColorImage} w-20 h-20 flex justify-center items-center`}>
+                <PuffLoader color={LOADER_COLOR[colorMain] ?? "#059669"} size={50} speedMultiplier={2.5} />
+              </div>
+            )}
+            <Image
+              className={`rounded-full object-cover border-4 ${classes?.borderColorImage} shadow-xl w-20 h-20 ${!imageLoaded ? "hidden" : ""}`}
+              onLoad={() => setImageLoaded(true)}
+              quality={85} width={200} height={200} priority
+              src="/images/profile/me-image.jpg" alt="me-image"
+            />
+          </div>
+        </div>
+
+        {/* Developer section */}
+        <div className="mb-7 animate-[fadeSlideUp_0.2s_ease_forwards]">
+          {sectionTitle(language === "eng" ? "Developer" : "Desarrollador")}
+          <div className="space-y-2 text-sm">
+            <p className={paraCls}>{texts?.text_1}</p>
+            <p className={paraCls}>
+              {texts?.text_2_part_1}{" "}
+              <a onClick={() => router.push("/work")} className={linkCls}>{texts?.text_link_1}</a>
+              {texts?.text_2_part_2}
+            </p>
+            <p className={paraCls}>
+              {texts?.text_3_part_1}{" "}
+              <a onClick={() => router.push("/tech")} className={linkCls}>{texts?.text_link_2}{" "}</a>
+              {texts?.text_3_part_2}
+            </p>
+          </div>
+        </div>
+
+        {/* Studies section */}
+        <div className="mb-7 animate-[fadeSlideUp_0.2s_0.1s_ease_forwards] opacity-0">
+          {sectionTitle(language === "eng" ? "Studies" : "Estudios", <IoSchool size={16} />)}
+          <div className="space-y-2 text-sm">
+            <p className={paraCls}>
+              {texts?.text_4_part_1}{" "}
+              <a onClick={() => window.open("https://uap.edu.ar/", "_blank")} className={linkCls}>{texts?.text_link_4}</a>
+              {texts?.text_4_part_2}
+            </p>
+            <p className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2 w-fit rounded-md`}>
+              {texts?.degree_1}{" "}<span className={classes?.textMainColor}>95%</span>
+            </p>
+            <p className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2 w-fit rounded-md`}>
+              {texts?.degree_2}{" "}<span className={classes?.textMainColor}>90%</span>
+            </p>
+          </div>
+        </div>
+
+        {/* Skills section */}
+        <div className="mb-7 animate-[fadeSlideUp_0.2s_0.2s_ease_forwards] opacity-0">
+          {sectionTitle(language === "eng" ? "Skills" : "Habilidades")}
+          <div className="space-y-2">
+            {skills.map(({ key, level }) => (
+              <div key={key} className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1.5 px-2 rounded-lg flex justify-between items-center text-sm`}>
+                <span>{texts?.[key]}</span>
+                <SkillLevel level={level} bgColorMain={classes?.bgMain} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Contact section */}
+        <div className="mb-7 animate-[fadeSlideUp_0.2s_0.3s_ease_forwards] opacity-0">
+          {sectionTitle(language === "eng" ? "Contact" : "Contacto")}
+          <div className="space-y-3">
+            {formStatus === "success" ? (
+              <div className={`${paraCls} text-center py-6`}>✓ {texts?.contact_success}</div>
+            ) : (
+              <>
+                <input
+                  type="text" placeholder={texts?.contact_name} value={form.name}
+                  onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                  className={`w-full ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} rounded-md py-2 px-3 outline-none placeholder-current placeholder-opacity-50 text-sm`}
+                />
+                <input
+                  type="email" placeholder={texts?.contact_email} value={form.email}
+                  onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                  className={`w-full ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} rounded-md py-2 px-3 outline-none placeholder-current placeholder-opacity-50 text-sm`}
+                />
+                <textarea
+                  placeholder={texts?.contact_message} value={form.message}
+                  onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+                  rows={4}
+                  className={`w-full ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} rounded-md py-2 px-3 outline-none placeholder-current placeholder-opacity-50 text-sm resize-none`}
+                />
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={handleSubmit}
+                    disabled={formStatus === "sending" || !form.name || !form.email || !form.message}
+                    className={`${classes?.bgMain} px-4 py-2 rounded-md text-white text-sm transition duration-150 disabled:opacity-40`}
+                  >
+                    {formStatus === "sending" ? texts?.contact_sending : texts?.contact_send}
+                  </button>
+                  {formStatus === "error" && <span className="text-red-400 text-xs">{texts?.contact_error}</span>}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* Social links */}
+        <div className="flex justify-center items-center gap-5 pb-2">
+          <a href="https://wa.me/5493413466408" target="_blank" rel="noopener noreferrer" className={`${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2.5 rounded-full transition duration-150`}>
+            <IoLogoWhatsapp size={24} className={classes?.textMainColor} />
+          </a>
+          <a href="mailto:pablo7kamp@gmail.com" className={`${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2.5 rounded-full transition duration-150`}>
+            <FaEnvelope size={22} className={classes?.textMainColor} />
+          </a>
+          <a href="https://github.com/pablodKampmann" target="_blank" rel="noopener noreferrer" className={`${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2.5 rounded-full transition duration-150`}>
+            <FaGithub size={24} className={classes?.textMainColor} />
+          </a>
+        </div>
+      </div>
+
+      {/* ═══ DESKTOP LAYOUT ════════════════════════════════════════════ */}
 
       {/* Tab bar */}
-      <div className={`flex mt-6 md:mt-0 justify-start text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl tracking-wide border-b-2 ${classes?.borderColorImage} w-[90%] md:w-[50%]`}>
+      <div className={`hidden md:flex mt-0 justify-start text-sm lg:text-base xl:text-lg 2xl:text-xl tracking-wide border-b-2 ${classes?.borderColorImage} md:w-[50%]`}>
         {(["developer", "studies", "skills", "contact"] as const).map((tab, i) => {
           const labels = {
             developer: language === "eng" ? "Developer" : "Desarrollador",
@@ -122,7 +264,7 @@ export default function HomePage() {
             <button
               key={tab}
               onClick={() => setSelected(tab)}
-              className={`${selected === tab ? classes?.bgMain : `hover:bg-opacity-20 bg-white ${classes?.bgOpacityMain}`} transition duration-100 px-1 md:px-3 py-2 md:py-1 ${roundCls}`}
+              className={`${selected === tab ? classes?.bgMain : `hover:bg-opacity-20 bg-white ${classes?.bgOpacityMain}`} transition duration-100 px-3 py-1 ${roundCls}`}
             >
               {labels[tab]}
             </button>
@@ -131,21 +273,20 @@ export default function HomePage() {
       </div>
 
       {/* Main card */}
-      <div className={`w-[90%] md:w-[50%] h-[57%] md:h-[65%] flex flex-col justify-start p-4 md:p-8 md:pt-6 relative bg-white ${classes?.bgOpacityMain} rounded-b-2xl rounded-tr-2xl shadow-2xl`}>
+      <div className={`hidden md:flex flex-col w-[50%] h-[65%] justify-start p-8 pt-6 relative bg-white ${classes?.bgOpacityMain} rounded-b-2xl rounded-tr-2xl shadow-2xl`}>
 
         {/* Header */}
         <div>
-          <h2 className="uppercase flex flex-col md:flex-row items-start md:items-center text-base md:text-xs lg:text-sm xl:text-base 2xl:text-xl text-opacity-80">
+          <h2 className="uppercase flex flex-row items-center text-xs lg:text-sm xl:text-base 2xl:text-xl text-opacity-80">
             <span>
               {texts?.title_1}
-              <span className="hidden md:inline">{" ("}</span>
+              <span>{" ("}</span>
             </span>
             <span className={`underline flex items-center ${classes?.decorationColor}`}>
-              <span className="hidden md:inline">&nbsp;</span>
-              {texts?.title_2}
-              <span className="hidden md:inline">{" )"}</span>
+              &nbsp;{texts?.title_2}
+              {" )"}
               <FaDev
-                className={`ml-2 md:ml-4 ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} p-1 rounded ${classes?.textMainColor}`}
+                className={`ml-4 ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} p-1 rounded ${classes?.textMainColor}`}
                 size={24}
               />
             </span>
@@ -157,7 +298,7 @@ export default function HomePage() {
 
         {/* Developer tab */}
         {selected === "developer" && (
-          <div className="w-full md:w-[70%] h-fit space-y-4 overflow-y-auto about-me-container md:text-xs lg:text-sm xl:text-base 2xl:text-lg mt-4 animate-[fadeSlideUp_0.2s_ease_forwards]">
+          <div className="w-[70%] h-fit space-y-4 overflow-y-auto about-me-container text-xs lg:text-sm xl:text-base 2xl:text-lg mt-4 animate-[fadeSlideUp_0.2s_ease_forwards]">
             <p className={paraCls}>{texts?.text_1}</p>
             <p className={paraCls}>
               {texts?.text_2_part_1}{" "}
@@ -174,13 +315,13 @@ export default function HomePage() {
 
         {/* Studies tab */}
         {selected === "studies" && (
-          <div className="w-full md:w-[70%] h-fit space-y-4 overflow-y-auto about-me-container md:text-xs lg:text-sm xl:text-base 2xl:text-lg mt-4 animate-[fadeSlideUp_0.2s_ease_forwards]">
+          <div className="w-[70%] h-fit space-y-4 overflow-y-auto about-me-container text-xs lg:text-sm xl:text-base 2xl:text-lg mt-4 animate-[fadeSlideUp_0.2s_ease_forwards]">
             <p className={paraCls}>
               {texts?.text_4_part_1}{" "}
               <a onClick={() => window.open("https://uap.edu.ar/", "_blank")} className={linkCls}>{texts?.text_link_4}</a>
               {texts?.text_4_part_2}
             </p>
-            <h2 className={`flex items-center underline ${classes?.decorationColor} ml-1 md:text-xs lg:text-sm xl:text-base 2xl:text-xl`}>
+            <h2 className={`flex items-center underline ${classes?.decorationColor} ml-1 text-xs lg:text-sm xl:text-base 2xl:text-xl`}>
               Títulos <IoSchool className="ml-2" />
             </h2>
             <p className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2 w-fit rounded-md`}>
@@ -194,7 +335,7 @@ export default function HomePage() {
 
         {/* Skills tab */}
         {selected === "skills" && (
-          <div className="w-full md:w-[70%] h-fit space-y-4 overflow-y-auto text-sm tracking-tight about-me-container md:text-xs md:tracking-normal lg:text-sm xl:text-base 2xl:text-lg mt-4 animate-[fadeSlideUp_0.2s_ease_forwards]">
+          <div className="w-[70%] h-fit space-y-4 overflow-y-auto tracking-normal about-me-container text-xs lg:text-sm xl:text-base 2xl:text-lg mt-4 animate-[fadeSlideUp_0.2s_ease_forwards]">
             {skills.map(({ key, level }) => (
               <div key={key} className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2 rounded-lg flex justify-between items-center`}>
                 <span>{texts?.[key]}</span>
@@ -206,8 +347,7 @@ export default function HomePage() {
 
         {/* Contact tab */}
         {selected === "contact" && (
-          <div className="w-full md:w-[70%] h-fit space-y-3 mt-4">
-
+          <div className="w-[70%] h-fit space-y-3 mt-4">
             {formStatus === "success" ? (
               <div className={`${paraCls} animate-[fadeSlideUp_0.4s_ease_forwards] text-center py-6`}>
                 ✓ {texts?.contact_success}
@@ -216,36 +356,31 @@ export default function HomePage() {
               <>
                 <div className="animate-[fadeSlideUp_0.2s_ease_forwards]">
                   <input
-                    type="text"
-                    placeholder={texts?.contact_name}
-                    value={form.name}
+                    type="text" placeholder={texts?.contact_name} value={form.name}
                     onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                    className={`w-full ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} rounded-md py-1.5 px-3 outline-none placeholder-current placeholder-opacity-50 text-sm md:text-xs lg:text-sm`}
+                    className={`w-full ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} rounded-md py-1.5 px-3 outline-none placeholder-current placeholder-opacity-50 text-xs lg:text-sm`}
                   />
                 </div>
                 <div className="animate-[fadeSlideUp_0.2s_0.08s_ease_forwards] opacity-0">
                   <input
-                    type="email"
-                    placeholder={texts?.contact_email}
-                    value={form.email}
+                    type="email" placeholder={texts?.contact_email} value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                    className={`w-full ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} rounded-md py-1.5 px-3 outline-none placeholder-current placeholder-opacity-50 text-sm md:text-xs lg:text-sm`}
+                    className={`w-full ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} rounded-md py-1.5 px-3 outline-none placeholder-current placeholder-opacity-50 text-xs lg:text-sm`}
                   />
                 </div>
                 <div className="animate-[fadeSlideUp_0.2s_0.16s_ease_forwards] opacity-0">
                   <textarea
-                    placeholder={texts?.contact_message}
-                    value={form.message}
+                    placeholder={texts?.contact_message} value={form.message}
                     onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                     rows={3}
-                    className={`w-full ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} rounded-md py-1.5 px-3 outline-none placeholder-current placeholder-opacity-50 text-sm md:text-xs lg:text-sm resize-none`}
+                    className={`w-full ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} rounded-md py-1.5 px-3 outline-none placeholder-current placeholder-opacity-50 text-xs lg:text-sm resize-none`}
                   />
                 </div>
                 <div className="animate-[fadeSlideUp_0.2s_0.24s_ease_forwards] opacity-0">
                   <button
                     onClick={handleSubmit}
                     disabled={formStatus === "sending" || !form.name || !form.email || !form.message}
-                    className={`${classes?.bgMain} px-4 py-1.5 rounded-md text-white text-sm md:text-xs lg:text-sm transition duration-150 disabled:opacity-40`}
+                    className={`${classes?.bgMain} px-4 py-1.5 rounded-md text-white text-xs lg:text-sm transition duration-150 disabled:opacity-40`}
                   >
                     {formStatus === "sending" ? texts?.contact_sending : texts?.contact_send}
                   </button>
@@ -258,50 +393,20 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* Mobile social buttons */}
-        <div className="md:hidden mt-auto flex justify-center items-center gap-5 pt-3 pb-1">
-          <a
-            href="https://wa.me/5493413466408"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2.5 rounded-full transition duration-150`}
-          >
-            <IoLogoWhatsapp size={24} className={classes?.textMainColor} />
-          </a>
-          <a
-            href="mailto:pablo7kamp@gmail.com"
-            className={`${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2.5 rounded-full transition duration-150`}
-          >
-            <FaEnvelope size={22} className={classes?.textMainColor} />
-          </a>
-          <a
-            href="https://github.com/pablodKampmann"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${classes?.hoverBgColor} ${classes?.hoverBgOpacity} p-2.5 rounded-full transition duration-150`}
-          >
-            <FaGithub size={24} className={classes?.textMainColor} />
-          </a>
-        </div>
-
-        {/* Avatar + social (social hidden on mobile) */}
-        <div className="absolute -top-10 -right-4 md:-right-10">
+        {/* Avatar + social */}
+        <div className="absolute -top-10 -right-10">
           {!imageLoaded && (
-            <div className={`rounded-full border-4 ${classes?.borderColorImage} shadow-2xl w-[120px] h-[120px] md:w-[200px] md:h-[200px] flex justify-center items-center`}>
+            <div className={`rounded-full border-4 ${classes?.borderColorImage} shadow-2xl w-[200px] h-[200px] flex justify-center items-center`}>
               <PuffLoader color={LOADER_COLOR[colorMain] ?? "#059669"} size={100} speedMultiplier={2.5} />
             </div>
           )}
           <Image
-            className={`rounded-full object-cover border-4 ${classes?.borderColorImage} shadow-2xl w-[120px] h-[120px] md:w-[200px] md:h-[200px] ${!imageLoaded ? "hidden" : ""}`}
+            className={`rounded-full object-cover border-4 ${classes?.borderColorImage} shadow-2xl w-[200px] h-[200px] ${!imageLoaded ? "hidden" : ""}`}
             onLoad={() => setImageLoaded(true)}
-            quality={85}
-            width={400}
-            height={400}
-            priority={true}
-            src="/images/profile/me-image.jpg"
-            alt="me-image"
+            quality={85} width={400} height={400} priority
+            src="/images/profile/me-image.jpg" alt="me-image"
           />
-          <div className="hidden md:block">
+          <div>
             {openSocial && (
               <div>
                 <button
