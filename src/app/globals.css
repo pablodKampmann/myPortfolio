@@ -16,6 +16,10 @@
   }
 }
 
+@media (pointer: fine) {
+  * { cursor: none !important; }
+}
+
 html {
   height: 100%;
   overflow: hidden;
