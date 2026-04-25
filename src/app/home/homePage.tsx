@@ -56,6 +56,27 @@ export default function HomePage() {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const { tone, colorMain, language } = useTheme();
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  const handleSubmit = async () => {
+    setFormStatus("sending");
+    try {
+      const res = await fetch("https://formspree.io/f/mvzdlleg", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: form.name, email: form.email, message: form.message }),
+      });
+      if (res.ok) {
+        setFormStatus("success");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setFormStatus("error");
+      }
+    } catch {
+      setFormStatus("error");
+    }
+  };
 
   useEffect(() => {
     document.documentElement.style.setProperty("--scrollbar-color", SCROLLBAR_COLOR[colorMain] ?? "#059669");
@@ -89,9 +110,14 @@ export default function HomePage() {
 
       {/* Tab bar */}
       <div className={`flex mt-6 md:mt-0 justify-start text-xs md:text-sm lg:text-base xl:text-lg 2xl:text-xl tracking-wide border-b-2 ${classes?.borderColorImage} w-[90%] md:w-[50%]`}>
-        {(["developer", "studies", "skills"] as const).map((tab, i) => {
-          const labels = { developer: "Desarrollador", studies: "Estudios", skills: "Habilidades" };
-          const roundCls = i === 0 ? "rounded-tl-lg" : i === 2 ? "rounded-tr-lg" : "";
+        {(["developer", "studies", "skills", "contact"] as const).map((tab, i) => {
+          const labels = {
+            developer: language === "eng" ? "Developer" : "Desarrollador",
+            studies: language === "eng" ? "Studies" : "Estudios",
+            skills: language === "eng" ? "Skills" : "Habilidades",
+            contact: language === "eng" ? "Contact" : "Contacto",
+          };
+          const roundCls = i === 0 ? "rounded-tl-lg" : i === 3 ? "rounded-tr-lg" : "";
           return (
             <button
               key={tab}
@@ -131,7 +157,7 @@ export default function HomePage() {
 
         {/* Developer tab */}
         {selected === "developer" && (
-          <div className="w-full md:w-[70%] h-fit space-y-4 overflow-y-auto about-me-container md:text-xs lg:text-sm xl:text-base 2xl:text-lg mt-4">
+          <div className="w-full md:w-[70%] h-fit space-y-4 overflow-y-auto about-me-container md:text-xs lg:text-sm xl:text-base 2xl:text-lg mt-4 animate-[fadeSlideUp_0.2s_ease_forwards]">
             <p className={paraCls}>{texts?.text_1}</p>
             <p className={paraCls}>
               {texts?.text_2_part_1}{" "}
@@ -148,7 +174,7 @@ export default function HomePage() {
 
         {/* Studies tab */}
         {selected === "studies" && (
-          <div className="w-full md:w-[70%] h-fit space-y-4 overflow-y-auto about-me-container md:text-xs lg:text-sm xl:text-base 2xl:text-lg mt-4">
+          <div className="w-full md:w-[70%] h-fit space-y-4 overflow-y-auto about-me-container md:text-xs lg:text-sm xl:text-base 2xl:text-lg mt-4 animate-[fadeSlideUp_0.2s_ease_forwards]">
             <p className={paraCls}>
               {texts?.text_4_part_1}{" "}
               <a onClick={() => window.open("https://uap.edu.ar/", "_blank")} className={linkCls}>{texts?.text_link_4}</a>
@@ -168,13 +194,67 @@ export default function HomePage() {
 
         {/* Skills tab */}
         {selected === "skills" && (
-          <div className="w-full md:w-[70%] h-fit space-y-4 overflow-y-auto text-sm tracking-tight about-me-container md:text-xs md:tracking-normal lg:text-sm xl:text-base 2xl:text-lg mt-4">
+          <div className="w-full md:w-[70%] h-fit space-y-4 overflow-y-auto text-sm tracking-tight about-me-container md:text-xs md:tracking-normal lg:text-sm xl:text-base 2xl:text-lg mt-4 animate-[fadeSlideUp_0.2s_ease_forwards]">
             {skills.map(({ key, level }) => (
               <div key={key} className={`${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} py-1 px-2 rounded-lg flex justify-between items-center`}>
                 <span>{texts?.[key]}</span>
                 <SkillLevel level={level} bgColorMain={classes?.bgMain} />
               </div>
             ))}
+          </div>
+        )}
+
+        {/* Contact tab */}
+        {selected === "contact" && (
+          <div className="w-full md:w-[70%] h-fit space-y-3 mt-4">
+
+            {formStatus === "success" ? (
+              <div className={`${paraCls} animate-[fadeSlideUp_0.4s_ease_forwards] text-center py-6`}>
+                ✓ {texts?.contact_success}
+              </div>
+            ) : (
+              <>
+                <div className="animate-[fadeSlideUp_0.2s_ease_forwards]">
+                  <input
+                    type="text"
+                    placeholder={texts?.contact_name}
+                    value={form.name}
+                    onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                    className={`w-full ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} rounded-md py-1.5 px-3 outline-none placeholder-current placeholder-opacity-50 text-sm md:text-xs lg:text-sm`}
+                  />
+                </div>
+                <div className="animate-[fadeSlideUp_0.2s_0.08s_ease_forwards] opacity-0">
+                  <input
+                    type="email"
+                    placeholder={texts?.contact_email}
+                    value={form.email}
+                    onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                    className={`w-full ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} rounded-md py-1.5 px-3 outline-none placeholder-current placeholder-opacity-50 text-sm md:text-xs lg:text-sm`}
+                  />
+                </div>
+                <div className="animate-[fadeSlideUp_0.2s_0.16s_ease_forwards] opacity-0">
+                  <textarea
+                    placeholder={texts?.contact_message}
+                    value={form.message}
+                    onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+                    rows={3}
+                    className={`w-full ${classes?.bgTextInfo} ${classes?.bgOpacityTextInfo} rounded-md py-1.5 px-3 outline-none placeholder-current placeholder-opacity-50 text-sm md:text-xs lg:text-sm resize-none`}
+                  />
+                </div>
+                <div className="animate-[fadeSlideUp_0.2s_0.24s_ease_forwards] opacity-0">
+                  <button
+                    onClick={handleSubmit}
+                    disabled={formStatus === "sending" || !form.name || !form.email || !form.message}
+                    className={`${classes?.bgMain} px-4 py-1.5 rounded-md text-white text-sm md:text-xs lg:text-sm transition duration-150 disabled:opacity-40`}
+                  >
+                    {formStatus === "sending" ? texts?.contact_sending : texts?.contact_send}
+                  </button>
+                  {formStatus === "error" && (
+                    <span className="ml-3 text-red-400 text-xs">{texts?.contact_error}</span>
+                  )}
+                </div>
+              </>
+            )}
           </div>
         )}
 

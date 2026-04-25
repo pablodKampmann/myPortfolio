@@ -8,7 +8,6 @@ import Loading from "./components/loading";
 import { useRouter } from "next/navigation";
 import { ThemeContext } from "./context/ThemeContext";
 import { getColorClasses } from "./lib/themeClasses";
-import CustomCursor from "./components/customCursor";
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   //LANGUAGE
@@ -85,7 +84,6 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           </button>
           <div className={`absolute md:opacity-100 lg:opacity-100 right-9 xl:opacity-100 opacity-0 bottom-[80%] rounded-full ${bgLinesColor} h-8 w-1 z-10`} />
           <ThemeContext.Provider value={{ tone, colorMain, language, handleToneChange, handleColorChange: handleColorMainChange, handleLanguageChange }}>
-            <CustomCursor />
             <NavBar />
             <ToneMode />
             <LanguageOptions />
