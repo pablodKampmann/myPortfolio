@@ -88,10 +88,8 @@ export default function WorkPage() {
 
     const texts = language === "eng" ? languageTexts.eng : languageTexts.spa;
 
-    // ── Image loading ────────────────────────────────────────────────────────
     const [imagesLoaded, setImagesLoaded] = useState<boolean[]>([false, false, false, false, false]);
 
-    // ── Scroll-reveal (mobile IntersectionObserver) ──────────────────────────
     const [inViewStates, setInViewStates] = useState([false, false, false, false, false]);
     const imageRefs = useRef<(HTMLImageElement | null)[]>([]);
 
@@ -115,7 +113,6 @@ export default function WorkPage() {
         return () => { imageRefs.current.forEach((r) => r && observer.unobserve(r)); };
     }, []);
 
-    // ── Project data (depends on texts) ─────────────────────────────────────
     const projects: ProjectDef[] = [
         {
             title: "Dental Agenda",
@@ -174,7 +171,6 @@ export default function WorkPage() {
         },
     ];
 
-    // ── Helpers ──────────────────────────────────────────────────────────────
     const infoBox = (title: string, items: string[], icon: React.ReactNode) => (
         <div className={`${classes?.bgColorLinks} w-fit px-3 py-2 rounded-lg shadow-2xl ${classes?.bgOpacityLinks}`}>
             <h2 className="flex items-center text-sm font-semibold">
@@ -186,13 +182,12 @@ export default function WorkPage() {
         </div>
     );
 
-    // ── Render ────────────────────────────────────────────────────────────────
     return (
-        <div className={`${classes?.textColorMain} flex flex-col justify-center items-center h-full pb-[4%]`}>
+        <div className={`${classes?.textColorMain} flex flex-col items-center h-full overflow-y-auto md:overflow-visible md:justify-center pt-16 md:pt-0 pb-6 md:pb-[4%]`}>
 
-            {/* Page title */}
+            {/* Page title — shared */}
             <div
-                className={`${classes?.bgColorTitle} font-normal border-r-4 border-b-4 flex ${classes?.borderColorProjectsCont} justify-center px-2 py-1.5 pb-2 rounded-2xl shadow-2xl mb-4 md:mb-6 xl:mb-8 items-center text-left text-xl sm:text-2xl md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl`}
+                className={`${classes?.bgColorTitle} font-normal md:mt-0 mt-8 border-r-4 border-b-4 flex ${classes?.borderColorProjectsCont} justify-center px-2 py-1.5 pb-2 rounded-2xl shadow-2xl mb-4 md:mb-6 xl:mb-8 items-center text-left text-xl sm:text-2xl md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl`}
             >
                 {texts.title}{" "}
                 <MdDesignServices
@@ -201,9 +196,58 @@ export default function WorkPage() {
                 />
             </div>
 
-            {/* Projects container */}
+            {/* ═══ MOBILE LAYOUT ══════════════════════════════════════════════ */}
+            <div className="md:hidden w-full px-4 md:pb-8 pb-14 space-y-5">
+                {projects.map((p, i) => (
+                    <div
+                        key={p.title}
+                        className={`${classes?.bgColorLinks} ${classes?.bgOpacityLinks} rounded-xl p-4 animate-[fadeSlideUp_0.2s_ease_forwards]`}
+                        style={{ animationDelay: `${i * 0.08}s` }}
+                    >
+                        {/* Accent bar + title */}
+                        <div className="flex items-start gap-3 mb-3">
+                            <div className={`w-1 shrink-0 self-stretch rounded-full mt-0.5 ${classes?.bgColorTitle}`} />
+                            <h3 className="font-bold text-base leading-snug">{p.title}</h3>
+                        </div>
+
+                        {/* Image */}
+                        <div className="w-full mb-3" style={{ aspectRatio: `${p.width} / ${p.height}` }}>
+                            {!imagesLoaded[i] && (
+                                <div className={`flex justify-center items-center rounded-lg shadow-2xl w-full h-full ${classes?.bgColorLoaderImage} ${classes?.bgOpacityLoaderImage}`}>
+                                    <RiseLoader color={LOADER_COLOR[colorMain] ?? "#059669"} size={10} />
+                                </div>
+                            )}
+                            <Image
+                                className={`rounded-lg shadow-2xl w-full h-full object-cover transition-opacity duration-500 ${imagesLoaded[i] ? "opacity-100" : "invisible absolute"}`}
+                                onLoad={() => {
+                                    setImagesLoaded(prev => {
+                                        const next = [...prev];
+                                        next[i] = true;
+                                        return next;
+                                    });
+                                }}
+                                quality={85} width={p.width} height={p.height} priority
+                                src={p.src} alt={p.title}
+                            />
+                        </div>
+
+                        {/* Description */}
+                        <p className="text-sm leading-relaxed mb-3">{p.info}</p>
+
+                        {/* Stack + devices */}
+                        <div className="flex flex-wrap gap-2 mb-3">
+                            {infoBox("Stack", p.stack, <HiSquare3Stack3D size={16} />)}
+                            {infoBox("Dispositivos", p.devices, <MdScreenshotMonitor size={16} />)}
+                        </div>
+
+
+                    </div>
+                ))}
+            </div>
+
+            {/* ═══ DESKTOP LAYOUT ════════════════════════════════════════════ */}
             <div
-                className={`flex h-[55%] sm:h-[60%] xl:h-[68%] 2xl:h-[72%] relative ${classes?.bgColorProjectsCont} ${classes?.bgOpacityProjectsCont} rounded-2xl w-[92%] sm:w-[88%] md:w-[78%] lg:w-[72%] xl:w-[68%] shadow-2xl justify-center items-center`}
+                className={`hidden md:flex h-[55%] xl:h-[68%] 2xl:h-[72%] relative ${classes?.bgColorProjectsCont} ${classes?.bgOpacityProjectsCont} rounded-2xl md:w-[78%] lg:w-[72%] xl:w-[68%] shadow-2xl justify-center items-center`}
             >
                 <div className="overflow-y-auto bg-transparent overflow-x-hidden flex flex-col h-full w-full">
                     {projects.map((p, i) => {
@@ -211,27 +255,26 @@ export default function WorkPage() {
                         const isLast = i === projects.length - 1;
                         const borderCls = [
                             !isLast ? "border-b border-white border-opacity-10" : "",
-                            !isFirst ? "border-t md:border-t-0" : "",
-                            "md:border-transparent",
-                            !isFirst ? "md:hover:border-t-2" : "",
-                            !isLast ? "md:hover:border-b-2" : "",
+                            "border-transparent",
+                            !isFirst ? "hover:border-t-2" : "",
+                            !isLast ? "hover:border-b-2" : "",
                         ].join(" ");
 
                         return (
                             <div
                                 key={p.title}
                                 className={[
-                                    "flex flex-col md:flex-row group hover:cursor-help",
+                                    "flex flex-row group hover:cursor-help",
                                     classes?.bgHoverOpacityProject,
                                     classes?.bgHoverColorProject,
                                     "transition-all duration-300",
-                                    "text-xs sm:text-sm md:text-xs lg:text-sm xl:text-base 2xl:text-xl",
+                                    "text-xs lg:text-sm xl:text-base 2xl:text-xl",
                                     "justify-center items-center",
-                                    "md:hover:py-10 lg:hover:py-12 xl:hover:py-14",
+                                    "hover:py-10 lg:hover:py-12 xl:hover:py-14",
                                     borderCls,
                                     classes?.borderHoverColorProject,
                                     classes?.borderHoverOpacityProject,
-                                    "p-2 sm:p-3 md:p-4 lg:p-5 xl:p-6 rounded-2xl",
+                                    "p-4 lg:p-5 xl:p-6 rounded-2xl",
                                 ].join(" ")}
                             >
                                 {/* ── Text column ── */}
@@ -239,19 +282,13 @@ export default function WorkPage() {
                                     className={[
                                         "font-bold w-full",
                                         p.textWidth,
-                                        p.imageLeft ? "order-1 md:order-2 md:ml-auto" : "md:mr-auto",
+                                        p.imageLeft ? "order-2 ml-auto" : "mr-auto",
                                     ].join(" ")}
                                 >
-                                    <span className="block leading-snug">
-                                        {p.title}{" "}
-                                        <span className={`${classes?.textColorSubTitle} font-normal`}>
-                                            ({p.subtitle})
-                                        </span>
-                                    </span>
+                                    <span className="block leading-snug">{p.title}</span>
                                     <p className="w-full font-normal mt-1 leading-relaxed">{p.info}</p>
 
-                                    {/* Deploy — desktop only (inside text column) */}
-                                    <div className="hidden md:flex flex-wrap gap-2 mt-4">
+                                    <div className="flex flex-wrap gap-2 mt-4">
                                         {infoBox("Stack", p.stack, <HiSquare3Stack3D size={16} />)}
                                         {infoBox("Dispositivos", p.devices, <MdScreenshotMonitor size={16} />)}
                                     </div>
@@ -259,9 +296,9 @@ export default function WorkPage() {
 
                                 {/* ── Loader + Image wrapper ── */}
                                 <div className={[
-                                    "w-[85%] sm:w-[78%] md:w-[58%] lg:w-[60%]",
-                                    "my-5 sm:my-6 md:my-0 md:mx-8 lg:mx-10",
-                                    p.imageLeft ? "order-2 md:order-1" : "",
+                                    "w-[58%] lg:w-[60%]",
+                                    "my-0 mx-8 lg:mx-10",
+                                    p.imageLeft ? "order-1" : "",
                                 ].join(" ")}
                                     style={{ aspectRatio: `${p.width} / ${p.height}` }}
                                 >
@@ -278,9 +315,8 @@ export default function WorkPage() {
                                         ref={(el) => { imageRefs.current[i] = el; }}
                                         className={[
                                             "rounded-lg shadow-2xl transform transition-all duration-700 w-full h-full object-cover",
-                                            "md:opacity-50 md:group-hover:scale-110 md:group-hover:opacity-100",
-                                            inViewStates[i] ? "scale-110 opacity-100 md:scale-100 md:opacity-50" : classes?.opacityImages,
-                                            "md:group-hover:scale-110 md:group-hover:opacity-100",
+                                            "opacity-50 group-hover:scale-110 group-hover:opacity-100",
+                                            inViewStates[i] ? "scale-110 opacity-100" : classes?.opacityImages,
                                             !imagesLoaded[i] ? "invisible absolute" : "",
                                         ].join(" ")}
                                         onLoad={() => {
@@ -297,12 +333,6 @@ export default function WorkPage() {
                                         src={p.src}
                                         alt={p.src.replace("/", "").replace(".png", "")}
                                     />
-                                </div>
-
-                                {/* ── Deploy — mobile only (after image) ── */}
-                                <div className="md:hidden flex flex-wrap gap-2 mt-3 w-full">
-                                    {infoBox("Stack", p.stack, <HiSquare3Stack3D size={16} />)}
-                                    {infoBox("Dispositivos", p.devices, <MdScreenshotMonitor size={16} />)}
                                 </div>
                             </div>
                         );

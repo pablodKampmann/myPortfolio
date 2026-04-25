@@ -75,7 +75,6 @@ export default function Tech() {
 
   const texts = language === "eng" ? languageTexts.eng : languageTexts.spa;
 
-  // Mobile tap state
   const [activeIcon, setActiveIcon] = useState<string | null>(null);
   useEffect(() => {
     if (!activeIcon) return;
@@ -131,10 +130,9 @@ export default function Tech() {
     other: "md:w-[560px]",
   };
 
-  const rowCls = "flex flex-wrap md:flex-nowrap justify-center gap-4 sm:gap-5 md:gap-6 mt-4 sm:mt-6 items-center";
-
+  // Desktop: full-size icons
   const renderIcons = (icons: { src: string; label: string }[]) => (
-    <div className={rowCls}>
+    <div className="flex flex-wrap md:flex-nowrap justify-center gap-4 sm:gap-5 md:gap-6 mt-4 sm:mt-6 items-center">
       {icons.map(({ src, label }) => {
         const tapped = activeIcon === src;
         return (
@@ -151,7 +149,7 @@ export default function Tech() {
                 onLoad={() => setIconsLoaded(prev => ({ ...prev, [src]: true }))}
               />
             </div>
-            <p className={`text-xs sm:text-sm tracking-widest mt-1 sm:mt-2.5 transition duration-150 font-[600] opacity-100`}>
+            <p className="text-xs sm:text-sm tracking-widest mt-1 sm:mt-2.5 transition duration-150 font-[600] opacity-100">
               {label}
             </p>
           </div>
@@ -160,48 +158,93 @@ export default function Tech() {
     </div>
   );
 
-  return (
-    <div className={`${classes?.textColorClass} flex flex-col justify-center items-center h-full pb-[6%] px-3`}>
+  // Mobile: compact icons
+  const renderIconsCompact = (icons: { src: string; label: string }[]) => (
+    <div className="flex flex-wrap justify-center gap-4 sm:gap-6 items-center">
+      {icons.map(({ src, label }) => {
+        const tapped = activeIcon === src;
+        return (
+          <div key={src} className="flex flex-col justify-center items-center" onTouchStart={() => setActiveIcon(src)}>
+            <div className="relative w-12 h-12 sm:w-16 sm:h-16">
+              {!iconsLoaded[src] && (
+                <div className="absolute inset-0 flex justify-center items-center">
+                  <HashLoader speedMultiplier={2.5} color={LOADER_COLOR[colorMain] ?? "#059669"} size={28} />
+                </div>
+              )}
+              <Image
+                className={`transition-transform duration-300 w-full h-full transform${tapped ? " scale-110 -translate-y-2" : ""} ${!iconsLoaded[src] ? "invisible" : ""}`}
+                width={64} height={64} priority src={src} alt={label}
+                onLoad={() => setIconsLoaded(prev => ({ ...prev, [src]: true }))}
+              />
+            </div>
+            <p className="text-xs tracking-widest mt-1 font-[600]">{label}</p>
+          </div>
+        );
+      })}
+    </div>
+  );
 
-      {/* Title */}
-      <div className={`${classes?.bgColorTitle} font-normal border-r-4 border-b-4 flex ${classes?.borderColorProjectsCont} justify-center px-2 py-1.5 pb-2 rounded-2xl shadow-2xl mb-4 md:mb-8 items-center text-left text-2xl sm:text-3xl lg:text-4xl`}>
+  return (
+    <div className={`${classes?.textColorClass} flex flex-col items-center h-full overflow-y-auto md:overflow-visible md:justify-center pt-16 md:pt-0 pb-6 md:pb-[6%] px-3`}>
+
+      {/* Title — shared */}
+      <div className={`${classes?.bgColorTitle} font-normal md:mt-0 mt-9 border-r-4 border-b-4 flex ${classes?.borderColorProjectsCont} justify-center px-2 py-1.5 pb-2 rounded-2xl shadow-2xl mb-4 md:mb-8 items-center text-left text-2xl sm:text-3xl lg:text-4xl`}>
         {texts?.technologies}{" "}
         <GrTechnology className={`ml-2 sm:ml-4 ${tone === "light" && "bg-white"} bg-opacity-90 p-1 rounded-full`} />
       </div>
 
-      {/* Description */}
-      <p className="text-xs sm:text-sm lg:text-lg text-center mt-2 sm:mt-4 w-[92%] sm:w-[75%] lg:w-[50%] leading-relaxed">
-        {texts?.info}
-      </p>
-
-      {/* Arrow */}
-      <TbArrowWaveRightUp
-        size={40}
-        className={`${classes?.textColorArrow} opacity-20 mt-3 sm:mt-4 mb-4 sm:mb-6 rotate-90`}
-      />
-
-      {/* Option tabs */}
-      <div className="flex justify-center select-none gap-2 sm:gap-4 items-center flex-wrap">
-        {tabs.map(({ key, label }) => (
-          <button
+      {/* ═══ MOBILE LAYOUT ══════════════════════════════════════════════ */}
+      <div className="md:hidden w-full pt-2 pb-8 md:mb-0 mb-8 space-y-6">
+        <p className="text-sm text-center leading-relaxed w-[95%] mx-auto">{texts?.info}</p>
+        {tabs.map(({ key, label }, i) => (
+          <div
             key={key}
-            onClick={() => setOption(key)}
-            className={`${option === key ? classes?.bgColorTitle : `${classes?.hoverColorButtons} ${classes?.hoverOpacityButtons}`} transition duration-200 rounded-md text-sm sm:text-base lg:text-lg px-2 sm:px-3 py-1 cursor-pointer`}
+            className="animate-[fadeSlideUp_0.2s_ease_forwards] opacity-0"
+            style={{ animationDelay: `${i * 0.09}s` }}
           >
-            {label}
-          </button>
+            <div className="flex items-center gap-2 mb-2">
+              <div className={`w-1 h-5 rounded-full ${classes?.bgColorTitle}`} />
+              <h3 className={`text-sm font-semibold tracking-wide ${classes?.textColorCategory}`}>{label}</h3>
+            </div>
+            <div className={`${classes?.bgColorImages} ${classes?.bgOpacityImages} rounded-lg px-3 py-4`}>
+              {renderIconsCompact(iconSets[key] ?? [])}
+            </div>
+          </div>
         ))}
       </div>
 
-      {/* Icons container */}
-      <div className={[
-        widths[option] ?? "md:w-[560px]",
-        classes?.bgColorImages,
-        classes?.bgOpacityImages,
-        "w-[92%] select-none transition-all ease-in-out duration-300 flex flex-col relative rounded-lg shadow-2xl px-4 sm:px-6 py-4 sm:py-6 mt-3 sm:mt-4",
-      ].join(" ")}>
-        <TbHandMove size={20} className="absolute opacity-70 top-1.5 right-1.5" />
-        {renderIcons(iconSets[option] ?? [])}
+      {/* ═══ DESKTOP LAYOUT ════════════════════════════════════════════ */}
+      <div className="hidden md:flex flex-col items-center w-full">
+        <p className="text-xs sm:text-sm lg:text-lg text-center mt-2 sm:mt-4 w-[92%] sm:w-[75%] lg:w-[50%] leading-relaxed">
+          {texts?.info}
+        </p>
+
+        <TbArrowWaveRightUp
+          size={40}
+          className={`${classes?.textColorArrow} opacity-20 mt-3 sm:mt-4 mb-4 sm:mb-6 rotate-90`}
+        />
+
+        <div className="flex justify-center select-none gap-2 sm:gap-4 items-center flex-wrap">
+          {tabs.map(({ key, label }) => (
+            <button
+              key={key}
+              onClick={() => setOption(key)}
+              className={`${option === key ? classes?.bgColorTitle : `${classes?.hoverColorButtons} ${classes?.hoverOpacityButtons}`} transition duration-200 rounded-md text-sm sm:text-base lg:text-lg px-2 sm:px-3 py-1 cursor-pointer`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
+        <div className={[
+          widths[option] ?? "md:w-[560px]",
+          classes?.bgColorImages,
+          classes?.bgOpacityImages,
+          "w-[92%] select-none transition-all ease-in-out duration-300 flex flex-col relative rounded-lg shadow-2xl px-4 sm:px-6 py-4 sm:py-6 mt-3 sm:mt-4",
+        ].join(" ")}>
+          <TbHandMove size={20} className="absolute opacity-70 top-1.5 right-1.5" />
+          {renderIcons(iconSets[option] ?? [])}
+        </div>
       </div>
 
     </div>
